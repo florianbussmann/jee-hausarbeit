@@ -1,4 +1,5 @@
 ### Gradle ###
+.settings/
 .gradle
 /build/
 
