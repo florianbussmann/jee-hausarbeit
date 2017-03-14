@@ -21,4 +21,5 @@ repositories {
 // In this section you declare the dependencies for your production and test code
 dependencies {
     providedCompile 'com.sun.faces:jsf-api:2.2.10'
+    providedCompile 'javax.enterprise:cdi-api:1.2'
 }
