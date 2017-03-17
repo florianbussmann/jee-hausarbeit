@@ -16,10 +16,15 @@ eclipse {
 // In this section you declare where to find the dependencies of your project
 repositories {
     mavenCentral()
+    	maven {
+            url "http://repository.primefaces.org"
+        }
 }
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
     providedCompile 'com.sun.faces:jsf-api:2.2.10'
     providedCompile 'javax.enterprise:cdi-api:1.2'
+    
+    compile 'org.primefaces:primefaces:6.1.RC1'
 }
