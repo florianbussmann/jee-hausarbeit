@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<ui:include src="include/header.xhtml" />
+<h:outputStylesheet name="css/base.css" />
+<h:body>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="80" styleClass="ui-layout-borderless">
+            <p:tabMenu activeIndex="#{param.i}">
+                <p:menuitem value="Startseite" outcome="/start" icon="ui-icon-home">
+                    <f:param name="i" value="0" />
+                </p:menuitem>
+                <p:menuitem value="Suche" outcome="/search" icon="ui-icon-search">
+                    <f:param name="i" value="1" />
+                </p:menuitem>
+                <p:menuitem value="Logout" outcome="/logout" icon="ui-icon-power">
+                    <f:param name="i" value="2" />
+                </p:menuitem>
+            </p:tabMenu>
+        </p:layoutUnit>
+     
+        <p:layoutUnit position="south" size="40" styleClass="ui-layout-borderless">
+            <h:outputText value="Ein guter Footer." />
+        </p:layoutUnit>
+
+        <!-- nur wenn angemeldet -->
+        <p:layoutUnit position="west">
+            <h:form>  
+                <p:menu>
+                    <p:submenu label="Kategorie 1">
+                        <p:menuitem value="Eintrag A" icon="ui-icon-star" />
+                    </p:submenu>
+                    <p:submenu label="Kategorie 2">
+                        <p:menuitem value="Eintrag Y" icon="ui-icon-document" />
+                    </p:submenu>
+                </p:menu>
+            </h:form>
+        </p:layoutUnit>
+     
+        <p:layoutUnit position="center">
+            <ui:insert name="content" />
+        </p:layoutUnit>
+    </p:layout>
+</h:body>
+</html>
