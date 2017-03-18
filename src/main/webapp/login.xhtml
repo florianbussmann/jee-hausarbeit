@@ -8,7 +8,22 @@
 <ui:composition template="templates/base.xhtml">
     <ui:define name="title">Login</ui:define>
     <ui:define name="content">
-        Login-Form
+        <h:form>
+            <p:messages closeable="true" id="messages"/>
+            <p:panelGrid columns="2">
+                <h:outputLabel for="name" value="Benutzername: *"/>
+                <p:inputText id="name" required="true" requiredMessage="Bitte geben Sie einen gültigen Benutzernamen ein." tabindex="1" value="#{login.name}"/>
+                
+                <h:outputLabel for="passwort" value="Passwort: *"/>
+                <p:password id="passwort" required="true" requiredMessage="Bitte geben Sie ein gültiges Passwort ein." tabindex="2" value="#{login.passwort}" />
+                
+                <f:facet name="footer">
+                    <p:commandButton tabindex="3" value="Login" actionListener="#{login.doLogin}" update="messages"/>
+                </f:facet>
+            </p:panelGrid>
+        </h:form>
     </ui:define>
 </ui:composition>
 </html>
+
+ <!-- Passwortstärke anzeigen? -->

@@ -7,3 +7,4 @@
 .classpath
 .eclipse
 *.class
+/bin/
