@@ -5,7 +5,7 @@
  * REMOVE ANY COPYRIGHT NOTICE FROM THE CODE. REASSEMBLING, RECOMPILATION, TRANSFER, DISTRIBUTION OR MODIFICATION OF
  * PART OR ALL OF THE CODE IN ANY FORM WITHOUT THE PRIOR WRITTEN PERMISSION OF ZEB/INFORMATION.TECHNOLOGY IS PROHIBITED.
  *
- * created: 18.03.2017 - 21:05:23
+ * created: 19.03.2017 - 16:11:47
  */
 package controller;
 
@@ -23,44 +23,39 @@ import model.User;
  * @author agraf
  *
  */
-@Named( value = "login" )
+@Named( value = "register" )
 @RequestScoped
-public class Login {
+public class Register {
     private String       email;
     private String       password;
-    @Inject
-    private SessionScope session;
+    private String       firstName;
+    private String       surname;
+    private char         gender;
     @Inject
     private UserService  users;
+    @Inject
+    private SessionScope session;
 
-    public String doLogin() {
+    public String register() {
         if ( !this.session.isLoggedIn() ) {
             User user = this.users.getUserByEmail( this.email );
             if ( user == null ) {
-                FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
-                        "Es existiert kein User mit dieser E-Mail Adresse", null );
-                FacesContext.getCurrentInstance().addMessage( null, msg );
-                return "login.jsf";
+                user = new User( this.email, this.password, this.firstName, this.surname, this.gender, false );
+                this.users.addUser( user );
+                System.out.println( "Erfolgreich registriert." );
+                return "start.jsf";
             } else {
-                if ( user.getPassword().equals( this.password ) ) {
-                    this.session.setCurrentUser( user );
-                    System.out.println( "Erfolgreicher Login" );
-                    System.out.println( this.session.isLoggedIn() );
-                    // TODO: Wieso funktioniert das Weiterleiten hier nicht?
-                    return "start.jsf";
-                } else {
-                    FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
-                            "Diese Kombination aus E-Mail-Adresse und Passwort existiert nicht", null );
-                    FacesContext.getCurrentInstance().addMessage( null, msg );
-                    return "login.jsf";
-                }
+                FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
+                        "Es existiert bereits ein Benutzer mit dieser E-Mail-Adresse", null );
+                FacesContext.getCurrentInstance().addMessage( null, msg );
+                return "register.jsf";
             }
         } else {
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
-                    "Sie sind bereits angemeldet. Bitte melden Sie sich ab, bevor Sie sich mit einem anderen Nutzer anmelden.",
+                    "Sie sind bereits angemeldet. Bitte melden Sie sich ab, bevor Sie einen neuen Nutzer registrieren",
                     null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
-            return "login.jsf";
+            return "register.jsf";
         }
     }
 
@@ -78,5 +73,29 @@ public class Login {
 
     public void setPassword( final String password ) {
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public void setFirstName( final String firstName ) {
+        this.firstName = firstName;
+    }
+
+    public String getSurname() {
+        return this.surname;
+    }
+
+    public void setSurname( final String surname ) {
+        this.surname = surname;
+    }
+
+    public char getGender() {
+        return this.gender;
+    }
+
+    public void setGender( final char gender ) {
+        this.gender = gender;
     }
 }

@@ -17,7 +17,7 @@
                 <p:menuitem value="Suche" outcome="/search" icon="ui-icon-search">
                     <f:param name="i" value="1" />
                 </p:menuitem>
-                <p:menuitem value="Logout" outcome="/logout" icon="ui-icon-power">
+                <p:menuitem value="Logout" outcome="/logout" icon="ui-icon-power" rendered="#{sessionScope.isLoggedIn}">
                     <f:param name="i" value="2" />
                 </p:menuitem>
             </p:tabMenu>
@@ -28,7 +28,7 @@
         </p:layoutUnit>
 
         <!-- nur wenn angemeldet -->
-        <p:layoutUnit position="west">
+        <p:layoutUnit position="west" rendered="{#sessionScope.isLoggedIn}">
             <h:form>  
                 <p:menu>
                     <p:submenu label="Kategorie 1">

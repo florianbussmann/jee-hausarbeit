@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="templates/base.xhtml">
+    <ui:define name="title">Registrierung</ui:define>
+    <ui:define name="content">
+        <h:form>
+            <p:messages closeable="true" id="messages"/>
+            <p:panelGrid columns="2">
+                <h:outputLabel for="email" value="Email: *"/>
+                <p:inputText id="email" required="true" requiredMessage="Bitte geben Sie eine gültige E-Mail-Adresse ein." tabindex="1" value="#{register.email}"/>
+                
+                <h:outputLabel for="password" value="Passwort: *"/>
+                <p:password id="password" required="true" requiredMessage="Bitte geben Sie ein gültiges Passwort ein." tabindex="2" value="#{register.password}" />
+                
+                <h:outputLabel for="firstName" value="Vorname *"/>
+                <p:inputText id="firstName" required="true" requiredMessage="Bitte geben Sie einen gültigen Vornamen ein." tabindex="3" value="#{register.firstName}" />
+                
+                <h:outputLabel for="surname" value="Name: *"/>
+                <p:inputText id="surname" required="true" requiredMessage="Bitte geben Sie einen gültigen Nachnamen ein." tabindex="4" value="#{register.surname}" />
+                
+                <h:outputLabel for="gender" value="Geschlecht: *"/>
+                <p:selectOneRadio id="gender" value="#{register.gender}" required="true" requiredMessage="Bitte geben Sie ein Geschlecht ein." tabindex="5">  
+                    <f:selectItem itemValue="m" itemLabel="Männlich" />  
+                    <f:selectItem itemValue="w" itemLabel="Weiblich"  tabindex="6"/>  
+                </p:selectOneRadio>
+                
+                <f:facet name="footer">
+                    <p:commandButton tabindex="6" value="Registrieren" actionListener="#{register.register}" update="messages"/>
+                </f:facet>
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
+
+<!-- Tabreihenfolge bei selectOneRadio will nicht -->
