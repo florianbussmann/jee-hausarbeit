@@ -23,15 +23,15 @@ import model.User;
  * @author agraf
  *
  */
-@Named( value = "login" )
+@Named
 @RequestScoped
 public class Login {
-    private String       email;
-    private String       password;
+    private String         email;
+    private String         password;
     @Inject
     private SessionContext session;
     @Inject
-    private UserService  users;
+    private UserService    users;
 
     public String doLogin() {
         if ( !this.session.isLoggedIn() ) {

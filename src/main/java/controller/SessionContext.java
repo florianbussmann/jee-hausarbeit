@@ -49,4 +49,15 @@ public class SessionContext implements Serializable {
                 new FacesMessage( FacesMessage.SEVERITY_INFO, "Logout successful", "" ) );
         return "login";
     }
+
+    public String checkAuthentication() {
+        System.out.println( "Check auth" );
+        if ( !isLoggedIn() ) {
+            System.out.println( "Redirect unauthorized user" );
+            FacesContext.getCurrentInstance().addMessage( "", new FacesMessage( FacesMessage.SEVERITY_WARN,
+                    "Sie haben versuchen einen geschützen Bereich einzusehen.", "" ) );
+            return "login";
+        }
+        return null;
+    }
 }

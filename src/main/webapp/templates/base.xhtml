@@ -10,14 +10,19 @@
 <h:body>
     <p:layout fullPage="true">
         <p:layoutUnit position="north" size="80" styleClass="ui-layout-borderless">
-            <p:tabMenu activeIndex="#{param.i}">
+            <p:tabMenu activeIndex="#{param.i}" rendered="#{!sessionContext.isLoggedIn()}">
+                <p:menuitem value="Login" outcome="/login" icon="ui-icon-locked">
+                    <f:param name="i" value="0" />
+                </p:menuitem>
+            </p:tabMenu>
+            <p:tabMenu activeIndex="#{param.i}" rendered="#{sessionContext.isLoggedIn()}">
                 <p:menuitem value="Startseite" outcome="/start" icon="ui-icon-home">
                     <f:param name="i" value="0" />
                 </p:menuitem>
                 <p:menuitem value="Suche" outcome="/search" icon="ui-icon-search">
                     <f:param name="i" value="1" />
                 </p:menuitem>
-                <p:menuitem value="Logout" outcome="/logout" icon="ui-icon-power" rendered="#{sessionContext.isLoggedIn()}">
+                <p:menuitem value="Logout" outcome="/logout" icon="ui-icon-power">
                     <f:param name="i" value="2" />
                 </p:menuitem>
             </p:tabMenu>
