@@ -10,7 +10,11 @@
 package controller;
 
 
-import javax.enterprise.context.ApplicationScoped;
+import java.io.Serializable;
+
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import model.User;
@@ -20,10 +24,12 @@ import model.User;
  * @author agraf
  *
  */
-@Named( value = "sessionScope" )
-@ApplicationScoped
-public class SessionScope {
-    private User currentUser;
+@Named
+@SessionScoped
+public class SessionContext implements Serializable {
+    private static final long serialVersionUID = 6207785445617104641L;
+
+    private User              currentUser;
 
     public User getCurrentUser() {
         return this.currentUser;
@@ -37,7 +43,10 @@ public class SessionScope {
         return this.currentUser != null;
     }
 
-    public void logOut() {
+    public String logout() {
         this.currentUser = null;
+        FacesContext.getCurrentInstance().addMessage( "",
+                new FacesMessage( FacesMessage.SEVERITY_INFO, "Logout successful", "" ) );
+        return "login";
     }
 }

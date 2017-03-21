@@ -29,7 +29,7 @@ public class Login {
     private String       email;
     private String       password;
     @Inject
-    private SessionScope session;
+    private SessionContext session;
     @Inject
     private UserService  users;
 

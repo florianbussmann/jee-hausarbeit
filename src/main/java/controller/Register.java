@@ -34,7 +34,7 @@ public class Register {
     @Inject
     private UserService  users;
     @Inject
-    private SessionScope session;
+    private SessionContext session;
 
     public String register() {
         if ( !this.session.isLoggedIn() ) {
