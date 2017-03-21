@@ -14,6 +14,9 @@ import java.util.HashMap;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import model.User;
 
@@ -27,6 +30,9 @@ import model.User;
 public class UserService {
     private HashMap<String, User> users;
 
+    @PersistenceContext( unitName = "h2" )
+    private EntityManager         entityManager;
+
     public UserService() {
         // TODO: Lese User aus Datenbank
         this.users = new HashMap<>();
@@ -37,7 +43,17 @@ public class UserService {
         return this.users.get( email );
     }
 
+    @Transactional
     public void addUser( final User user ) {
         this.users.put( user.getEmail(), user );
+        this.getEntityManager().persist( user );
+    }
+
+    public EntityManager getEntityManager() {
+        return this.entityManager;
+    }
+
+    public void setEntityManager( final EntityManager entityManager ) {
+        this.entityManager = entityManager;
     }
 }

@@ -10,17 +10,45 @@
 package model;
 
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
 /**
  * @author agraf
  *
  */
+@Entity
 public class User {
+
+    @Id
+    @GeneratedValue( strategy = GenerationType.AUTO )
+    private Long    id;
+
+    @Column( nullable = false, unique = true )
     private String  email;
+
+    @Column( nullable = false )
     private String  password;
+
+    @Column
     private String  firstName;
+
+    @Column
     private String  surname;
+
+    @Column
     private char    gender;
+
+    @Column( nullable = false )
     private boolean manager;
+
+    public User() {
+
+    }
 
     public User( final String email, final String password, final String firstName, final String surname,
             final char gender, final boolean manager ) {
@@ -79,5 +107,13 @@ public class User {
 
     public void setManager( final boolean manager ) {
         this.manager = manager;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId( final Long id ) {
+        this.id = id;
     }
 }
