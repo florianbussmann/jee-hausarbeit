@@ -33,19 +33,13 @@ public class UserService {
     @PersistenceContext( unitName = "h2" )
     private EntityManager         entityManager;
 
-    public UserService() {
-        // TODO: Lese User aus Datenbank
-        this.users = new HashMap<>();
-        this.users.put( "test", new User( "test", "test", "test", "test", 'm', true ) );
-    }
-
     public User getUserByEmail( final String email ) {
-        return this.users.get( email );
+        return (User) ( this.getEntityManager().createQuery( "SELECT user FROM User user WHERE user.email = :email" )
+                .setParameter( "email", email ).getResultList() ).get( 0 );
     }
 
     @Transactional
     public void addUser( final User user ) {
-        this.users.put( user.getEmail(), user );
         this.getEntityManager().persist( user );
     }
 
