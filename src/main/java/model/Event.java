@@ -57,6 +57,20 @@ public class Event {
     @JoinColumn( nullable = false )
     private User   creator;
 
+    public Event( final String name, final String description, final Date date, final String place,
+            final int contingent, final Type type, final User creator ) {
+        super();
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.place = place;
+        this.contingent = contingent;
+        this.type = type;
+        this.creator = creator;
+    }
+
+    public Event() {}
+
     public Long getId() {
         return this.id;
     }

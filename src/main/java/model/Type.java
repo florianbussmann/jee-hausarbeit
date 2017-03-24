@@ -16,7 +16,7 @@ package model;
  */
 public enum Type {
 
-    KONZERT( 0 ), COMEDY( 1 ), KULTUR( 2 ), MESSE( 3 ), SPORT( 4 ), THEATHER( 5 ), MUSICAL( 6 );
+    Konzert( 0 ), Comedy( 1 ), Kultur( 2 ), Messe( 3 ), Sport( 4 ), Theather( 5 ), Musical( 6 );
 
     private int id;
 

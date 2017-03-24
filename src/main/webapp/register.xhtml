@@ -17,20 +17,23 @@
                 <h:outputLabel for="password" value="Passwort: *"/>
                 <p:password id="password" required="true" requiredMessage="Bitte geben Sie ein gültiges Passwort ein." tabindex="2" value="#{register.password}" />
                 
+                <h:outputLabel for="confirmPassword" value="Passwort bestätigen: *"/>
+                <p:password id="confirmPassword" required="true" requiredMessage="Bitte bestätigen Sie das Passwort." tabindex="3" value="#{register.confirmPassword}" />
+                
                 <h:outputLabel for="firstName" value="Vorname *"/>
-                <p:inputText id="firstName" required="true" requiredMessage="Bitte geben Sie einen gültigen Vornamen ein." tabindex="3" value="#{register.firstName}" />
+                <p:inputText id="firstName" required="true" requiredMessage="Bitte geben Sie einen gültigen Vornamen ein." tabindex="4" value="#{register.firstName}" />
                 
                 <h:outputLabel for="surname" value="Name: *"/>
-                <p:inputText id="surname" required="true" requiredMessage="Bitte geben Sie einen gültigen Nachnamen ein." tabindex="4" value="#{register.surname}" />
+                <p:inputText id="surname" required="true" requiredMessage="Bitte geben Sie einen gültigen Nachnamen ein." tabindex="5" value="#{register.surname}" />
                 
                 <h:outputLabel for="gender" value="Geschlecht: *"/>
-                <p:selectOneRadio id="gender" value="#{register.gender}" required="true" requiredMessage="Bitte geben Sie ein Geschlecht ein." tabindex="5">  
-                    <f:selectItem itemValue="m" itemLabel="Männlich" />  
-                    <f:selectItem itemValue="w" itemLabel="Weiblich" />
+                <p:selectOneRadio id="gender" value="#{register.gender}" required="true" requiredMessage="Bitte geben Sie ein Geschlecht ein.">  
+                    <f:selectItem itemValue="m" itemLabel="Männlich" tabindex="6" />  
+                    <f:selectItem itemValue="w" itemLabel="Weiblich" tabindex="7"/>
                 </p:selectOneRadio>
                 
                 <f:facet name="footer">
-                    <p:commandButton tabindex="6" value="Registrieren" actionListener="#{register.register}" update="messages"/>
+                    <p:commandButton tabindex="8" value="Registrieren" actionListener="#{register.register}" update="messages"/>
                 </f:facet>
             </p:panelGrid>
         </h:form>

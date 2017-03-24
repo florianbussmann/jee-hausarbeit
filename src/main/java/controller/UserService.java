@@ -11,12 +11,12 @@ package controller;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 import model.User;
 
@@ -30,24 +30,25 @@ import model.User;
 public class UserService {
     private HashMap<String, User> users;
 
-    @PersistenceContext( unitName = "h2" )
+    @Inject
     private EntityManager         entityManager;
 
-    public User getUserByEmail( final String email ) {
-        return (User) ( this.getEntityManager().createQuery( "SELECT user FROM User user WHERE user.email = :email" )
-                .setParameter( "email", email ).getResultList() ).get( 0 );
+    public User getUserByEmail( final String email ) throws IllegalStateException {
+        List users = this.entityManager.createQuery( "SELECT user FROM User user WHERE user.email = :email" )
+                .setParameter( "email", email ).getResultList();
+        if ( users.size() == 1 ) {
+            return (User) users.get( 0 );
+        } else if ( users.size() == 0 ) {
+            return null;
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
-    @Transactional
+    // @Transactional
     public void addUser( final User user ) {
-        this.getEntityManager().persist( user );
-    }
-
-    public EntityManager getEntityManager() {
-        return this.entityManager;
-    }
-
-    public void setEntityManager( final EntityManager entityManager ) {
-        this.entityManager = entityManager;
+        this.entityManager.getTransaction().begin();
+        this.entityManager.persist( user );
+        this.entityManager.getTransaction().commit();
     }
 }

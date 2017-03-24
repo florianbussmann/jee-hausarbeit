@@ -26,13 +26,14 @@ import model.User;
 @Named( value = "register" )
 @RequestScoped
 public class Register {
-    private String       email;
-    private String       password;
-    private String       firstName;
-    private String       surname;
-    private char         gender;
+    private String         email;
+    private String         password;
+    private String         confirmPassword;
+    private String         firstName;
+    private String         surname;
+    private char           gender;
     @Inject
-    private UserService  users;
+    private UserService    users;
     @Inject
     private SessionContext session;
 
@@ -40,10 +41,17 @@ public class Register {
         if ( !this.session.isLoggedIn() ) {
             User user = this.users.getUserByEmail( this.email );
             if ( user == null ) {
-                user = new User( this.email, this.password, this.firstName, this.surname, this.gender, false );
-                this.users.addUser( user );
-                System.out.println( "Erfolgreich registriert." );
-                return "start.jsf";
+                if ( this.confirmPassword.equals( this.password ) ) {
+                    user = new User( this.email, this.password, this.firstName, this.surname, this.gender, false );
+                    this.users.addUser( user );
+                    System.out.println( "Erfolgreich registriert." );
+                    return "start.jsf";
+                } else {
+                    FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
+                            "Die eingegebenen Passwörte stimmen nicht überein.", null );
+                    FacesContext.getCurrentInstance().addMessage( null, msg );
+                    return "register.jsf";
+                }
             } else {
                 FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                         "Es existiert bereits ein Benutzer mit dieser E-Mail-Adresse", null );
@@ -57,6 +65,14 @@ public class Register {
             FacesContext.getCurrentInstance().addMessage( null, msg );
             return "register.jsf";
         }
+    }
+
+    public String getConfirmPassword() {
+        return this.confirmPassword;
+    }
+
+    public void setConfirmPassword( final String confirmPassword ) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getEmail() {

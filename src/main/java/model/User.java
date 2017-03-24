@@ -52,9 +52,7 @@ public class User {
     @Column( nullable = false )
     private boolean     manager;
 
-    public User() {
-
-    }
+    public User() {}
 
     public User( final String email, final String password, final String firstName, final String surname,
             final char gender, final boolean manager ) {
