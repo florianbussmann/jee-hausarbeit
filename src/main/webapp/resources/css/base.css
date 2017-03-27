@@ -1,3 +1,7 @@
 .ui-layout-borderless {
     border: 0;
 }
+
+.alignment-center {
+    text-align: center;
+}

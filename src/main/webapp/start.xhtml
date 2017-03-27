@@ -15,7 +15,32 @@
     <ui:param name="authRequired" value="true" />
     <ui:define name="title">Startseite</ui:define>
     <ui:define name="content">
-        Übersicht
+        <p:dataTable var="event" value="#{eventService.events}">
+            <p:column headerText="Veranstaltung">
+                <!-- 
+                <p:commandLink title="Details anzeigen" value="" styleClass="ui-icon ui-icon-search">
+                    <h:outputText value="#{event.name}" />
+                </p:commandLink>
+                -->
+                <h:outputText value="#{event.name}" />
+            </p:column>
+            <!-- gruppieren nach Typ? -->
+            <p:column headerText="Veranstaltungsart">
+                <h:outputText value="#{event.type}" />
+            </p:column>
+            <p:column headerText="Ort">
+                <h:outputText value="#{event.place}" />
+            </p:column>
+            <p:column headerText="Datum">
+                <h:outputText value="#{event.date}">
+                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                </h:outputText>
+            </p:column>
+            <p:column headerText="Kontingent">
+                <!-- Zentrierung greift nicht -->
+                <h:outputText value="#{event.contingent}" styleClass="alignment-center" />
+            </p:column>
+        </p:dataTable>
     </ui:define>
 </ui:composition>
 </html>

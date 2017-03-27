@@ -10,10 +10,13 @@
 package service;
 
 
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import model.Event;
@@ -38,5 +41,10 @@ public class EventService {
     @Transactional
     public void addEvent( final Event event ) {
         this.entityManager.persist( event );
+    }
+
+    public List<Event> getEvents() {
+        TypedQuery<Event> query = this.entityManager.createQuery( "SELECT event FROM Event event", Event.class );
+        return query.getResultList();
     }
 }
