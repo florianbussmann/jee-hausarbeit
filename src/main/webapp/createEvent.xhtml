@@ -30,8 +30,8 @@
                 </p:inputText>
                 
                 <h:outputLabel for="type" value="Veranstaltungsart: *"/>
-                <p:selectOneMenu id= "type" value="{eventBean.type}" required="true" requiredMessage="Bitte suchen Sie eine Veranstaltungsart aus." tabindex="6">
-                    <f:selectItems value="#{eventService.getPossibleTypes()}" var="type" itemValue="#{type}" itemLabel="#{type}" />
+                <p:selectOneMenu id= "type" value="#{eventBean.type}" required="true" requiredMessage="Bitte suchen Sie eine Veranstaltungsart aus." tabindex="6">
+                    <f:selectItems value="#{eventService.getPossibleTypes()}" />
                 </p:selectOneMenu>
                 
                 <f:facet name="footer">

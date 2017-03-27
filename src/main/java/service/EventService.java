@@ -7,13 +7,14 @@
  *
  * created: 23.03.2017 - 22:58:15
  */
-package controller;
+package service;
 
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import model.Event;
 import model.Type;
@@ -23,7 +24,7 @@ import model.Type;
  * @author agraf
  *
  */
-@Named( value = "eventService" )
+@Named
 @ApplicationScoped
 public class EventService {
 
@@ -34,10 +35,8 @@ public class EventService {
         return Type.values();
     }
 
-    // @Transactional
+    @Transactional
     public void addEvent( final Event event ) {
-        this.entityManager.getTransaction().begin();
         this.entityManager.persist( event );
-        this.entityManager.getTransaction().commit();
     }
 }

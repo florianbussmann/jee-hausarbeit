@@ -21,13 +21,14 @@ import javax.inject.Named;
 import model.Event;
 import model.Type;
 import model.User;
+import service.EventService;
 
 
 /**
  * @author agraf
  *
  */
-@Named( value = "eventBean" )
+@Named
 @RequestScoped
 public class EventBean {
 
@@ -52,6 +53,7 @@ public class EventBean {
     public String createEvent() {
         User cur = this.session.getCurrentUser();
         if ( cur != null ) {
+            System.out.println( "type is: " + this.type );
             if ( cur.isManager() ) {
                 this.eventService.addEvent( new Event( this.name, this.description, this.date, this.place,
                         this.contingent, this.type, cur ) );
@@ -115,6 +117,7 @@ public class EventBean {
     }
 
     public void setType( final Type type ) {
+        System.out.println( "setType: " + type );
         this.type = type;
     }
 }
