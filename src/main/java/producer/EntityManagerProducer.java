@@ -7,16 +7,13 @@
  *
  * created: 23.03.2017 - 23:16:39
  */
-package controller;
+package producer;
 
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 
 /**
@@ -24,17 +21,21 @@ import javax.persistence.Persistence;
  *
  */
 @ApplicationScoped
-public class PersistenceConfiguration {
+public class EntityManagerProducer {
+
+    @PersistenceContext( name = "h2" )
+    private EntityManager entityManager;
 
     @Produces
-    @RequestScoped
+    // @RequestScoped
     public EntityManager createEntityManager() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory( "h2" );
-        return emf.createEntityManager();
+        return this.entityManager;
+        // EntityManagerFactory emf = Persistence.createEntityManagerFactory( "h2" );
+        // return emf.createEntityManager();
     }
 
-    public void disposeEm( @Disposes final EntityManager em ) {
-        em.close();
-    }
+    /*
+     * public void disposeEm( @Disposes final EntityManager em ) { em.close(); }
+     */
 
 }

@@ -17,8 +17,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -53,9 +51,11 @@ public class Event {
     @Column( nullable = false )
     private Type   type;
 
-    @ManyToOne
-    @JoinColumn( nullable = false )
-    private User   creator;
+    /*
+     * @ManyToOne
+     *
+     * @JoinColumn( nullable = false ) private User creator;
+     */
 
     public Event( final String name, final String description, final Date date, final String place,
             final int contingent, final Type type, final User creator ) {
@@ -66,7 +66,7 @@ public class Event {
         this.place = place;
         this.contingent = contingent;
         this.type = type;
-        this.creator = creator;
+        // this.creator = creator;
     }
 
     public Event() {}
@@ -92,7 +92,8 @@ public class Event {
     }
 
     public User getCreator() {
-        return this.creator;
+        return null;
+        // return this.creator;
     }
 
     public void setDescription( final String description ) {

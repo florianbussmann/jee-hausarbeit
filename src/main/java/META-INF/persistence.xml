@@ -7,11 +7,11 @@
 	<persistence-unit name="h2"	transaction-type="JTA">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<jta-data-source>java:app/jdbc/h2</jta-data-source>
-        <class>model.User</class>
-        <class>model.Event</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>	
 			<property name="eclipselink.ddl-generation.output-mode" value="both"/>
 			<property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+            <property name="eclipselink.logging.level" value="FINEST"/>
 	    </properties>
 	</persistence-unit>
 </persistence>

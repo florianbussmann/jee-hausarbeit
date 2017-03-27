@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import model.User;
+import service.UserServiceImpl;
 
 
 /**
@@ -26,12 +27,12 @@ import model.User;
 @Named
 @RequestScoped
 public class Login {
-    private String         email;
-    private String         password;
+    private String          email;
+    private String          password;
     @Inject
-    private SessionContext session;
+    private SessionContext  session;
     @Inject
-    private UserService    users;
+    private UserServiceImpl users;
 
     public String doLogin() {
         if ( !this.session.isLoggedIn() ) {
@@ -46,7 +47,6 @@ public class Login {
                     this.session.setCurrentUser( user );
                     System.out.println( "Erfolgreicher Login" );
                     System.out.println( this.session.isLoggedIn() );
-                    // TODO: Wieso funktioniert das Weiterleiten hier nicht?
                     return "start.jsf";
                 } else {
                     FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,

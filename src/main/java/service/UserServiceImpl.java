@@ -7,7 +7,7 @@
  *
  * created: 19.03.2017 - 16:57:54
  */
-package controller;
+package service;
 
 
 import java.util.HashMap;
@@ -15,8 +15,8 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import model.User;
 
@@ -25,9 +25,8 @@ import model.User;
  * @author agraf
  *
  */
-@Named( value = "userService" )
 @ApplicationScoped
-public class UserService {
+public class UserServiceImpl implements UserService {
     private HashMap<String, User> users;
 
     @Inject
@@ -45,10 +44,17 @@ public class UserService {
         }
     }
 
-    // @Transactional
+    @Transactional
     public void addUser( final User user ) {
-        this.entityManager.getTransaction().begin();
         this.entityManager.persist( user );
-        this.entityManager.getTransaction().commit();
     }
+
+    public EntityManager getEntityManager() {
+        return this.entityManager;
+    }
+
+    public void setEntityManager( final EntityManager entityManager ) {
+        this.entityManager = entityManager;
+    }
+
 }

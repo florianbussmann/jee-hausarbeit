@@ -10,14 +10,11 @@
 package model;
 
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 
 /**
@@ -29,28 +26,29 @@ public class User {
 
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )
-    private Long        id;
+    private Long    id;
 
-    @OneToMany( mappedBy = "creator" )
-    private List<Event> createdEvents;
+    /*
+     * @OneToMany( mappedBy = "creator" ) private List<Event> createdEvents;
+     */
 
     @Column( nullable = false, unique = true )
-    private String      email;
+    private String  email;
 
     @Column( nullable = false )
-    private String      password;
+    private String  password;
 
     @Column( nullable = false )
-    private String      firstName;
+    private String  firstName;
 
     @Column( nullable = false )
-    private String      surname;
+    private String  surname;
 
     @Column( nullable = false )
-    private char        gender;
+    private char    gender;
 
     @Column( nullable = false )
-    private boolean     manager;
+    private boolean manager;
 
     public User() {}
 

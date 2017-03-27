@@ -10,40 +10,47 @@
 package controller;
 
 
-import javax.enterprise.context.RequestScoped;
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import model.User;
+import service.UserServiceImpl;
 
 
 /**
  * @author agraf
  *
  */
-@Named( value = "register" )
-@RequestScoped
-public class Register {
-    private String         email;
-    private String         password;
-    private String         confirmPassword;
-    private String         firstName;
-    private String         surname;
-    private char           gender;
+@Named
+@ViewScoped
+public class Register implements Serializable {
+    private static final long serialVersionUID = -2030156315717245369L;
+
+    private String            email;
+    private String            password;
+    private String            confirmPassword;
+    private String            firstName;
+    private String            surname;
+    private char              gender;
+
     @Inject
-    private UserService    users;
+    private UserServiceImpl   userService;
+
     @Inject
-    private SessionContext session;
+    private SessionContext    sessionContext;
 
     public String register() {
-        if ( !this.session.isLoggedIn() ) {
-            User user = this.users.getUserByEmail( this.email );
+        if ( !this.sessionContext.isLoggedIn() ) {
+            User user = this.userService.getUserByEmail( this.email );
             if ( user == null ) {
                 if ( this.confirmPassword.equals( this.password ) ) {
                     user = new User( this.email, this.password, this.firstName, this.surname, this.gender, false );
-                    this.users.addUser( user );
+                    this.userService.addUser( user );
                     System.out.println( "Erfolgreich registriert." );
                     return "start.jsf";
                 } else {
@@ -114,4 +121,21 @@ public class Register {
     public void setGender( final char gender ) {
         this.gender = gender;
     }
+
+    public UserServiceImpl getUserService() {
+        return this.userService;
+    }
+
+    public void setUserService( final UserServiceImpl userService ) {
+        this.userService = userService;
+    }
+
+    public SessionContext getSessionContext() {
+        return this.sessionContext;
+    }
+
+    public void setSessionContext( final SessionContext sessionContext ) {
+        this.sessionContext = sessionContext;
+    }
+
 }
