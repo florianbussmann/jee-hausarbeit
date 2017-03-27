@@ -14,6 +14,9 @@
                 <p:menuitem value="Login" outcome="/login" icon="ui-icon-locked">
                     <f:param name="i" value="0" />
                 </p:menuitem>
+                <p:menuitem value="Register" outcome="/register" icon="ui-icon-person">
+                    <f:param name="i" value="1" />
+                </p:menuitem>
             </p:tabMenu>
             <p:tabMenu activeIndex="#{param.i}" rendered="#{sessionContext.isLoggedIn()}">
                 <p:menuitem value="Startseite" outcome="/start" icon="ui-icon-home">
@@ -32,7 +35,6 @@
             <h:outputText value="Ein guter Footer." />
         </p:layoutUnit>
 
-        <!-- nur wenn angemeldet -->
         <p:layoutUnit position="west" rendered="#{sessionContext.isLoggedIn()}">
             <h:form>  
                 <p:menu>
@@ -41,6 +43,9 @@
                     </p:submenu>
                     <p:submenu label="Kategorie 2">
                         <p:menuitem value="Eintrag Y" icon="ui-icon-document" />
+                    </p:submenu>
+                    <p:submenu label="Management" rendered="#{sessionContext.getCurrentUser().isManager()}">
+                        <p:menuitem value="Veranstaltung anlegen" outcome="/createEvent" icon="ui-icon-document" />
                     </p:submenu>
                 </p:menu>
             </h:form>

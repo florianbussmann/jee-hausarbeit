@@ -5,6 +5,12 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <f:metadata>
+        <!-- in Template auslagern über Parameter -->
+       <f:viewAction action="#{sessionContext.checkAuthentication()}" />
+    </f:metadata>
+</f:view>
 <ui:composition template="templates/base.xhtml">
     <ui:define name="title">Veranstaltung erstellen</ui:define>
     <ui:define name="content">

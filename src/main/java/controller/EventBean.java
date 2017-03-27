@@ -65,6 +65,7 @@ public class EventBean {
                 return "createEvent.jsf";
             }
         } else {
+            // TODO: View theorethisch nicht erreichbar, aber sollte als Annotation aufgenommen werden
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                     "Dieser Bereich ist nur für angemeldete User. Bitte melden Sie sich an.", null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
