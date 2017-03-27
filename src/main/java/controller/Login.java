@@ -41,18 +41,17 @@ public class Login {
                 FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                         "Es existiert kein User mit dieser E-Mail Adresse", null );
                 FacesContext.getCurrentInstance().addMessage( null, msg );
-                return "login.jsf";
+                return "login";
             } else {
                 if ( user.getPassword().equals( this.password ) ) {
                     this.session.setCurrentUser( user );
-                    System.out.println( "Erfolgreicher Login" );
                     System.out.println( this.session.isLoggedIn() );
-                    return "start.jsf";
+                    return "start";
                 } else {
                     FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                             "Diese Kombination aus E-Mail-Adresse und Passwort existiert nicht", null );
                     FacesContext.getCurrentInstance().addMessage( null, msg );
-                    return "login.jsf";
+                    return "login";
                 }
             }
         } else {
@@ -60,7 +59,7 @@ public class Login {
                     "Sie sind bereits angemeldet. Bitte melden Sie sich ab, bevor Sie sich mit einem anderen Nutzer anmelden.",
                     null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
-            return "login.jsf";
+            return "login";
         }
     }
 

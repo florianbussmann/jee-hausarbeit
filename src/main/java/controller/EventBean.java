@@ -53,23 +53,22 @@ public class EventBean {
     public String createEvent() {
         User cur = this.session.getCurrentUser();
         if ( cur != null ) {
-            System.out.println( "type is: " + this.type );
             if ( cur.isManager() ) {
                 this.eventService.addEvent( new Event( this.name, this.description, this.date, this.place,
                         this.contingent, this.type, cur ) );
-                return "createEvent.jsf";
+                return "start";
             } else {
                 FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                         "Nur Manager dürfen Veranstaltungen erstellen.", null );
                 FacesContext.getCurrentInstance().addMessage( null, msg );
-                return "createEvent.jsf";
+                return "createEvent";
             }
         } else {
             // TODO: View theorethisch nicht erreichbar, aber sollte als Annotation aufgenommen werden
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                     "Dieser Bereich ist nur für angemeldete User. Bitte melden Sie sich an.", null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
-            return "login.jsf";
+            return "login";
         }
     }
 

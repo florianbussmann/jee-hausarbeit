@@ -52,25 +52,25 @@ public class Register implements Serializable {
                     user = new User( this.email, this.password, this.firstName, this.surname, this.gender, false );
                     this.userService.addUser( user );
                     System.out.println( "Erfolgreich registriert." );
-                    return "start.jsf";
+                    return "start";
                 } else {
                     FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                             "Die eingegebenen Passwörte stimmen nicht überein.", null );
                     FacesContext.getCurrentInstance().addMessage( null, msg );
-                    return "register.jsf";
+                    return "register";
                 }
             } else {
                 FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                         "Es existiert bereits ein Benutzer mit dieser E-Mail-Adresse", null );
                 FacesContext.getCurrentInstance().addMessage( null, msg );
-                return "register.jsf";
+                return "register";
             }
         } else {
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                     "Sie sind bereits angemeldet. Bitte melden Sie sich ab, bevor Sie einen neuen Nutzer registrieren",
                     null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
-            return "register.jsf";
+            return "register";
         }
     }
 

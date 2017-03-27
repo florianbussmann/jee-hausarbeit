@@ -16,32 +16,76 @@
     <ui:define name="content">
         <h:form>
             <p:messages closeable="true" id="messages"/>
-            <p:panelGrid columns="2">
-                <h:outputLabel for="name" value="Name: *"/>
-                <p:inputText id="name" required="true" requiredMessage="Bitte geben Sie einen Namen für die Veranstaltung ein." tabindex="1" value="#{eventBean.name}"/>
+            <p:panelGrid>
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="name" value="Name: *"/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="name" required="true" requiredMessage="Bitte geben Sie einen Namen für die Veranstaltung ein." tabindex="1" value="#{eventBean.name}"/>
+                    </p:column>
+                </p:row>
                 
-                <h:outputLabel for="description" value="Beschreibung: *"/>
-                <p:inputTextarea id="description" required="true" requiredMessage="Bitte geben Sie einen Beschreibung für die Veranstaltung ein." tabindex="2" value="#{eventBean.description}"/>
+                <p:row>
+                    <p:column colspan="2">
+                        <h:outputLabel for="description" value="Beschreibung: *"/>
+                    </p:column>
+                </p:row>
                 
-                <h:outputLabel for="contingent" value="Kartenkontingent: *"/>
-                <p:inputText id="contingent" required="true" requiredMessage="Bitte geben Sie ein Kartenkontingent: ein." tabindex="3" value="#{eventBean.contingent}"/>
+                <p:row>
+                    <p:column colspan="2">
+                        <p:inputTextarea id="description" required="true" requiredMessage="Bitte geben Sie einen Beschreibung für die Veranstaltung ein." tabindex="2" value="#{eventBean.description}" cols="45" rows="7"/>
+                    </p:column>
+                </p:row>
                 
-                <h:outputLabel for="place" value="Veranstaltungsstandort: *"/>
-                <p:inputText id="place" required="true" requiredMessage="Bitte geben Sie einen Veranstaltungsstandort ein." tabindex="4" value="#{eventBean.place}"/>
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="contingent" value="Kartenkontingent: *"/>
+                    </p:column>
+                    <p:column>
+                        <p:inputNumber id="contingent" required="true" requiredMessage="Bitte geben Sie ein Kartenkontingent: ein." tabindex="3" value="#{eventBean.contingent}" decimalPlaces="0"/>
+                    </p:column>
+                </p:row>
                 
-                <h:outputLabel for="date" value="Veranstaltungsdatum: *"/>
-                <p:inputText id="date" required="true" requiredMessage="Bitte geben Sie ein Veranstaltungsdatum ein." tabindex="5" value="#{eventBean.date}" label="dd.MM.yy hh:mm">
-                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm"/>
-                    <p:watermark for="date" value="dd.MM.yyyy HH:mm"/>
-                </p:inputText>
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="place" value="Veranstaltungsstandort: *"/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="place" required="true" requiredMessage="Bitte geben Sie einen Veranstaltungsstandort ein." tabindex="4" value="#{eventBean.place}"/>
+                    </p:column>
+                </p:row>
                 
-                <h:outputLabel for="type" value="Veranstaltungsart: *"/>
-                <p:selectOneMenu id= "type" value="#{eventBean.type}" required="true" requiredMessage="Bitte suchen Sie eine Veranstaltungsart aus." tabindex="6">
-                    <f:selectItems value="#{eventService.getPossibleTypes()}" />
-                </p:selectOneMenu>
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="date" value="Veranstaltungsdatum: *"/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="date" required="true" requiredMessage="Bitte geben Sie ein Veranstaltungsdatum ein." tabindex="5" value="#{eventBean.date}" label="dd.MM.yy hh:mm" validatorMessage="Bitte geben Sie ein Datum in der Zukunft an." converterMessage="Bitte geben Sie ein Datum im Format DD.MM.YYYY HH:MM ein">
+                            <f:convertDateTime pattern="dd.MM.yyyy HH:mm"/>
+                            <f:validator validatorId="dateValidator"/>
+                            <p:watermark for="date" value="DD.MM.YYYY HH:MM"/>
+                        </p:inputText>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="type" value="Veranstaltungsart: *"/>
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu id= "type" value="#{eventBean.type}" required="true" requiredMessage="Bitte suchen Sie eine Veranstaltungsart aus." tabindex="6">
+                            <f:selectItems value="#{eventService.getPossibleTypes()}" />
+                        </p:selectOneMenu>
+                    </p:column>
+                </p:row>
                 
                 <f:facet name="footer">
-                    <p:commandButton tabindex="7" value="Veranstaltung erstellen" actionListener="#{eventBean.createEvent}" update="messages"/>
+                    <p:row>
+                        <p:column colspan="2">
+                            <p:commandButton tabindex="7" value="Veranstaltung erstellen" actionListener="#{eventBean.createEvent}" update="messages"/>
+                        </p:column>
+                    </p:row>
                 </f:facet>
             </p:panelGrid>
         </h:form>
@@ -49,4 +93,4 @@
 </ui:composition>
 </html>
 
-<!-- Converter für type ausprobieren, description mehr Platz geben, bei date checken ob in der Zukunft -->
+<!--description mehr Platz geben, bei date checken ob in der Zukunft -->
