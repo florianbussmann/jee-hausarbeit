@@ -5,3 +5,8 @@
 .alignment-center {
     text-align: center;
 }
+
+.ui-menu, .ui-menu-list, .ui-menuitem-link, .nowrap {
+    white-space: nowrap;
+    width: auto !important;
+}

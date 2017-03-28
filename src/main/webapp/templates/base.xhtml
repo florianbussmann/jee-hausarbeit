@@ -32,11 +32,11 @@
         </p:layoutUnit>
      
         <p:layoutUnit position="south" size="40" styleClass="ui-layout-borderless">
-            <h:outputText value="Ein guter Footer." />
+            <h:outputText value="Eine Hausarbeit in JEE." />
         </p:layoutUnit>
 
-        <p:layoutUnit position="west" rendered="#{sessionContext.isLoggedIn()}">
-            <h:form>  
+        <p:layoutUnit position="west" rendered="#{sessionContext.isLoggedIn()}" styleClass="nowrap">
+            <h:form>
                 <p:menu>
                     <p:submenu label="Kategorie 1">
                         <p:menuitem value="Eintrag A" icon="ui-icon-star" />
@@ -46,6 +46,8 @@
                     </p:submenu>
                     <p:submenu label="Management" rendered="#{sessionContext.getCurrentUser().isManager()}">
                         <p:menuitem value="Veranstaltung anlegen" outcome="/createEvent" icon="ui-icon-document" />
+                        <p:menuitem value="Veranstaltung veröffentlichen" outcome="/start" icon="ui-icon-signal-diag" />
+                        <p:menuitem value="Reservierungen" outcome="/start" icon="ui-icon-tag" />
                     </p:submenu>
                 </p:menu>
             </h:form>
