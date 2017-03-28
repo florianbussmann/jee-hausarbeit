@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <f:metadata>
+        <!-- in Template auslagern über Parameter -->
+       <f:viewAction action="#{sessionContext.checkAuthentication()}"/>
+       <f:viewParam name="id" value="#{processEvent.event}" converter="#{eventConverter}"/>
+       <f:event listener="#{processEvent.init()}" type="preRenderView"/>
+    </f:metadata>
+</f:view>
+<ui:composition template="templates/base.xhtml">
+    <ui:param name="authRequired" value="true" />
+    <ui:define name="title">Veranstaltungsübersicht</ui:define>
+    <ui:define name="content">
+        <p:messages closeable="true" id="messages"/>
+            <p:panelGrid>
+                <f:facet name="header">
+                    <p:row>
+                        <p:column colspan="2">
+                            <p:outputLabel value="#{processEvent.getName()}"/>
+                        </p:column>
+                    </p:row>
+                </f:facet>
+                
+                <p:row>
+                    <p:column colspan="2">
+                        <h:outputLabel value="Beschreibung:"/>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column colspan="2">
+                        <h:outputText value="#{processEvent.getDescription()}"/>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column>
+                        <h:outputLabel value="Kartenkontingent:"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{processEvent.getContingent()}"/>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column>
+                        <h:outputLabel value="Veranstaltungsstandort:"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{processEvent.getPlace()}"/>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column>
+                        <h:outputLabel value="Veranstaltungsdatum:"/>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="#{processEvent.getDate()}">
+                            <f:convertDateTime pattern="dd.MM.yyyy HH:mm"/>
+                        </p:outputLabel>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column>
+                        <h:outputLabel value="Veranstaltungsart:"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="#{processEvent.getType()}" />
+                    </p:column>
+                </p:row>
+                
+                <f:facet name="footer">
+                    <p:row>
+                        <p:column colspan="2" rendered="#{processEvent.isPublished()}">
+                            <p:button value="Ticket reservieren" outcome="reserve">
+                                <f:param name="id" value="#{processEvent.getId()}"/>
+                            </p:button>
+                        </p:column>
+                    </p:row>
+                    <p:row  rendered="#{processEvent.isOwner()}">
+                        <p:column>
+                            <p:button value="Veranstaltung bearbeiten" outcome="changeEvent">
+                                <f:param name="id" value="#{processEvent.getId()}"/>
+                            </p:button>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="Veröffentlichen" action="#{processEvent.publish()}"/>
+                        </p:column>
+                    </p:row>
+                </f:facet>
+            </p:panelGrid>
+    </ui:define>
+</ui:composition>
+</html>

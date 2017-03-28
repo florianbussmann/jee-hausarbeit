@@ -41,6 +41,11 @@
                 <!-- Zentrierung greift nicht -->
                 <h:outputText value="#{event.contingent}" styleClass="alignment-center" />
             </p:column>
+            <p:column headerText="Details">
+                <p:link value="Details" outcome="event">
+                    <f:param name="id" value="#{event.id}"/>
+                </p:link>
+            </p:column>
         </p:dataTable>
     </ui:define>
 </ui:composition>

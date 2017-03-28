@@ -54,4 +54,8 @@ public class EventService {
                 .setParameter( "creator", this.session.getCurrentUser() );
         return query.getResultList();
     }
+
+    public Event getEvent( final long id ) {
+        return this.entityManager.find( Event.class, id );
+    }
 }
