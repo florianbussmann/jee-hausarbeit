@@ -73,4 +73,10 @@ public class EventService {
     public Event getEvent( final long id ) {
         return this.entityManager.find( Event.class, id );
     }
+
+    @Transactional
+    public void publishEvent( final Event event ) {
+        event.setPublished( true );
+        this.entityManager.merge( event );
+    }
 }
