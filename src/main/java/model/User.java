@@ -29,28 +29,31 @@ public class User {
 
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )
-    private Long        id;
+    private Long              id;
 
     @OneToMany( mappedBy = "creator" )
-    private List<Event> createdEvents;
+    private List<Event>       createdEvents;
 
     @Column( nullable = false, unique = true )
-    private String      email;
+    private String            email;
 
     @Column( nullable = false )
-    private String      password;
+    private String            password;
 
     @Column( nullable = false )
-    private String      firstName;
+    private String            firstName;
 
     @Column( nullable = false )
-    private String      surname;
+    private String            surname;
 
     @Column( nullable = false )
-    private char        gender;
+    private char              gender;
 
     @Column( nullable = false )
-    private boolean     manager;
+    private boolean           manager;
+
+    @OneToMany
+    private List<Reservation> reservations;
 
     public User() {}
 
@@ -119,5 +122,21 @@ public class User {
 
     public void setId( final Long id ) {
         this.id = id;
+    }
+
+    public List<Event> getCreatedEvents() {
+        return this.createdEvents;
+    }
+
+    public void setCreatedEvents( final List<Event> createdEvents ) {
+        this.createdEvents = createdEvents;
+    }
+
+    public List<Reservation> getReservations() {
+        return this.reservations;
+    }
+
+    public void setReservations( final List<Reservation> reservations ) {
+        this.reservations = reservations;
     }
 }

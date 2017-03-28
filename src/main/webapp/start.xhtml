@@ -16,6 +16,26 @@
     <ui:define name="title">Startseite</ui:define>
     <ui:define name="content">
         <p:link value="Achtung: Es warten noch #{eventService.getDraftedEvents().size()} Veranstaltungen darauf veröffentlicht zu werden. Jetzt zur Übersicht wechseln um diese zu veröffentlichen." outcome="publishEvents" rendered="#{sessionContext.getCurrentUser().isManager()}"/>
+        
+        <p:dataTable var="reservation" value="#{reservationService.getReservations()}" rendered="#{sessionContext.getCurrentUser().isManager()}">
+            <p:column headerText="Reservierung">
+                <h:outputText value="#{reservation.id}" />
+            </p:column>
+            <p:column headerText="Veranstaltung">
+                <h:outputText value="#{reservation.event.name}" />
+            </p:column>
+            <p:column headerText="Reserviert für">
+                <h:outputText value="#{reservation.user.surname}">
+                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                </h:outputText>
+            </p:column>
+            <p:column headerText="Datum">
+                <h:outputText value="#{reservation.issueDate}">
+                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                </h:outputText>
+            </p:column>
+        </p:dataTable>
+        
         <p:dataTable var="event" value="#{eventService.getPublishedEvents()}">
             <p:column headerText="Veranstaltung">
                 <!-- 
