@@ -32,33 +32,36 @@ public class Event {
 
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO )
-    private Long   id;
+    private Long    id;
 
     @Column( nullable = false )
-    private String name;
+    private String  name;
 
     @Column( nullable = false )
-    private String description;
+    private String  description;
 
     @Column( nullable = false )
     @Temporal( TemporalType.TIMESTAMP )
-    private Date   date;
+    private Date    date;
 
     @Column( nullable = false )
-    private String place;
+    private String  place;
 
     @Column( nullable = false )
-    private int    contingent;
+    private int     contingent;
 
     @Column( nullable = false )
-    private Type   type;
+    private Type    type;
+
+    @Column
+    private boolean published;
 
     @ManyToOne
     @JoinColumn( nullable = false )
-    private User   creator;
+    private User    creator;
 
     public Event( final String name, final String description, final Date date, final String place,
-            final int contingent, final Type type, final User creator ) {
+            final int contingent, final Type type, final User creator, final boolean published ) {
         super();
         this.name = name;
         this.description = description;
@@ -67,6 +70,7 @@ public class Event {
         this.contingent = contingent;
         this.type = type;
         this.creator = creator;
+        this.published = published;
     }
 
     public Event() {}
@@ -130,5 +134,13 @@ public class Event {
 
     public void setType( final Type type ) {
         this.type = type;
+    }
+
+    public boolean isPublished() {
+        return this.published;
+    }
+
+    public void setPublished( final boolean published ) {
+        this.published = published;
     }
 }

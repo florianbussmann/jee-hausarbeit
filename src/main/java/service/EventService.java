@@ -19,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import controller.SessionContext;
 import model.Event;
 import model.Type;
 
@@ -32,7 +33,10 @@ import model.Type;
 public class EventService {
 
     @Inject
-    private EntityManager entityManager;
+    private EntityManager  entityManager;
+
+    @Inject
+    private SessionContext session;
 
     public Type[] getPossibleTypes() {
         return Type.values();
@@ -43,8 +47,11 @@ public class EventService {
         this.entityManager.persist( event );
     }
 
-    public List<Event> getEvents() {
-        TypedQuery<Event> query = this.entityManager.createQuery( "SELECT event FROM Event event", Event.class );
+    public List<Event> getVisibleEvents() {
+        TypedQuery<Event> query = this.entityManager
+                .createQuery( "SELECT event FROM Event event WHERE event.published='true' OR event.creator= :creator",
+                        Event.class )
+                .setParameter( "creator", this.session.getCurrentUser() );
         return query.getResultList();
     }
 }

@@ -55,7 +55,7 @@ public class EventBean {
         if ( cur != null ) {
             if ( cur.isManager() ) {
                 this.eventService.addEvent( new Event( this.name, this.description, this.date, this.place,
-                        this.contingent, this.type, cur ) );
+                        this.contingent, this.type, cur, false ) );
                 return "start";
             } else {
                 FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,

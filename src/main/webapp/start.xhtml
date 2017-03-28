@@ -15,7 +15,7 @@
     <ui:param name="authRequired" value="true" />
     <ui:define name="title">Startseite</ui:define>
     <ui:define name="content">
-        <p:dataTable var="event" value="#{eventService.events}">
+        <p:dataTable var="event" value="#{eventService.getVisibleEvents()}">
             <p:column headerText="Veranstaltung">
                 <!-- 
                 <p:commandLink title="Details anzeigen" value="" styleClass="ui-icon ui-icon-search">
