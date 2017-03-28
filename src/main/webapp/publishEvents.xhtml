@@ -13,19 +13,12 @@
 </f:view>
 <ui:composition template="templates/base.xhtml">
     <ui:param name="authRequired" value="true" />
-    <ui:define name="title">Startseite</ui:define>
+    <ui:define name="title">Veranstaltungen veröffentlichen</ui:define>
     <ui:define name="content">
-        <p:link value="Achtung: Es warten noch #{eventService.getDraftedEvents().size()} Veranstaltungen darauf veröffentlicht zu werden. Jetzt zur Übersicht wechseln um diese zu veröffentlichen." outcome="publishEvents" rendered="#{sessionContext.getCurrentUser().isManager()}"/>
-        <p:dataTable var="event" value="#{eventService.getPublishedEvents()}">
+        <p:dataTable var="event" value="#{eventService.getDraftedEvents()}">
             <p:column headerText="Veranstaltung">
-                <!-- 
-                <p:commandLink title="Details anzeigen" value="" styleClass="ui-icon ui-icon-search">
-                    <h:outputText value="#{event.name}" />
-                </p:commandLink>
-                -->
                 <h:outputText value="#{event.name}" />
             </p:column>
-            <!-- gruppieren nach Typ? -->
             <p:column headerText="Veranstaltungsart">
                 <h:outputText value="#{event.type}" />
             </p:column>
@@ -37,14 +30,17 @@
                     <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
                 </h:outputText>
             </p:column>
-            <p:column headerText="Kontingent">
-                <!-- Zentrierung greift nicht -->
-                <h:outputText value="#{event.contingent}" styleClass="alignment-center" />
-            </p:column>
-            <p:column headerText="Details">
-                <p:link value="Details" outcome="event">
+            <p:column headerText="Aktionen">
+                <p:button value="Details anzeigen" outcome="event">
                     <f:param name="id" value="#{event.id}"/>
-                </p:link>
+                </p:button>
+                <p:commandButton value="Direkt veröffentlichen" actionListener="#{event.publish()}">
+                    <p:confirm header="Veröffentlichung bestätigen" message="Willst Du die Veranstaltung '#{event.name}' wirklich direkt veröffentlichen?" icon="ui-icon-alert" />
+                </p:commandButton>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Ja" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="Nein" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
             </p:column>
         </p:dataTable>
     </ui:define>

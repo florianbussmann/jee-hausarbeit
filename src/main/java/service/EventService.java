@@ -47,6 +47,21 @@ public class EventService {
         this.entityManager.persist( event );
     }
 
+    public List<Event> getEvents( final boolean published ) {
+        TypedQuery<Event> query = this.entityManager
+                .createQuery( "SELECT event FROM Event event WHERE event.published = :published", Event.class )
+                .setParameter( "published", published );
+        return query.getResultList();
+    }
+
+    public List<Event> getDraftedEvents() {
+        return getEvents( false );
+    }
+
+    public List<Event> getPublishedEvents() {
+        return getEvents( true );
+    }
+
     public List<Event> getVisibleEvents() {
         TypedQuery<Event> query = this.entityManager
                 .createQuery( "SELECT event FROM Event event WHERE event.published='true' OR event.creator= :creator",

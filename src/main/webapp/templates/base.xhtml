@@ -35,7 +35,7 @@
             <h:outputText value="Eine Hausarbeit in JEE." />
         </p:layoutUnit>
 
-        <p:layoutUnit position="west" rendered="#{sessionContext.isLoggedIn()}" styleClass="nowrap">
+        <p:layoutUnit position="west" rendered="#{sessionContext.isLoggedIn()}" styleClass="nowrap no-left-corner">
             <h:form>
                 <p:menu>
                     <p:submenu label="Kategorie 1">
@@ -46,14 +46,14 @@
                     </p:submenu>
                     <p:submenu label="Management" rendered="#{sessionContext.getCurrentUser().isManager()}">
                         <p:menuitem value="Veranstaltung anlegen" outcome="/createEvent" icon="ui-icon-document" />
-                        <p:menuitem value="Veranstaltung veröffentlichen" outcome="/start" icon="ui-icon-signal-diag" />
+                        <p:menuitem value="Veranstaltung veröffentlichen" outcome="/publishEvents" icon="ui-icon-signal-diag" />
                         <p:menuitem value="Reservierungen" outcome="/start" icon="ui-icon-tag" />
                     </p:submenu>
                 </p:menu>
             </h:form>
         </p:layoutUnit>
      
-        <p:layoutUnit position="center">
+        <p:layoutUnit position="center" styleClass="no-right-corner">
             <ui:insert name="content" />
         </p:layoutUnit>
     </p:layout>
