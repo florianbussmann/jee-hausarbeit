@@ -43,9 +43,9 @@
                         <h:outputLabel for="contingent" value="Kartenkontingent: *"/>
                     </p:column>
                     <p:column>
-                        <p:inputNumber id="contingent" required="true" requiredMessage="Bitte geben Sie ein Kartenkontingent: ein." tabindex="3" value="#{eventBean.contingent}" decimalPlaces="0" minValue="1" emptyValue="empty">
+                        <p:spinner id="contingent" required="true" requiredMessage="Bitte geben Sie ein Kartenkontingent: ein." tabindex="3" value="#{eventBean.contingent}" min="1">
                             <f:validator validatorId="contingentValidator"/>
-                        </p:inputNumber>
+                        </p:spinner>
                     </p:column>
                 </p:row>
                 
