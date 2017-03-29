@@ -4,17 +4,74 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:p="http://primefaces.org/ui">
 <f:view>
     <f:metadata>
         <!-- in Template auslagern über Parameter -->
        <f:viewAction action="#{sessionContext.checkAuthentication()}" />
+       <f:viewParam name="q" value="#{search.query}"/>
+       <f:event listener="#{search.init()}" type="preRenderView"/>
     </f:metadata>
 </f:view>
 <ui:composition template="templates/base.xhtml">
     <ui:define name="title">Suche</ui:define>
     <ui:define name="content">
-        Suche
+        <p:messages closeable="true" id="messages"/>
+        <p:panelGrid>
+            <row>
+                <h:form>
+                    <column>
+                        <p:inputText value="#{search.query}" required="true" requiredMessage="Bitten geben Sie einen Suchbegriff ein."/>
+                    </column>
+                    <column>
+                        <p:commandButton value="Suchen" action="#{search.redirect}" ajax="false"/>
+                    </column>
+                </h:form>                
+            </row>
+        </p:panelGrid>
+         <h:form rendered="#{search.queryFilled()}">
+            <p:dataTable var="event" value="#{search.events}" widgetVar="eventsTable" emptyMessage="Keine Events mit diesem Suchtext vorhanden." filteredValue="#{search.filteredEvents}">
+                <f:facet name="header">
+                    Es wurden insgesamt #{fn:length(search.events)} Veranstaltungen gefunden.
+                </f:facet>
+             
+                <p:column headerText="Veranstaltung" filterBy="#{event.name}" filterMatchMode="contains">
+                    <!-- 
+                    <p:commandLink title="Details anzeigen" value="" styleClass="ui-icon ui-icon-search">
+                        <h:outputText value="#{event.name}" />
+                    </p:commandLink>
+                    -->
+                    <h:outputText value="#{event.name}" />
+                </p:column>
+                <!-- gruppieren nach Typ? -->
+                <p:column headerText="Veranstaltungsart" filterBy="#{event.type}" filterMatchMode="exact" >
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('eventsTable').filter()" >
+                            <f:selectItem itemLabel="Select One" noSelectionOption="true" />
+                            <f:selectItems value="#{eventService.possibleTypes}" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <h:outputText value="#{event.type}" />
+                </p:column>
+                <p:column headerText="Ort" filterBy="#{event.place}" filterMatchMode="contains">
+                    <h:outputText value="#{event.place}" />
+                </p:column>
+                <p:column headerText="Datum">
+                    <h:outputText value="#{event.date}">
+                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Kontingent">
+                    <h:outputText value="#{event.contingent}" styleClass="center" />
+                </p:column>
+                <p:column headerText="Details">
+                    <p:link value="Details" outcome="event">
+                        <f:param name="id" value="#{event.id}"/>
+                    </p:link>
+                </p:column>
+            </p:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>
 </html>

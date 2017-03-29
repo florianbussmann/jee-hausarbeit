@@ -84,4 +84,12 @@ public class EventService {
     public void changeEvent( final Event event ) {
         this.entityManager.merge( event );
     }
+
+    public List<Event> search( final String query ) {
+        String RegExQuery = ".*" + query + ".*";
+        TypedQuery<Event> result = this.entityManager.createQuery(
+                "SELECT event FROM Event event WHERE event.published='true' AND (event.name REGEXP :query OR event.description REGEXP :query )",
+                Event.class ).setParameter( "query", RegExQuery );
+        return result.getResultList();
+    }
 }
