@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <f:view>
@@ -18,6 +19,10 @@
         <h:form>
             <p:messages closeable="true" id="messages" />
             <p:dataTable var="reservation" value="#{reservationService.getReservationsForUser(sessionContext.getCurrentUser())}">
+                <f:facet name="header">
+                    Meine Reservierungen
+                </f:facet>
+         
                 <p:column headerText="Reservierung">
                     <h:outputText value="#{reservation.id}" />
                 </p:column>

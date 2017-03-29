@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <f:view>
@@ -20,7 +21,11 @@
         <p:link value="Achtung: Es warten noch #{eventService.getDraftedEvents().size()} Veranstaltungen darauf veröffentlicht zu werden. Jetzt zur Übersicht wechseln um diese zu veröffentlichen." outcome="publishEvents" rendered="#{sessionContext.getCurrentUser().isManager()}"/>
         
         <p:dataTable var="reservation" value="#{reservationService.getReservations()}" rendered="#{sessionContext.getCurrentUser().isManager()}">
-            <p:column headerText="Reservierung">
+            <f:facet name="header">
+                Liste aller Reservierungen
+            </f:facet>
+         
+            <p:column headerText="Reservierung" styleClass="right">
                 <h:outputText value="#{reservation.id}" />
             </p:column>
             <p:column headerText="Veranstaltung">
@@ -36,9 +41,17 @@
                     <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
                 </h:outputText>
             </p:column>
+            
+            <f:facet name="footer">
+                Es gibt insgesamt #{fn:length(reservationService.getReservations())} Reservierungen.
+            </f:facet>
         </p:dataTable>
         
         <p:dataTable var="event" value="#{eventService.getPublishedEvents()}">
+            <f:facet name="header">
+                Liste aller veröffentlichten Veranstaltungen
+            </f:facet>
+         
             <p:column headerText="Veranstaltung">
                 <!-- 
                 <p:commandLink title="Details anzeigen" value="" styleClass="ui-icon ui-icon-search">
@@ -60,14 +73,17 @@
                 </h:outputText>
             </p:column>
             <p:column headerText="Kontingent">
-                <!-- Zentrierung greift nicht -->
-                <h:outputText value="#{event.contingent}" styleClass="alignment-center" />
+                <h:outputText value="#{event.contingent}" styleClass="center" />
             </p:column>
             <p:column headerText="Details">
                 <p:link value="Details" outcome="event">
                     <f:param name="id" value="#{event.id}"/>
                 </p:link>
             </p:column>
+            
+            <f:facet name="footer">
+                Es gibt insgesamt #{fn:length(eventService.getPublishedEvents())} veröffentlichte Veranstaltungen.
+            </f:facet>
         </p:dataTable>
     </ui:define>
 </ui:composition>

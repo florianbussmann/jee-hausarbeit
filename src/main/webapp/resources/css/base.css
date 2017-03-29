@@ -2,7 +2,19 @@
     border: 0;
 }
 
-.alignment-center {
+.ui-datatable {
+    margin: 25px auto;
+}
+
+table {
+    table-layout: auto !important;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
     text-align: center;
 }
 

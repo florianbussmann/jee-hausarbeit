@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <f:view>
@@ -16,6 +17,10 @@
     <ui:define name="title">Veranstaltungen veröffentlichen</ui:define>
     <ui:define name="content">
         <p:dataTable var="event" value="#{eventService.getDraftedEvents()}">
+            <f:facet name="header">
+                Liste noch zu veröffentlichender Veranstaltungen
+            </f:facet>
+         
             <p:column headerText="Veranstaltung">
                 <h:outputText value="#{event.name}" />
             </p:column>
@@ -42,6 +47,10 @@
                     <p:commandButton value="Nein" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                 </p:confirmDialog>
             </p:column>
+
+            <f:facet name="footer">
+                Es sind noch #{fn:length(eventService.getDraftedEvents())} Veranstaltungen abzuarbeiten.
+            </f:facet>
         </p:dataTable>
     </ui:define>
 </ui:composition>
