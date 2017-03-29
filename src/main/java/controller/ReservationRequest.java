@@ -46,7 +46,7 @@ public class ReservationRequest {
         try {
             this.reservationService.cancelReservation( reservation );
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
-                    "Die Reservierung wurde erfolgreich storniert.", null );
+                    "Die Reservierung " + reservation.getId() + " wurde erfolgreich storniert.", null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
         } catch ( ReservationCancelException ex ) {
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR, ex.getMessage(), null );
@@ -54,7 +54,7 @@ public class ReservationRequest {
         }
     }
 
-    public void submit() {
+    public String submit() {
         try {
             Reservation reservation = this.reservationService.submitReservation( this.event, this.amountTickets,
                     this.sessionContext.getCurrentUser() );
@@ -63,9 +63,11 @@ public class ReservationRequest {
                             + reservation.getId() + ".",
                     null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
+            return "myReservations";
         } catch ( EventContingentException ex ) {
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR, ex.getMessage(), null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
+            return null;
         }
     }
 

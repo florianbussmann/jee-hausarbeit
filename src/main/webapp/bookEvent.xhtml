@@ -49,7 +49,7 @@
                 <f:facet name="footer">
                     <p:row>
                         <p:column colspan="2">
-                            <p:commandButton value="Reservierung bestätigen" actionListener="#{reservationRequest.submit}" update="messages"/>
+                            <p:commandButton value="Reservierung bestätigen" action="#{reservationRequest.submit}" ajax="false" />
                         </p:column>
                     </p:row>
                 </f:facet>

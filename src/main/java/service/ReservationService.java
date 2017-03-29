@@ -72,6 +72,7 @@ public class ReservationService {
     @Transactional
     public void cancelReservation( final Reservation reservation ) throws ReservationCancelException {
         reservation.cancel();
+        this.entityManager.merge( reservation.getEvent() );
         this.entityManager.merge( reservation );
     }
 

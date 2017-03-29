@@ -15,27 +15,29 @@
     <ui:param name="authRequired" value="true" />
     <ui:define name="title">Meine Reservierungen</ui:define>
     <ui:define name="content">
-        <p:messages closeable="true" id="messages" />
-        <p:dataTable var="reservation" value="#{reservationService.getReservationsForUser(sessionContext.getCurrentUser())}">
-            <p:column headerText="Reservierung">
-                <h:outputText value="#{reservation.id}" />
-            </p:column>
-            <p:column headerText="Veranstaltung">
-                <h:outputText value="#{reservation.event.name}" />
-            </p:column>
-            <p:column headerText="Anzahl Tickets">
-                <h:outputText value="#{reservation.ticketAmount}" />
-            </p:column>
-            <p:column headerText="Datum">
-                <h:outputText value="#{reservation.issueDate}">
-                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
-                </h:outputText>
-            </p:column>
-            <p:column headerText="Aktion">
-                <p:commandLink value="Stornieren" action="#{reservationRequest.cancel(reservation)}" rendered="#{reservation.ticketAmount > 0}" update="messages" />
-                <h:outputText value="Bereits storniert." rendered="#{reservation.ticketAmount == 0}" />
-            </p:column>
-        </p:dataTable>
+        <h:form>
+            <p:messages closeable="true" id="messages" />
+            <p:dataTable var="reservation" value="#{reservationService.getReservationsForUser(sessionContext.getCurrentUser())}">
+                <p:column headerText="Reservierung">
+                    <h:outputText value="#{reservation.id}" />
+                </p:column>
+                <p:column headerText="Veranstaltung">
+                    <h:outputText value="#{reservation.event.name}" />
+                </p:column>
+                <p:column headerText="Anzahl Tickets">
+                    <h:outputText value="#{reservation.ticketAmount}" />
+                </p:column>
+                <p:column headerText="Datum">
+                    <h:outputText value="#{reservation.issueDate}">
+                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Aktion">
+                    <p:commandLink value="Stornieren" action="#{reservationRequest.cancel(reservation)}" rendered="#{reservation.ticketAmount > 0}" update="@form" />
+                    <h:outputText value="Bereits storniert." rendered="#{reservation.ticketAmount == 0}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>
 </html>
