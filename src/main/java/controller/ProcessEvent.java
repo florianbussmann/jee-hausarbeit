@@ -2,14 +2,17 @@ package controller;
 
 
 import java.io.Serializable;
-import java.util.Date;
 
+import javax.annotation.PreDestroy;
+import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import model.Event;
-import model.Type;
+import service.EventService;
 
 
 @Named
@@ -20,10 +23,14 @@ public class ProcessEvent implements Serializable {
     @Inject
     private SessionContext session;
 
-    public void init() {}
+    @Inject
+    private EventService   eventService;
 
-    public Event getCur() {
-        return this.event;
+    @Inject
+    Conversation           conversation;
+
+    public void init() {
+        this.conversation.begin();
     }
 
     public void setEvent( final Event event ) {
@@ -34,43 +41,20 @@ public class ProcessEvent implements Serializable {
         return this.event;
     }
 
-    public String getName() {
-        return this.event.getName();
-    }
-
-    public String getDescription() {
-        return this.event.getDescription();
-    }
-
-    public int getContingent() {
-        return this.event.getContingent();
-    }
-
-    public String getPlace() {
-        return this.event.getPlace();
-    }
-
-    public Date getDate() {
-        return this.event.getDate();
-    }
-
-    public Type getType() {
-        return this.event.getType();
-    }
-
-    public boolean isPublished() {
-        return this.event.isPublished();
-    }
-
-    public long getId() {
-        return this.event.getId();
-    }
-
     public boolean isOwner() {
         return this.session.getCurrentUser().getId() == this.event.getCreator().getId();
     }
 
-    public void publish() {
-        this.event.setPublished( true );
+    public String changeEvent() {
+        this.eventService.changeEvent( this.event );
+        FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
+                "Die Veranstaltung wurde erfolgreich geändert.", null );
+        FacesContext.getCurrentInstance().addMessage( null, msg );
+        return "start";
+    }
+
+    @PreDestroy
+    public void endConversation() {
+        this.conversation.end();
     }
 }

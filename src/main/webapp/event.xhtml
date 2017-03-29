@@ -22,7 +22,7 @@
                 <f:facet name="header">
                     <p:row>
                         <p:column colspan="2">
-                            <p:outputLabel value="#{processEvent.getName()}"/>
+                            <p:outputLabel value="#{processEvent.event.name}"/>
                         </p:column>
                     </p:row>
                 </f:facet>
@@ -35,7 +35,7 @@
                 
                 <p:row>
                     <p:column colspan="2">
-                        <h:outputText value="#{processEvent.getDescription()}"/>
+                        <h:outputText value="#{processEvent.event.description}"/>
                     </p:column>
                 </p:row>
                 
@@ -44,7 +44,7 @@
                         <h:outputLabel value="Kartenkontingent:"/>
                     </p:column>
                     <p:column>
-                        <h:outputText value="#{processEvent.getContingent()}"/>
+                        <h:outputText value="#{processEvent.event.contingent}"/>
                     </p:column>
                 </p:row>
                 
@@ -53,7 +53,7 @@
                         <h:outputLabel value="Veranstaltungsstandort:"/>
                     </p:column>
                     <p:column>
-                        <h:outputText value="#{processEvent.getPlace()}"/>
+                        <h:outputText value="#{processEvent.event.place}"/>
                     </p:column>
                 </p:row>
                 
@@ -62,7 +62,7 @@
                         <h:outputLabel value="Veranstaltungsdatum:"/>
                     </p:column>
                     <p:column>
-                        <p:outputLabel value="#{processEvent.getDate()}">
+                        <p:outputLabel value="#{processEvent.event.date}">
                             <f:convertDateTime pattern="dd.MM.yyyy HH:mm"/>
                         </p:outputLabel>
                     </p:column>
@@ -73,26 +73,26 @@
                         <h:outputLabel value="Veranstaltungsart:"/>
                     </p:column>
                     <p:column>
-                        <h:outputLabel value="#{processEvent.getType()}" />
+                        <h:outputLabel value="#{processEvent.event.type}" />
                     </p:column>
                 </p:row>
                 
                 <f:facet name="footer">
                     <p:row>
-                        <p:column colspan="2" rendered="#{processEvent.isPublished()}">
+                        <p:column colspan="2" rendered="#{processEvent.event.published}">
                             <p:button value="Ticket reservieren" outcome="bookEvent">
-                                <f:param name="id" value="#{processEvent.getId()}"/>
+                                <f:param name="id" value="#{processEvent.event.id}"/>
                             </p:button>
                         </p:column>
                     </p:row>
                     <p:row  rendered="#{processEvent.isOwner()}">
                         <p:column>
                             <p:button value="Veranstaltung bearbeiten" outcome="changeEvent">
-                                <f:param name="id" value="#{processEvent.getId()}"/>
+                                <f:param name="id" value="#{processEvent.event.id}"/>
                             </p:button>
                         </p:column>
                         <p:column>
-                            <p:commandButton value="Veröffentlichen" action="#{processEvent.publish()}"/>
+                            <p:commandButton value="Veröffentlichen" action="#{eventService.publishEvent(processEvent.event)}"  rendered="#{!processEvent.event.published}"/>
                         </p:column>
                     </p:row>
                 </f:facet>

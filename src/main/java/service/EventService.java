@@ -79,4 +79,9 @@ public class EventService {
         event.setPublished( true );
         this.entityManager.merge( event );
     }
+
+    @Transactional
+    public void changeEvent( final Event event ) {
+        this.entityManager.merge( event );
+    }
 }

@@ -98,7 +98,6 @@ public class Event {
     }
 
     public User getCreator() {
-        // return null;
         return this.creator;
     }
 

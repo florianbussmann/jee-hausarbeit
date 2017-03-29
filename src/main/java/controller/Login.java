@@ -35,7 +35,6 @@ public class Login {
     private UserServiceImpl users;
 
     public String doLogin() {
-        System.out.println( "Login attempt" );
         if ( !this.session.isLoggedIn() ) {
             User user = this.users.getUserByEmail( this.email );
             if ( user == null ) {

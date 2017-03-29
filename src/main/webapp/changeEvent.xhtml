@@ -9,12 +9,90 @@
     <f:metadata>
         <!-- in Template auslagern über Parameter -->
        <f:viewAction action="#{sessionContext.checkAuthentication()}" />
+       <f:viewParam name="id" value="#{processEvent.event}" converter="#{eventConverter}"/>
+       <f:event listener="#{processEvent.init()}" type="preRenderView"/>
     </f:metadata>
 </f:view>
 <ui:composition template="templates/base.xhtml">
-    <ui:define name="title">Veranstaltung bearbeiten</ui:define>
+    <ui:define name="title">Veranstaltung erstellen</ui:define>
     <ui:define name="content">
-    Platzhalter
+        <h:form>
+            <p:messages closeable="true" id="messages"/>
+            <p:panelGrid>
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="name" value="Name: *"/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="name" required="true" requiredMessage="Bitte geben Sie einen Namen für die Veranstaltung ein." tabindex="1" value="#{processEvent.event.name}"/>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column colspan="2">
+                        <h:outputLabel for="description" value="Beschreibung: *"/>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column colspan="2">
+                        <p:inputTextarea id="description" required="true" requiredMessage="Bitte geben Sie einen Beschreibung für die Veranstaltung ein." tabindex="2" value="#{processEvent.event.description}" cols="45" rows="7"/>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="contingent" value="Kartenkontingent: *"/>
+                    </p:column>
+                    <p:column>
+                        <p:spinner id="contingent" required="true" requiredMessage="Bitte geben Sie ein Kartenkontingent: ein." tabindex="3" value="#{processEvent.event.contingent}" min="1">
+                            <f:validator validatorId="contingentValidator"/>
+                        </p:spinner>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="place" value="Veranstaltungsstandort: *"/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="place" required="true" requiredMessage="Bitte geben Sie einen Veranstaltungsstandort ein." tabindex="4" value="#{processEvent.event.place}"/>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="date" value="Veranstaltungsdatum: *"/>
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="date" required="true" requiredMessage="Bitte geben Sie ein Veranstaltungsdatum ein." tabindex="5" value="#{processEvent.event.date}" label="dd.MM.yy hh:mm" validatorMessage="Bitte geben Sie ein Datum in der Zukunft an." converterMessage="Bitte geben Sie ein Datum im Format DD.MM.YYYY HH:MM ein">
+                            <f:convertDateTime pattern="dd.MM.yyyy HH:mm"/>
+                            <f:validator validatorId="dateValidator"/>
+                            <p:watermark for="date" value="DD.MM.YYYY HH:MM"/>
+                        </p:inputText>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="type" value="Veranstaltungsart: *"/>
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu id= "type" value="#{processEvent.event.type}" required="true" requiredMessage="Bitte suchen Sie eine Veranstaltungsart aus." tabindex="6">
+                            <f:selectItems value="#{eventService.getPossibleTypes()}" />
+                        </p:selectOneMenu>
+                    </p:column>
+                </p:row>
+                
+                <f:facet name="footer">
+                    <p:row>
+                        <p:column colspan="2">
+                            <p:commandButton tabindex="7" value="Änderungen speichern" action="#{processEvent.changeEvent()}" ajax="false"/>
+                        </p:column>
+                    </p:row>
+                </f:facet>
+            </p:panelGrid>
+        </h:form>
     </ui:define>
-    </ui:composition>
+</ui:composition>
 </html>
