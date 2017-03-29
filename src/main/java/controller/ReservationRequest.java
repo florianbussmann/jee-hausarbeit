@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import exception.EventContingentException;
+import exception.ReservationCancelException;
 import model.Event;
 import model.Reservation;
 import service.ReservationService;
@@ -40,6 +41,18 @@ public class ReservationRequest {
     private SessionContext     sessionContext;
 
     public void init() {}
+
+    public void cancel( final Reservation reservation ) {
+        try {
+            this.reservationService.cancelReservation( reservation );
+            FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
+                    "Die Reservierung wurde erfolgreich storniert.", null );
+            FacesContext.getCurrentInstance().addMessage( null, msg );
+        } catch ( ReservationCancelException ex ) {
+            FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR, ex.getMessage(), null );
+            FacesContext.getCurrentInstance().addMessage( null, msg );
+        }
+    }
 
     public void submit() {
         try {

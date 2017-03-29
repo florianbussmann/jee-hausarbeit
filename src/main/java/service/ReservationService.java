@@ -20,6 +20,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import exception.EventContingentException;
+import exception.ReservationCancelException;
 import model.Event;
 import model.Reservation;
 import model.User;
@@ -43,11 +44,19 @@ public class ReservationService {
         return query.getResultList();
     }
 
-    public List<Reservation> getReservations( final Event event ) {
+    public List<Reservation> getReservationsForEvent( final Event event ) {
         TypedQuery<Reservation> query = this.entityManager
                 .createQuery( "SELECT reservation FROM Reservation reservation WHERE reservation.event = :event",
                         Reservation.class )
                 .setParameter( "event", event );
+        return query.getResultList();
+    }
+
+    public List<Reservation> getReservationsForUser( final User user ) {
+        TypedQuery<Reservation> query = this.entityManager
+                .createQuery( "SELECT reservation FROM Reservation reservation WHERE reservation.user = :user",
+                        Reservation.class )
+                .setParameter( "user", user );
         return query.getResultList();
     }
 
@@ -58,6 +67,12 @@ public class ReservationService {
         this.entityManager.persist( reservation );
         this.entityManager.merge( event );
         return reservation;
+    }
+
+    @Transactional
+    public void cancelReservation( final Reservation reservation ) throws ReservationCancelException {
+        reservation.cancel();
+        this.entityManager.merge( reservation );
     }
 
 }

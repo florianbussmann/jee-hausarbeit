@@ -38,11 +38,8 @@
         <p:layoutUnit position="west" rendered="#{sessionContext.isLoggedIn()}" styleClass="nowrap no-left-corner">
             <h:form>
                 <p:menu>
-                    <p:submenu label="Kategorie 1">
-                        <p:menuitem value="Eintrag A" icon="ui-icon-star" />
-                    </p:submenu>
-                    <p:submenu label="Kategorie 2">
-                        <p:menuitem value="Eintrag Y" icon="ui-icon-document" />
+                    <p:submenu label="Mein Bereich">
+                        <p:menuitem value="Meine Reservierungen" outcome="/myReservations" icon="ui-icon-tag" />
                     </p:submenu>
                     <p:submenu label="Management" rendered="#{sessionContext.getCurrentUser().isManager()}">
                         <p:menuitem value="Veranstaltung anlegen" outcome="/createEvent" icon="ui-icon-document" />

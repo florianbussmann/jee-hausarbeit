@@ -24,6 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import exception.EventContingentException;
+import exception.ReservationCancelException;
 
 
 /**
@@ -101,6 +102,15 @@ public class Reservation {
 
     public void setIssueDate( final Date issueDate ) {
         this.issueDate = issueDate;
+    }
+
+    public void cancel() throws ReservationCancelException {
+        if ( this.event.getDate().getTime() < new Date().getTime() ) {
+            throw new ReservationCancelException();
+        }
+
+        this.event.raiseContingent( this.ticketAmount );
+        this.ticketAmount = 0;
     }
 
 }

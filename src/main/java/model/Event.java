@@ -130,6 +130,10 @@ public class Event {
         this.contingent = contingent;
     }
 
+    public void raiseContingent( final int byAmount ) {
+        this.contingent += byAmount;
+    }
+
     public void reduceContingent( final int byAmount ) throws EventContingentException {
         if ( byAmount > this.contingent ) {
             throw new EventContingentException( this );

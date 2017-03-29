@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <f:metadata>
+        <!-- in Template auslagern über Parameter -->
+       <f:viewAction action="#{sessionContext.checkAuthentication()}" />
+    </f:metadata>
+</f:view>
+<ui:composition template="templates/base.xhtml">
+    <ui:param name="authRequired" value="true" />
+    <ui:define name="title">Meine Reservierungen</ui:define>
+    <ui:define name="content">
+        <p:messages closeable="true" id="messages" />
+        <p:dataTable var="reservation" value="#{reservationService.getReservationsForUser(sessionContext.getCurrentUser())}">
+            <p:column headerText="Reservierung">
+                <h:outputText value="#{reservation.id}" />
+            </p:column>
+            <p:column headerText="Veranstaltung">
+                <h:outputText value="#{reservation.event.name}" />
+            </p:column>
+            <p:column headerText="Anzahl Tickets">
+                <h:outputText value="#{reservation.ticketAmount}" />
+            </p:column>
+            <p:column headerText="Datum">
+                <h:outputText value="#{reservation.issueDate}">
+                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                </h:outputText>
+            </p:column>
+            <p:column headerText="Aktion">
+                <p:commandLink value="Stornieren" action="#{reservationRequest.cancel(reservation)}" rendered="#{reservation.ticketAmount > 0}" update="messages" />
+                <h:outputText value="Bereits storniert." rendered="#{reservation.ticketAmount == 0}" />
+            </p:column>
+        </p:dataTable>
+    </ui:define>
+</ui:composition>
+</html>
