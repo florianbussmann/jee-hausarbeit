@@ -17,10 +17,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
-import controller.SessionContext;
+import exception.EventContingentException;
 import model.Event;
 import model.Reservation;
+import model.User;
 
 
 /**
@@ -33,10 +35,7 @@ import model.Reservation;
 public class ReservationService {
 
     @Inject
-    private EntityManager  entityManager;
-
-    @Inject
-    private SessionContext sessionContext;
+    private EntityManager entityManager;
 
     public List<Reservation> getReservations() {
         TypedQuery<Reservation> query = this.entityManager
@@ -50,6 +49,15 @@ public class ReservationService {
                         Reservation.class )
                 .setParameter( "event", event );
         return query.getResultList();
+    }
+
+    @Transactional
+    public Reservation submitReservation( final Event event, final int amountTickets, final User user )
+            throws EventContingentException {
+        Reservation reservation = new Reservation( event, amountTickets, user );
+        this.entityManager.persist( reservation );
+        this.entityManager.merge( event );
+        return reservation;
     }
 
 }

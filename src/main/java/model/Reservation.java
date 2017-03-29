@@ -23,6 +23,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import exception.EventContingentException;
+
 
 /**
  * @author fbussmann
@@ -50,6 +52,14 @@ public class Reservation {
     private Date  issueDate;
 
     public Reservation() {
+        this.issueDate = new Date();
+    }
+
+    public Reservation( final Event event, final int amountTickets, final User user ) throws EventContingentException {
+        event.reduceContingent( amountTickets );
+        this.event = event;
+        this.ticketAmount = amountTickets;
+        this.user = user;
         this.issueDate = new Date();
     }
 

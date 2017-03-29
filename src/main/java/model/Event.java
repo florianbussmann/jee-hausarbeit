@@ -22,6 +22,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import exception.EventContingentException;
+
 
 /**
  * @author agraf
@@ -126,6 +128,14 @@ public class Event {
 
     public void setContingent( final int contingent ) {
         this.contingent = contingent;
+    }
+
+    public void reduceContingent( final int byAmount ) throws EventContingentException {
+        if ( byAmount > this.contingent ) {
+            throw new EventContingentException( this );
+        }
+
+        this.contingent -= byAmount;
     }
 
     public Type getType() {

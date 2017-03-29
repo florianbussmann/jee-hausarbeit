@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <f:metadata>
+        <!-- in Template auslagern über Parameter -->
+       <f:viewAction action="#{sessionContext.checkAuthentication()}" />
+       <f:viewParam name="id" value="#{reservationRequest.event}" converter="#{eventConverter}"/>
+       <f:event listener="#{reservationRequest.init()}" type="preRenderView"/>
+    </f:metadata>
+</f:view>
+<ui:composition template="templates/base.xhtml">
+    <ui:define name="title">Reservierung</ui:define>
+    <ui:define name="content">
+        <h:form>
+            <p:messages closeable="true" id="messages" />
+            <p:panelGrid>
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="name" value="Veranstaltung: " />
+                    </p:column>
+                    <p:column>
+                        <h:outputText id="name" value="#{reservationRequest.event.name}" />
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="contingent" value="Kartenkontingent: " />
+                    </p:column>
+                    <p:column>
+                        <h:outputText id="contingent" value="#{reservationRequest.event.contingent}" />
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="tickets" value="Zu reservierende Tickets: "/>
+                    </p:column>
+                    <p:column>
+                        <p:spinner id="tickets" required="true" requiredMessage="Bitte geben Sie an wieviele Tickets reserviert werden sollen." value="#{reservationRequest.amountTickets}" tabindex="3" min="1" max="#{reservationRequest.event.contingent}" />
+                    </p:column>
+                </p:row>
+                
+                <f:facet name="footer">
+                    <p:row>
+                        <p:column colspan="2">
+                            <p:commandButton value="Reservierung bestätigen" actionListener="#{reservationRequest.submit}" update="messages"/>
+                        </p:column>
+                    </p:row>
+                </f:facet>
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
