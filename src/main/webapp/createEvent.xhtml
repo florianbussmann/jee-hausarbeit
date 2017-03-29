@@ -85,7 +85,7 @@
                 <f:facet name="footer">
                     <p:row>
                         <p:column colspan="2">
-                            <p:commandButton tabindex="7" value="Veranstaltung erstellen" actionListener="#{eventBean.createEvent}" update="messages"/>
+                            <p:commandButton tabindex="7" value="Veranstaltung erstellen" action="#{eventBean.createEvent}" ajax="false" />
                         </p:column>
                     </p:row>
                 </f:facet>

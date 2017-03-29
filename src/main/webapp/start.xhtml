@@ -15,6 +15,8 @@
     <ui:param name="authRequired" value="true" />
     <ui:define name="title">Startseite</ui:define>
     <ui:define name="content">
+        <p:messages closeable="true" id="messages"/>
+        
         <p:link value="Achtung: Es warten noch #{eventService.getDraftedEvents().size()} Veranstaltungen darauf veröffentlicht zu werden. Jetzt zur Übersicht wechseln um diese zu veröffentlichen." outcome="publishEvents" rendered="#{sessionContext.getCurrentUser().isManager()}"/>
         
         <p:dataTable var="reservation" value="#{reservationService.getReservations()}" rendered="#{sessionContext.getCurrentUser().isManager()}">

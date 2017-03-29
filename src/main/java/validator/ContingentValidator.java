@@ -17,7 +17,7 @@ public class ContingentValidator implements Validator {
             throws ValidatorException {
         int contingent = (int) value;
         if ( contingent <= 0 ) {
-            FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
+            FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR,
                     "Bitte geben Sie ein Kartenkontingent ein.", null );
             throw new ValidatorException( msg );
         }

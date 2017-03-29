@@ -56,6 +56,9 @@ public class EventBean {
             if ( cur.isManager() ) {
                 this.eventService.addEvent( new Event( this.name, this.description, this.date, this.place,
                         this.contingent, this.type, cur, false ) );
+                FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
+                        "Die Veranstaltung wurde erfolgreich angelegt.", null );
+                FacesContext.getCurrentInstance().addMessage( null, msg );
                 return "start";
             } else {
                 FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
