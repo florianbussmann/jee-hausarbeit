@@ -47,44 +47,52 @@
             </f:facet>
         </p:dataTable>
         
-        <p:dataTable var="event" value="#{eventService.getPublishedEvents()}">
-            <f:facet name="header">
-                Liste aller veröffentlichten Veranstaltungen
-            </f:facet>
-         
-            <p:column headerText="Veranstaltung">
-                <!-- 
-                <p:commandLink title="Details anzeigen" value="" styleClass="ui-icon ui-icon-search">
+        <h:form>
+            <p:dataTable var="event" value="#{eventFilterView.events}" widgetVar="eventsTable" emptyMessage="Keine Events mit den angegebenen Kriterien gefunden." filteredValue="#{eventFilterView.filteredEvents}">
+                <f:facet name="header">
+                    Liste aller veröffentlichten Veranstaltungen
+                </f:facet>
+             
+                <p:column headerText="Veranstaltung" filterBy="#{event.name}" filterMatchMode="contains">
+                    <!-- 
+                    <p:commandLink title="Details anzeigen" value="" styleClass="ui-icon ui-icon-search">
+                        <h:outputText value="#{event.name}" />
+                    </p:commandLink>
+                    -->
                     <h:outputText value="#{event.name}" />
-                </p:commandLink>
-                -->
-                <h:outputText value="#{event.name}" />
-            </p:column>
-            <!-- gruppieren nach Typ? -->
-            <p:column headerText="Veranstaltungsart">
-                <h:outputText value="#{event.type}" />
-            </p:column>
-            <p:column headerText="Ort">
-                <h:outputText value="#{event.place}" />
-            </p:column>
-            <p:column headerText="Datum">
-                <h:outputText value="#{event.date}">
-                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
-                </h:outputText>
-            </p:column>
-            <p:column headerText="Kontingent">
-                <h:outputText value="#{event.contingent}" styleClass="center" />
-            </p:column>
-            <p:column headerText="Details">
-                <p:link value="Details" outcome="event">
-                    <f:param name="id" value="#{event.id}"/>
-                </p:link>
-            </p:column>
-            
-            <f:facet name="footer">
-                Es gibt insgesamt #{fn:length(eventService.getPublishedEvents())} veröffentlichte Veranstaltungen.
-            </f:facet>
-        </p:dataTable>
+                </p:column>
+                <!-- gruppieren nach Typ? -->
+                <p:column headerText="Veranstaltungsart" filterBy="#{event.type}" filterMatchMode="exact" >
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('eventsTable').filter()" >
+                            <f:selectItem itemLabel="Select One" noSelectionOption="true" />
+                            <f:selectItems value="#{eventService.possibleTypes}" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <h:outputText value="#{event.type}" />
+                </p:column>
+                <p:column headerText="Ort" filterBy="#{event.place}" filterMatchMode="contains">
+                    <h:outputText value="#{event.place}" />
+                </p:column>
+                <p:column headerText="Datum">
+                    <h:outputText value="#{event.date}">
+                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Kontingent">
+                    <h:outputText value="#{event.contingent}" styleClass="center" />
+                </p:column>
+                <p:column headerText="Details">
+                    <p:link value="Details" outcome="event">
+                        <f:param name="id" value="#{event.id}"/>
+                    </p:link>
+                </p:column>
+                
+                <f:facet name="footer">
+                    Es gibt insgesamt #{fn:length(eventFilterView.events)} veröffentlichte Veranstaltungen.
+                </f:facet>
+            </p:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>
 </html>
