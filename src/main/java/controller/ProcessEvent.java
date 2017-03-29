@@ -53,6 +53,14 @@ public class ProcessEvent implements Serializable {
         return "start";
     }
 
+    public boolean eventBookable() {
+        if ( this.event.isPublished() && ( this.event.getContingent() > 0 ) ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @PreDestroy
     public void endConversation() {
         this.conversation.end();

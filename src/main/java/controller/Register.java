@@ -122,20 +122,4 @@ public class Register implements Serializable {
         this.gender = gender;
     }
 
-    public UserServiceImpl getUserService() {
-        return this.userService;
-    }
-
-    public void setUserService( final UserServiceImpl userService ) {
-        this.userService = userService;
-    }
-
-    public SessionContext getSessionContext() {
-        return this.sessionContext;
-    }
-
-    public void setSessionContext( final SessionContext sessionContext ) {
-        this.sessionContext = sessionContext;
-    }
-
 }

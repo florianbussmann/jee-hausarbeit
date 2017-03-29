@@ -59,13 +59,4 @@ public class EventFilterView implements Serializable {
     public void setFilteredEvents( final List<Event> filteredEvents ) {
         this.filteredEvents = filteredEvents;
     }
-
-    public EventService getEventService() {
-        return this.eventService;
-    }
-
-    public void setEventService( final EventService eventService ) {
-        this.eventService = eventService;
-    }
-
 }

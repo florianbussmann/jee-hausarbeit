@@ -94,12 +94,4 @@ public class ReservationRequest {
     public void setReservationService( final ReservationService reservationService ) {
         this.reservationService = reservationService;
     }
-
-    public SessionContext getSessionContext() {
-        return this.sessionContext;
-    }
-
-    public void setSessionContext( final SessionContext sessionContext ) {
-        this.sessionContext = sessionContext;
-    };
 }

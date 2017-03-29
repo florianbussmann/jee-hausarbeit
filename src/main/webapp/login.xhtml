@@ -18,7 +18,7 @@
                 <p:password id="password" required="true" requiredMessage="Bitte geben Sie ein gültiges Passwort ein." tabindex="2" value="#{login.password}" />
                 
                 <f:facet name="footer">
-                    <p:commandButton tabindex="3" value="Login" action="#{login.doLogin}"/>
+                    <p:commandButton tabindex="3" value="Login" action="#{login.doLogin}" ajax="false"/>
                 </f:facet>
             </p:panelGrid>
         </h:form>

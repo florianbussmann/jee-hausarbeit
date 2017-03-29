@@ -55,7 +55,10 @@ public class EventService {
     }
 
     public List<Event> getDraftedEvents() {
-        return getEvents( false );
+        TypedQuery<Event> query = this.entityManager.createQuery(
+                "SELECT event FROM Event event WHERE event.published = false AND event.creator = :creator",
+                Event.class ).setParameter( "creator", this.session.getCurrentUser() );
+        return query.getResultList();
     }
 
     public List<Event> getPublishedEvents() {

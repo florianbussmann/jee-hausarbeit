@@ -19,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import controller.SessionContext;
 import exception.EventContingentException;
 import exception.ReservationCancelException;
 import model.Event;
@@ -36,11 +37,16 @@ import model.User;
 public class ReservationService {
 
     @Inject
-    private EntityManager entityManager;
+    private EntityManager  entityManager;
+
+    @Inject
+    private SessionContext session;
 
     public List<Reservation> getReservations() {
         TypedQuery<Reservation> query = this.entityManager
-                .createQuery( "SELECT reservation FROM Reservation reservation", Reservation.class );
+                .createQuery( "SELECT reservation FROM Reservation reservation WHERE reservation.event.creator = :user",
+                        Reservation.class )
+                .setParameter( "user", this.session.getCurrentUser() );
         return query.getResultList();
     }
 

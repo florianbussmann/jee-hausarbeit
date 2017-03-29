@@ -52,7 +52,7 @@ public class User {
     @Column( nullable = false )
     private boolean           manager;
 
-    @OneToMany
+    @OneToMany( mappedBy = "user" )
     private List<Reservation> reservations;
 
     public User() {}
