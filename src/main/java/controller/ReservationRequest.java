@@ -71,6 +71,17 @@ public class ReservationRequest {
         }
     }
 
+    public String checkContingent() {
+        if ( this.event.getContingent() == 0 ) {
+            FacesContext.getCurrentInstance().addMessage( "",
+                    new FacesMessage( FacesMessage.SEVERITY_WARN, "Für die Veranstaltung '" + this.event.toString()
+                            + "' wurde das Kontingent bereits vollständig ausgeschöpft.", "" ) );
+            return "start";
+        }
+
+        return null;
+    }
+
     public Event getEvent() {
         return this.event;
     }

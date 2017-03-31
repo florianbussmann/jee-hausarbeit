@@ -156,4 +156,10 @@ public class Event {
     public void setPublished( final boolean published ) {
         this.published = published;
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

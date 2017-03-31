@@ -7,10 +7,11 @@
       xmlns:p="http://primefaces.org/ui">
 <f:view>
     <f:metadata>
-        <!-- in Template auslagern über Parameter -->
+       <!-- in Template auslagern über Parameter -->
        <f:viewAction action="#{sessionContext.checkAuthentication()}" />
        <f:viewParam name="id" value="#{reservationRequest.event}" converter="#{eventConverter}"/>
        <f:event listener="#{reservationRequest.init()}" type="preRenderView"/>
+       <f:viewAction action="#{reservationRequest.checkContingent()}" />
     </f:metadata>
 </f:view>
 <ui:composition template="templates/base.xhtml">
@@ -42,7 +43,9 @@
                         <h:outputLabel for="tickets" value="Zu reservierende Tickets: "/>
                     </p:column>
                     <p:column>
-                        <p:spinner id="tickets" required="true" requiredMessage="Bitte geben Sie an wieviele Tickets reserviert werden sollen." value="#{reservationRequest.amountTickets}" tabindex="3" min="1" max="#{reservationRequest.event.contingent}" />
+                        <p:spinner id="tickets" required="true" requiredMessage="Bitte geben Sie an wieviele Tickets reserviert werden sollen." value="#{reservationRequest.amountTickets}" tabindex="3" min="1" max="#{reservationRequest.event.contingent}">
+                            <f:validator validatorId="contingentValidator"/> 
+                        </p:spinner>
                     </p:column>
                 </p:row>
                 
