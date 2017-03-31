@@ -10,8 +10,8 @@
     <f:metadata>
         <!-- in Template auslagern über Parameter -->
        <f:viewAction action="#{sessionContext.checkAuthentication()}" />
-       <f:viewParam name="q" value="#{search.query}"/>
-       <f:event listener="#{search.init()}" type="preRenderView"/>
+       <f:viewParam name="q" value="#{searchRequest.query}"/>
+       <f:event listener="#{searchRequest.init()}" type="preRenderView"/>
     </f:metadata>
 </f:view>
 <ui:composition template="templates/base.xhtml">
@@ -23,18 +23,18 @@
             <row>
                 <h:form>
                     <column>
-                        <p:inputText value="#{search.query}" required="true" requiredMessage="Bitten geben Sie einen Suchbegriff ein."/>
+                        <p:inputText value="#{searchRequest.query}" required="true" requiredMessage="Bitten geben Sie einen Suchbegriff ein."/>
                     </column>
                     <column>
-                        <p:commandButton value="Suchen" action="#{search.redirect}" ajax="false"/>
+                        <p:commandButton value="Suchen" action="#{searchRequest.redirect}" ajax="false"/>
                     </column>
                 </h:form>                
             </row>
         </p:panelGrid>
-         <h:form rendered="#{search.queryFilled()}">
-            <p:dataTable var="event" value="#{search.events}" widgetVar="eventsTable" emptyMessage="Keine Events mit diesem Suchtext vorhanden." filteredValue="#{search.filteredEvents}">
+         <h:form rendered="#{searchRequest.queryFilled()}">
+            <p:dataTable var="event" value="#{searchRequest.events}" widgetVar="eventsTable" emptyMessage="Keine Events mit diesem Suchtext vorhanden." filteredValue="#{searchRequest.filteredEvents}">
                 <f:facet name="header">
-                    Es wurden insgesamt #{fn:length(search.events)} Veranstaltungen gefunden.
+                    Es wurden insgesamt #{fn:length(searchRequest.events)} Veranstaltungen gefunden.
                 </f:facet>
              
                 <p:column headerText="Veranstaltung" filterBy="#{event.name}" filterMatchMode="contains">

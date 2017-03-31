@@ -105,7 +105,7 @@ public class EventService {
         String RegExQuery = ".*" + query + ".*";
         TypedQuery<Event> result = this.entityManager
                 .createQuery(
-                        "SELECT event FROM Event event WHERE (event.published='true' OR event.creator = :creator) AND (event.name REGEXP :query OR event.description REGEXP :query ) AND event.date > :sysdate ",
+                        "SELECT event FROM Event event WHERE (event.published='true' OR event.creator = :creator) AND (event.name REGEXP :query OR event.description REGEXP :query OR event.place REGEXP :query ) AND event.date > :sysdate ",
                         Event.class )
                 .setParameter( "query", RegExQuery ).setParameter( "creator", this.sessionContext.getCurrentUser() )
                 .setParameter( "sysdate", new Date( System.currentTimeMillis() ) );

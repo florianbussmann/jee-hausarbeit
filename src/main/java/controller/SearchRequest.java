@@ -14,7 +14,7 @@ import service.EventService;
 
 @Named
 @ViewScoped
-public class Search implements Serializable {
+public class SearchRequest implements Serializable {
     private String       query;
 
     private List<Event>  events;

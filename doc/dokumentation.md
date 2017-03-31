@@ -63,6 +63,18 @@ Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird dahe
 
 ### 4. Veranstaltung suchen
 
+| Komponente          | Aufgabe                   | Anwendungsschicht |
+| ------------------- | ------------------------- | ----------------: |
+| search.xhtml        | Darstellung des Formulars |      Präsentation |
+| SearchRequest.java  | Steuerung des Formulars   |    Geschäftslogik |
+| SessionContext.java | Authentifizierung         |    Geschäftslogik |
+| EventService.java   | Durchführen der Abfrage   |        Persistenz |
+| Event.java          | Datenmodell               |        Persistenz |
+
+> Der Anwender wählt nach dem Login zunächst im oberen Navigationsbereich den Eintrag `Suche` aus. Dort gibt er einen Suchbegriff ein, dies kann beispielsweise der *Ort* `Berlin` sein. Nach der Bestätigung seiner Eingabe werden ihm alle Veranstaltungen die zu seiner Suche passen aufgelistet. Dabei wird der *Name*, die *Beschreibung* und der *Ort* der Veranstaltung berücksichtigt.
+
+> Alternative: Darüber hinaus kann der Anwender bei jeder Auflistung von Veranstaltungen über die Filter unter den Spaltenüberschriften nach spezifischen Veranstaltungen suchen. Hierzu werden Filter für den *Namen*, die *Art* und den *Ort* der Veranstaltung angeboten.
+
 ### 5. Veranstaltung ansehen
 
 ### 6. Ticketreservierung
