@@ -5,24 +5,22 @@
  * REMOVE ANY COPYRIGHT NOTICE FROM THE CODE. REASSEMBLING, RECOMPILATION, TRANSFER, DISTRIBUTION OR MODIFICATION OF
  * PART OR ALL OF THE CODE IN ANY FORM WITHOUT THE PRIOR WRITTEN PERMISSION OF ZEB/INFORMATION.TECHNOLOGY IS PROHIBITED.
  *
- * created: 27.03.2017 - 18:44:34
+ * created: 31.03.2017 - 10:02:11
  */
-package service;
+package utils;
 
 
-import model.User;
+import java.security.NoSuchAlgorithmException;
 
 
 /**
  * @author fbussmann
  *
  */
-public interface UserService {
+public interface SecurePassword {
 
-    boolean addUser( User user, String password );
+    public String getHash( String password ) throws NoSuchAlgorithmException;
 
-    boolean checkAuthentication( User user, String password );
-
-    User getUserByEmail( String email );
+    public boolean checkPassword( String password, String storedHash ) throws NoSuchAlgorithmException;
 
 }

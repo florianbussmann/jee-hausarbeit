@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import model.User;
-import service.UserServiceImpl;
+import service.UserService;
 
 
 /**
@@ -27,25 +27,27 @@ import service.UserServiceImpl;
 @Named
 @RequestScoped
 public class Login {
-    private String          email;
-    private String          password;
+    private String         email;
+    private String         password;
+
     @Inject
-    private SessionContext  session;
+    private SessionContext sessionContext;
+
     @Inject
-    private UserServiceImpl users;
+    private UserService    userService;
 
     public String doLogin() {
-        if ( !this.session.isLoggedIn() ) {
-            User user = this.users.getUserByEmail( this.email );
+        if ( !this.sessionContext.isLoggedIn() ) {
+            User user = this.userService.getUserByEmail( this.email );
             if ( user == null ) {
                 FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                         "Es existiert kein User mit dieser E-Mail Adresse", null );
                 FacesContext.getCurrentInstance().addMessage( null, msg );
                 return "login";
             } else {
-                if ( user.getPassword().equals( this.password ) ) {
-                    this.session.setCurrentUser( user );
-                    System.out.println( this.session.isLoggedIn() );
+                if ( this.userService.checkAuthentication( user, this.password ) ) {
+                    this.sessionContext.setCurrentUser( user );
+                    System.out.println( this.sessionContext.isLoggedIn() );
                     return "start";
                 } else {
                     FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,

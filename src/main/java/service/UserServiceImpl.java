@@ -10,7 +10,7 @@
 package service;
 
 
-import java.util.HashMap;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -19,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import model.User;
+import utils.SecurePassword;
 
 
 /**
@@ -27,10 +28,12 @@ import model.User;
  */
 @ApplicationScoped
 public class UserServiceImpl implements UserService {
-    private HashMap<String, User> users;
 
     @Inject
-    private EntityManager         entityManager;
+    private SecurePassword securePassword;
+
+    @Inject
+    private EntityManager  entityManager;
 
     public User getUserByEmail( final String email ) throws IllegalStateException {
         List users = this.entityManager.createQuery( "SELECT user FROM User user WHERE user.email = :email" )
@@ -45,8 +48,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void addUser( final User user ) {
-        this.entityManager.persist( user );
+    public boolean addUser( final User user, final String password ) {
+        try {
+            user.setPassword( this.securePassword.getHash( password ) );
+            this.entityManager.persist( user );
+            return true;
+        } catch ( NoSuchAlgorithmException ex ) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean checkAuthentication( final User user, final String password ) {
+        try {
+            return this.securePassword.checkPassword( password, user.getPassword() );
+        } catch ( NoSuchAlgorithmException ex ) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     public EntityManager getEntityManager() {

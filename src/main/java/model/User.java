@@ -57,11 +57,10 @@ public class User {
 
     public User() {}
 
-    public User( final String email, final String password, final String firstName, final String surname,
-            final char gender, final boolean manager ) {
+    public User( final String email, final String firstName, final String surname, final char gender,
+            final boolean manager ) {
         super();
         this.email = email;
-        this.password = password;
         this.firstName = firstName;
         this.surname = surname;
         this.gender = gender;

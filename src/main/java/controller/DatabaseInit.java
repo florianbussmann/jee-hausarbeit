@@ -26,6 +26,7 @@ import model.Event;
 import model.Reservation;
 import model.Type;
 import model.User;
+import service.UserService;
 
 
 /**
@@ -39,6 +40,9 @@ public class DatabaseInit {
 
     @Inject
     private EntityManager entityManager;
+
+    @Inject
+    private UserService   userService;
 
     @Transactional
     public void reset() {
@@ -80,19 +84,19 @@ public class DatabaseInit {
     @Transactional
     private void add() throws ParseException, EventContingentException {
         // Add users
-        User user1 = new User( "admin@admin.de", "admin", "admin", "admin", 'm', true );
-        User user2 = new User( "foo@bar.de", "admin", "foo", "bar", 'm', true );
-        User user3 = new User( "test@test.de", "admin", "test", "test", 'w', true );
-        User user4 = new User( "user@user.de", "user", "user", "user", 'm', false );
-        User user5 = new User( "sonst@was.com", "user", "sonst", "was", 'w', false );
-        User user6 = new User( "keine@idee.de", "user", "keine", "idee", 'm', false );
+        User user1 = new User( "admin@admin.de", "admin", "admin", 'm', true );
+        User user2 = new User( "foo@bar.de", "admin", "bar", 'm', true );
+        User user3 = new User( "test@test.de", "admin", "test", 'w', true );
+        User user4 = new User( "user@user.de", "user", "user", 'm', false );
+        User user5 = new User( "sonst@was.com", "user", "was", 'w', false );
+        User user6 = new User( "keine@idee.de", "user", "idee", 'm', false );
 
-        this.entityManager.persist( user1 );
-        this.entityManager.persist( user2 );
-        this.entityManager.persist( user3 );
-        this.entityManager.persist( user4 );
-        this.entityManager.persist( user5 );
-        this.entityManager.persist( user6 );
+        this.userService.addUser( user1, "admin" );
+        this.userService.addUser( user2, "foo" );
+        this.userService.addUser( user3, "test" );
+        this.userService.addUser( user4, "user" );
+        this.userService.addUser( user5, "sonst" );
+        this.userService.addUser( user6, "keine" );
 
         // Add events
         SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );

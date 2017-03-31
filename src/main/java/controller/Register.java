@@ -19,7 +19,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import model.User;
-import service.UserServiceImpl;
+import service.UserService;
 
 
 /**
@@ -39,7 +39,7 @@ public class Register implements Serializable {
     private char              gender;
 
     @Inject
-    private UserServiceImpl   userService;
+    private UserService       userService;
 
     @Inject
     private SessionContext    sessionContext;
@@ -49,8 +49,8 @@ public class Register implements Serializable {
             User user = this.userService.getUserByEmail( this.email );
             if ( user == null ) {
                 if ( this.confirmPassword.equals( this.password ) ) {
-                    user = new User( this.email, this.password, this.firstName, this.surname, this.gender, false );
-                    this.userService.addUser( user );
+                    user = new User( this.email, this.firstName, this.surname, this.gender, false );
+                    this.userService.addUser( user, this.password );
                     System.out.println( "Erfolgreich registriert." );
                     return "start";
                 } else {
