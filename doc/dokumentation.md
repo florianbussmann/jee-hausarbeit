@@ -101,6 +101,19 @@ Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird dahe
 
 ### 7. Reservierungsbestätätigung
 
+| Komponente              | Aufgabe                                  | Anwendungsschicht |
+| ----------------------- | ---------------------------------------- | ----------------: |
+| bookEvent.xhtml         | Darstellung des Formulars aus 6.         |      Präsentation |
+| myReservations.xhtml    | Darstellung der Reservierungsbestätigung |      Präsentation |
+| BookEventRequest.java   | Steuerung des Formulars aus 6.           |    Geschäftslogik |
+| SessionContext.java     | Authentifizierung                        |    Geschäftslogik |
+| ReservationService.java | Historisierung                           |        Persistenz |
+| Reservation.java        | Datenmodell                              |        Persistenz |
+
+> Bei dem Bestätigen einer Reservierung wird noch einmal geprüft, ob die vom Anwender gewünschte Anzahl an Tickets nach wie vor zur Verfügung steht. Danach erhält der Nutzer eine dementsprechende Meldung. Stehen nicht mehr genügend Tickets zur Verfügung kann der Anwender seine Eingabe anpassen.
+>
+> Sobald eine Reservierung erfolgreich durchgeführt wurde, wird dem Anwender ein Reservierungscode mitgeteilt. Hierzu gelangt er zu einer Übersicht seiner aktuellen Reservierungen, bei der oben die Nummer der neuen Reservierung angegeben ist.
+
 ### 8. Reservierungsübersicht
 
 ### 9. Noch reservierbare Tickets
