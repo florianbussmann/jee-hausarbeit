@@ -40,8 +40,8 @@ public class LoginRequest {
         if ( !this.sessionContext.isLoggedIn() ) {
             User user = this.userService.getUserByEmail( this.email );
             if ( user == null ) {
-                FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
-                        "Es existiert kein User mit dieser E-Mail Adresse", null );
+                FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR,
+                        "Es existiert kein User mit dieser E-Mail-Adresse.", null );
                 FacesContext.getCurrentInstance().addMessage( null, msg );
                 return "login";
             } else {
@@ -50,14 +50,14 @@ public class LoginRequest {
                     System.out.println( this.sessionContext.isLoggedIn() );
                     return this.sessionContext.redirectEntryPoint() + "?faces-redirect=true";
                 } else {
-                    FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
-                            "Diese Kombination aus E-Mail-Adresse und Passwort existiert nicht", null );
+                    FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR,
+                            "Diese Kombination aus E-Mail-Adresse und Passwort existiert nicht.", null );
                     FacesContext.getCurrentInstance().addMessage( null, msg );
                     return "login";
                 }
             }
         } else {
-            FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
+            FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_WARN,
                     "Sie sind bereits angemeldet. Bitte melden Sie sich ab, bevor Sie sich mit einem anderen Nutzer anmelden.",
                     null );
             FacesContext.getCurrentInstance().addMessage( null, msg );

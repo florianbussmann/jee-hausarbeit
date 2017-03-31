@@ -56,20 +56,20 @@ public class RegisterRequest implements Serializable {
                     FacesContext.getCurrentInstance().addMessage( null, msg );
                     return "login";
                 } else {
-                    FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
+                    FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_WARN,
                             "Die eingegebenen Passwörte stimmen nicht überein.", null );
                     FacesContext.getCurrentInstance().addMessage( null, msg );
                     return "register";
                 }
             } else {
-                FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
-                        "Es existiert bereits ein Benutzer mit dieser E-Mail-Adresse", null );
+                FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR,
+                        "Es existiert bereits ein Benutzer mit dieser E-Mail-Adresse.", null );
                 FacesContext.getCurrentInstance().addMessage( null, msg );
                 return "register";
             }
         } else {
-            FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
-                    "Sie sind bereits angemeldet. Bitte melden Sie sich ab, bevor Sie einen neuen Nutzer registrieren",
+            FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_WARN,
+                    "Sie sind bereits angemeldet. Bitte melden Sie sich ab, bevor Sie einen neuen Nutzer registrieren.",
                     null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
             return "register";

@@ -55,7 +55,7 @@ public class DatabaseInit {
             FacesContext.getCurrentInstance().addMessage( null, msg );
         } catch ( Exception ex ) {
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR,
-                    "Diee Datenbestand konnte aufgrund eines Fehlers nicht zurück gesetzt werden.", null );
+                    "Der Datenbestand konnte aufgrund eines Fehlers nicht zurück gesetzt werden.", null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
             ex.printStackTrace();
         }
@@ -65,7 +65,7 @@ public class DatabaseInit {
     public void drop() {
         try {
             delete();
-            FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO, "Der Datenbank wurde geleert.", null );
+            FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO, "Die Datenbank wurde geleert.", null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
         } catch ( Exception ex ) {
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR,

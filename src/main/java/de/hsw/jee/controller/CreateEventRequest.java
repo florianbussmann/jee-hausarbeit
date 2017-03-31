@@ -49,14 +49,15 @@ public class CreateEventRequest {
                 FacesContext.getCurrentInstance().addMessage( null, msg );
                 return "events";
             } else {
-                FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
+                // nicht mehr erreichbar nach Umstellung auf @ManagementOperation
+                FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR,
                         "Nur Manager dürfen Veranstaltungen erstellen.", null );
                 FacesContext.getCurrentInstance().addMessage( null, msg );
                 return "createEvent";
             }
         } else {
             // TODO: View theorethisch nicht erreichbar, aber sollte als Annotation aufgenommen werden
-            FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
+            FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_WARN,
                     "Dieser Bereich ist nur für angemeldete User. Bitte melden Sie sich an.", null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
             return "login";
