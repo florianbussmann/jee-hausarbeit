@@ -21,7 +21,7 @@ Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird dahe
 ## Umsetzung der User-Stories
 
 > Liste aller beteiligten Komponenten und Klassen, sowie deren Aufgaben und Zugehörigkeit der Anwendungsschicht.
-> Kurze Beschreibung der Schritte, die ein Nutzer für die Anwendung der Story ausführen muss.
+> Kurze Beschreibung der Schritte, die ein Nutzer für die Anwendung der Story ausführen muss.
 
 ### 1. Veranstaltung anlegen
 
