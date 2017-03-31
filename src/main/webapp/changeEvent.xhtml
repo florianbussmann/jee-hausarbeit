@@ -11,6 +11,7 @@
        <f:viewAction action="#{sessionContext.checkAuthentication()}" />
        <f:viewParam name="id" value="#{processEvent.event}" converter="#{eventConverter}"/>
        <f:event listener="#{processEvent.init()}" type="preRenderView"/>
+       <f:viewAction action="#{securityContext.checkOwnership(processEvent.event)}" />
     </f:metadata>
 </f:view>
 <ui:composition template="templates/base.xhtml">

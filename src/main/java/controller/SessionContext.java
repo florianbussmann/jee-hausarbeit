@@ -52,7 +52,6 @@ public class SessionContext implements Serializable {
 
     // TODO: store request uri and redirect to it after successful auth
     public String checkAuthentication() {
-        System.out.println( "Check auth" );
         if ( !isLoggedIn() ) {
             System.out.println( "Redirect unauthorized user" );
             FacesContext.getCurrentInstance().addMessage( "", new FacesMessage( FacesMessage.SEVERITY_WARN,

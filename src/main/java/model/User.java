@@ -67,6 +67,26 @@ public class User {
         this.manager = manager;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public boolean equals( final Object other ) {
+        if ( other == null ) {
+            return false;
+        }
+        if ( !( other instanceof User ) ) {
+            return false;
+        }
+
+        if ( other == this ) {
+            return true;
+        }
+        if ( User.class.cast( other ).getId() == this.id ) {
+            return true;
+        }
+
+        return false;
+    }
+
     public String getEmail() {
         return this.email;
     }
