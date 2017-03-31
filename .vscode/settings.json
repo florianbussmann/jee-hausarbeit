@@ -1,0 +1,14 @@
+{
+    "markdown-pdf.breaks": true,
+    "markdown-pdf.type": "pdf",
+    "markdown-pdf.format": "A4",
+    "markdown-pdf.orientation": "portrait",
+    "markdown-pdf.border.top": "1cm",
+    "markdown-pdf.border.bottom": "1cm",
+    "markdown-pdf.border.right": "1cm",
+    "markdown-pdf.border.left": "1cm",
+    "markdown-pdf.header.contents": "<div style=\"text-align: left; float: left;\">Java EE Architektur - WI 44/14</div><div style=\"text-align: right;\">Eine Ausarbeitung von Florian Bussmann & Arthur Graf</div>",
+    "markdown-pdf.footer.contents": "<div style=\"text-align: center; margin-top: 0.5cm;\">{{page}}/{{pages}}</div>",
+    "markdown-pdf.footer.height": "0.8cm",
+    "markdown-pdf.header.height": "2.2cm"
+}

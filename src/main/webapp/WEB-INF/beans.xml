@@ -6,7 +6,7 @@
 	bean-discovery-mode="all" >
     
     <interceptors>
-        <class>intercept.ManagementOperationInterceptor</class>
+        <class>de.hsw.jee.intercept.ManagementOperationInterceptor</class>
     </interceptors>
 
 </beans>
