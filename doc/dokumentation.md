@@ -8,7 +8,7 @@ Die erste Schicht behandelt die Darstellung der Inhalte und wird daher im folgen
 
 Die Schicht der Geschäftslogik hingegen beschäftigt sich mit der konkreten Implementierung jeglicher Funktionalitäten zur Realisierung der User-Stories. Zu ihr zählen daher die Controller- und Request-Komponenten.
 
-Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird daher als Persistenzschicht bezeichnet. Zu ihr zählen die Datenmodelle und die Service-Komponenten, welche die Historisierung in H2 realisieren.
+Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird daher als Persistenzschicht bezeichnet. Zu ihr zählen die Datenmodelle und die Service-Komponenten, welche die Persistierung in H2 realisieren.
 
 ### Tabelle 1: Architektur der Anwendung
 
@@ -16,7 +16,7 @@ Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird dahe
 | ----------------- | ------------------------------------------------------------- |
 | Präsentation      | Views für die Abbildung der User-Stories                      |
 | Geschäftslogik    | Steuerung der Präsentation und Abbildung von Funktionalitäten |
-| Persistenz        | Datenmodell und Historisierung in H2                          |
+| Persistenz        | Datenmodell und Persistierung in H2                           |
 
 ## Manager-Status
 
@@ -54,7 +54,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | CreateEventRequest.java  | Steuerung des Formulars                              |    Geschäftslogik |
 | SessionContext.java      | Authentifizierung                                    |    Geschäftslogik |
 | ManagementOperation.java | Autorisierung: Ist der angemeldete User ein Manager? |    Geschäftslogik |
-| EventService.java        | Historisierung                                       |        Persistenz |
+| EventService.java        | Persistierung                                        |        Persistenz |
 | Event.java               | Datenmodell                                          |        Persistenz |
 
 > Der Manager wählt nach dem Login zunächst im linken Navigationsbereich den Eintrag `Veranstaltung anlegen` aus. Danach erscheint ein Formular in dem die nötigen Angaben zum Erstellen einer Veranstaltung abgefragt werden. Ist der Manager fertig mit der Eingabe der benötigten Daten, kann die Veranstaltung über den gleichnamigen Button erstellt werden.
@@ -66,7 +66,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | publishEvents.xhtml      | Auflistung seiner noch nicht veröffentlichten Veranstaltungen |      Präsentation |
 | SessionContext.java      | Authentifizierung                                             |    Geschäftslogik |
 | ManagementOperation.java | Autorisierung: Ist der angemeldete User ein Manager?          |    Geschäftslogik |
-| EventService.java        | Durchführen der Veröffentlichung inklusive Historisierung     |        Persistenz |
+| EventService.java        | Durchführen der Veröffentlichung inklusive Persistierung      |        Persistenz |
 | Event.java               | Datenmodell                                                   |        Persistenz |
 
 > Der Manager wählt nach dem Login zunächst im linken Navigationsbereich den Eintrag `Veranstaltung veröffentlichen` aus. Danach erscheint eine Liste der noch nicht veröffentlichten Veranstaltungen. Hier hat der Manager die Option eine Veranstaltung aus der Liste direkt zu veröffentlichen. Alternativ hierzu kann er sich auch zunächst die Details anzeigen lassen um vorher noch einmal die eingegebenen Daten näher zu kontrollieren und ggf. zu bearbeiten.
@@ -79,7 +79,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | ProcessEvent.java    | Steuerung des Formulars                                                  |    Geschäftslogik |
 | SessionContext.java  | Authentifizierung                                                        |    Geschäftslogik |
 | SecurityContext.java | Autorisierung: Ist der angemeldete User der Ersteller der Veranstaltung? |    Geschäftslogik |
-| EventService.java    | Historisierung                                                           |        Persistenz |
+| EventService.java    | Persistierung                                                            |        Persistenz |
 | Event.java           | Datenmodell                                                              |        Persistenz |
 
 > Der Manager wählt nach dem Login zunächst im linken Navigationsbereich den Eintrag `Meine Veranstaltungen` aus. Aus der Liste der Veranstaltungen wählt (`Details`) er dann eine aus, die er gerne bearbeiten möchte. Hier bekommt der Manager zunächst eine Übersicht über die aktuellen Eigenschaften der Veranstaltung und hat die Option, die `Veranstaltung zu bearbeiten`. Die Anpassungen bestätigt der Manager mit einem Klick auf den Button `Änderungen speichern`, dadurch wird er zurück auf die Übersicht seiner Veranstaltungen geleitet.
@@ -117,7 +117,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | bookEvent.xhtml         | Darstellung des Formulars |      Präsentation |
 | BookEventRequest.java   | Steuerung des Formulars   |    Geschäftslogik |
 | SessionContext.java     | Authentifizierung         |    Geschäftslogik |
-| ReservationService.java | Historisierung            |        Persistenz |
+| ReservationService.java | Persistierung             |        Persistenz |
 | Reservation.java        | Datenmodell               |        Persistenz |
 
 > Der Anwender hat nach dem Login eine Veranstaltung aus der Übersicht ausgewählt, die er gerne besuchen würde. In der Detail-Ansicht erhält er die Option `Ticket reservieren`. Hierbei wird ihm eingeblendet wieviele Karten aktuell noch zur Verfügung stehen. Nach einer Eingabe der gewünschten Anzahl an Tickets, kann der Anwender die `Reservierung bestätigen` oder den Vorgang `abbrechen`. Bestätigt er seinen Reservierungswunsch, so wird - wenn noch genügend Tickets zur Verfügung stehen - die Reservierung bestätigt.
@@ -130,7 +130,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | myReservations.xhtml    | Darstellung der Reservierungsbestätigung |      Präsentation |
 | BookEventRequest.java   | Steuerung des Formulars aus 6.           |    Geschäftslogik |
 | SessionContext.java     | Authentifizierung                        |    Geschäftslogik |
-| ReservationService.java | Historisierung                           |        Persistenz |
+| ReservationService.java | Persistierung                            |        Persistenz |
 | Reservation.java        | Datenmodell                              |        Persistenz |
 
 > Bei dem Bestätigen einer Reservierung wird noch einmal geprüft, ob die vom Anwender gewünschte Anzahl an Tickets nach wie vor zur Verfügung steht. Danach erhält der Nutzer eine dementsprechende Meldung. Stehen nicht mehr genügend Tickets zur Verfügung kann der Anwender seine Eingabe anpassen.
@@ -144,7 +144,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | myReservations.xhtml    | Auflistung der persönlichen Reservierungen |      Präsentation |
 | BookEventRequest.java   | Auf Wunsch Stornierung einer Reservierung  |    Geschäftslogik |
 | SessionContext.java     | Authentifizierung                          |    Geschäftslogik |
-| ReservationService.java | Historisierung                             |        Persistenz |
+| ReservationService.java | Persistierung                              |        Persistenz |
 | Reservation.java        | Datenmodell                                |        Persistenz |
 
 > Der Anwender wählt nach dem Login im linken Navigationsbereich den Eintrag `Meine Reservierungen` aus. Auf dieser Seite wird im eine Übersicht seiner aktuellen Reservierungen dargestellt. Wenn er sich entscheiden sollte eine Veranstaltung doch nicht besuchen zu wollen, hat er hier die Möglichkeit die entsprechende Reservierung zu stornieren.
