@@ -138,6 +138,16 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 
 ### 8. Reservierungsübersicht
 
+| Komponente              | Aufgabe                                    | Anwendungsschicht |
+| ----------------------- | ------------------------------------------ | ----------------: |
+| myReservations.xhtml    | Auflistung der persönlichen Reservierungen |      Präsentation |
+| BookEventRequest.java   | Auf Wunsch Stornierung einer Reservierung  |    Geschäftslogik |
+| SessionContext.java     | Authentifizierung                          |    Geschäftslogik |
+| ReservationService.java | Historisierung                             |        Persistenz |
+| Reservation.java        | Datenmodell                                |        Persistenz |
+
+> Der Anwender wählt nach dem Login im linken Navigationsbereich den Eintrag `Meine Reservierungen` aus. Auf dieser Seite wird im eine Übersicht seiner aktuellen Reservierungen dargestellt. Wenn er sich entscheiden sollte eine Veranstaltung doch nicht besuchen zu wollen, hat er hier die Möglichkeit die entsprechende Reservierung zu stornieren.
+
 ### 9. Noch reservierbare Tickets
 
 ## Tabelle 2: Sprint-Backlog
