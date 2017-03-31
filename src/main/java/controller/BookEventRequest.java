@@ -29,7 +29,7 @@ import service.ReservationService;
  */
 @Named
 @RequestScoped
-public class ReservationRequest {
+public class BookEventRequest {
 
     private Event              event;
     private int                amountTickets = 1;
@@ -63,7 +63,7 @@ public class ReservationRequest {
                             + reservation.getId() + ".",
                     null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
-            return "myReservations" + "?faces-redirect=true";
+            return "myReservations";
         } catch ( EventContingentException ex ) {
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR, ex.getMessage(), null );
             FacesContext.getCurrentInstance().addMessage( null, msg );

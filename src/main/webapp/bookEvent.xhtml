@@ -9,9 +9,9 @@
     <f:metadata>
        <!-- in Template auslagern über Parameter -->
        <f:viewAction action="#{sessionContext.checkAuthentication()}" />
-       <f:viewParam name="id" value="#{reservationRequest.event}" converter="#{eventConverter}"/>
-       <f:event listener="#{reservationRequest.init()}" type="preRenderView"/>
-       <f:viewAction action="#{reservationRequest.checkContingent()}" />
+       <f:viewParam name="id" value="#{bookEventRequest.event}" converter="#{eventConverter}"/>
+       <f:event listener="#{bookEventRequest.init()}" type="preRenderView"/>
+       <f:viewAction action="#{bookEventRequest.checkContingent()}" />
     </f:metadata>
 </f:view>
 <ui:composition template="templates/base.xhtml">
@@ -25,7 +25,7 @@
                         <h:outputLabel for="name" value="Veranstaltung: " />
                     </p:column>
                     <p:column>
-                        <h:outputText id="name" value="#{reservationRequest.event.name}" />
+                        <h:outputText id="name" value="#{bookEventRequest.event.name}" />
                     </p:column>
                 </p:row>
                 
@@ -34,7 +34,7 @@
                         <h:outputLabel for="contingent" value="Kartenkontingent: " />
                     </p:column>
                     <p:column>
-                        <h:outputText id="contingent" value="#{reservationRequest.event.contingent}" />
+                        <h:outputText id="contingent" value="#{bookEventRequest.event.contingent}" />
                     </p:column>
                 </p:row>
                 
@@ -43,7 +43,7 @@
                         <h:outputLabel for="tickets" value="Zu reservierende Tickets: "/>
                     </p:column>
                     <p:column>
-                        <p:spinner id="tickets" required="true" requiredMessage="Bitte geben Sie an wieviele Tickets reserviert werden sollen." value="#{reservationRequest.amountTickets}" tabindex="3" min="1" max="#{reservationRequest.event.contingent}">
+                        <p:spinner id="tickets" required="true" requiredMessage="Bitte geben Sie an wieviele Tickets reserviert werden sollen." value="#{bookEventRequest.amountTickets}" tabindex="3" min="1" max="#{bookEventRequest.event.contingent}">
                             <f:validator validatorId="contingentValidator"/> 
                         </p:spinner>
                     </p:column>
@@ -51,8 +51,11 @@
                 
                 <f:facet name="footer">
                     <p:row>
-                        <p:column colspan="2">
-                            <p:commandButton value="Reservierung bestätigen" action="#{reservationRequest.submit}" ajax="false" />
+                        <p:column>
+                            <p:button value="Abbrechen" outcome="events" ajax="false" />
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="Reservierung bestätigen" action="#{bookEventRequest.submit}" ajax="false" />
                         </p:column>
                     </p:row>
                 </f:facet>

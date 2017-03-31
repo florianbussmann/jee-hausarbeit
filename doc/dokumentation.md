@@ -89,6 +89,16 @@ Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird dahe
 
 ### 6. Ticketreservierung
 
+| Komponente              | Aufgabe                   | Anwendungsschicht |
+| ----------------------- | ------------------------- | ----------------: |
+| bookEvent.xhtml         | Darstellung des Formulars |      Präsentation |
+| BookEventRequest.java   | Steuerung des Formulars   |    Geschäftslogik |
+| SessionContext.java     | Authentifizierung         |    Geschäftslogik |
+| ReservationService.java | Historisierung            |        Persistenz |
+| Reservation.java        | Datenmodell               |        Persistenz |
+
+> Der Anwender hat nach dem Login eine Veranstaltung aus der Übersicht ausgewählt, die er gerne besuchen würde. In der Detail-Ansicht erhält er die Option `Ticket reservieren`. Hierbei wird ihm eingeblendet wieviele Karten aktuell noch zur Verfügung stehen. Nach einer Eingabe der gewünschten Anzahl an Tickets, kann der Anwender die `Reservierung bestätigen` oder den Vorgang `abbrechen`. Bestätigt er seinen Reservierungswunsch, so wird - wenn noch genügend Tickets zur Verfügung stehen - die Reservierung bestätigt.
+
 ### 7. Reservierungsbestätätigung
 
 ### 8. Reservierungsübersicht
