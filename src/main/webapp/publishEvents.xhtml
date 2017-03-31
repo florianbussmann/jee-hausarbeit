@@ -40,7 +40,7 @@
                     <f:param name="id" value="#{event.id}"/>
                 </p:button>
                 <p:commandButton value="Direkt veröffentlichen" actionListener="#{eventService.publishEvent(event)}">
-                    <p:confirm header="Veröffentlichung bestätigen" message="Willst Du die Veranstaltung '#{event.name}' wirklich direkt veröffentlichen?" icon="ui-icon-alert" />
+                    <p:confirm header="Veröffentlichung bestätigen" message="Wollen Sie die Veranstaltung '#{event.name}' wirklich direkt veröffentlichen?" icon="ui-icon-alert" />
                 </p:commandButton>
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                     <p:commandButton value="Ja" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />

@@ -59,7 +59,7 @@ public class BookEventRequest {
             Reservation reservation = this.reservationService.submitReservation( this.event, this.amountTickets,
                     this.sessionContext.getCurrentUser() );
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
-                    "Die Reservierung wurde erfolgreich durchgeführt. Dein Reservierungscode lautet "
+                    "Die Reservierung wurde erfolgreich durchgeführt. Ihr Reservierungscode lautet "
                             + reservation.getId() + ".",
                     null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
