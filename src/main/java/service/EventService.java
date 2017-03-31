@@ -10,6 +10,7 @@
 package service;
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -47,10 +48,11 @@ public class EventService {
         this.entityManager.persist( event );
     }
 
-    public List<Event> getEvents( final boolean published ) {
+    public List<Event> getPublishedEvents() {
         TypedQuery<Event> query = this.entityManager
-                .createQuery( "SELECT event FROM Event event WHERE event.published = :published", Event.class )
-                .setParameter( "published", published );
+                .createQuery( "SELECT event FROM Event event WHERE event.published = true AND event.date > :sysdate",
+                        Event.class )
+                .setParameter( "sysdate", new Date( System.currentTimeMillis() ) );
         return query.getResultList();
     }
 
@@ -61,15 +63,14 @@ public class EventService {
         return query.getResultList();
     }
 
-    public List<Event> getPublishedEvents() {
-        return getEvents( true );
-    }
-
     public List<Event> getVisibleEvents() {
         TypedQuery<Event> query = this.entityManager
-                .createQuery( "SELECT event FROM Event event WHERE event.published='true' OR event.creator= :creator",
+                .createQuery(
+                        "SELECT event FROM Event event WHERE (event.published='true' OR event.creator= :creator) AND event.date > :sysdate",
                         Event.class )
-                .setParameter( "creator", this.session.getCurrentUser() );
+                .setParameter( "creator", this.session.getCurrentUser() )
+                .setParameter( "sysdate", new Date( System.currentTimeMillis() ) );
+        ;
         return query.getResultList();
     }
 
@@ -90,9 +91,12 @@ public class EventService {
 
     public List<Event> search( final String query ) {
         String RegExQuery = ".*" + query + ".*";
-        TypedQuery<Event> result = this.entityManager.createQuery(
-                "SELECT event FROM Event event WHERE event.published='true' AND (event.name REGEXP :query OR event.description REGEXP :query )",
-                Event.class ).setParameter( "query", RegExQuery );
+        TypedQuery<Event> result = this.entityManager
+                .createQuery(
+                        "SELECT event FROM Event event WHERE (event.published='true' OR event.creator = :creator) AND (event.name REGEXP :query OR event.description REGEXP :query ) AND event.date > :sysdate ",
+                        Event.class )
+                .setParameter( "query", RegExQuery ).setParameter( "creator", this.session.getCurrentUser() )
+                .setParameter( "sysdate", new Date( System.currentTimeMillis() ) );
         return result.getResultList();
     }
 }

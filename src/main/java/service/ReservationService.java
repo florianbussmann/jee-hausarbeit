@@ -10,6 +10,7 @@
 package service;
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -44,9 +45,11 @@ public class ReservationService {
 
     public List<Reservation> getReservations() {
         TypedQuery<Reservation> query = this.entityManager
-                .createQuery( "SELECT reservation FROM Reservation reservation WHERE reservation.event.creator = :user",
+                .createQuery(
+                        "SELECT reservation FROM Reservation reservation WHERE reservation.event.creator = :user AND reservation.event.date > :sysdate",
                         Reservation.class )
-                .setParameter( "user", this.session.getCurrentUser() );
+                .setParameter( "user", this.session.getCurrentUser() )
+                .setParameter( "sysdate", new Date( System.currentTimeMillis() ) );
         return query.getResultList();
     }
 
@@ -60,9 +63,10 @@ public class ReservationService {
 
     public List<Reservation> getReservationsForUser( final User user ) {
         TypedQuery<Reservation> query = this.entityManager
-                .createQuery( "SELECT reservation FROM Reservation reservation WHERE reservation.user = :user",
+                .createQuery(
+                        "SELECT reservation FROM Reservation reservation WHERE reservation.user = :user AND reservation.event.date > :sysdate",
                         Reservation.class )
-                .setParameter( "user", user );
+                .setParameter( "user", user ).setParameter( "sysdate", new Date( System.currentTimeMillis() ) );
         return query.getResultList();
     }
 
