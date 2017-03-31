@@ -47,7 +47,7 @@ public class CreateEventRequest {
                 FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                         "Die Veranstaltung wurde erfolgreich angelegt.", null );
                 FacesContext.getCurrentInstance().addMessage( null, msg );
-                return "start";
+                return "events";
             } else {
                 FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                         "Nur Manager dürfen Veranstaltungen erstellen.", null );

@@ -50,7 +50,7 @@ public class ProcessEvent implements Serializable {
         FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                 "Die Veranstaltung wurde erfolgreich geändert.", null );
         FacesContext.getCurrentInstance().addMessage( null, msg );
-        return "start";
+        return "events";
     }
 
     @PreDestroy

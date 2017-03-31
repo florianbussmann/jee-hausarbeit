@@ -51,8 +51,10 @@ public class Register implements Serializable {
                 if ( this.confirmPassword.equals( this.password ) ) {
                     user = new User( this.email, this.firstName, this.surname, this.gender, false );
                     this.userService.addUser( user, this.password );
-                    System.out.println( "Erfolgreich registriert." );
-                    return "start";
+                    FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
+                            "Ihre Registrierung war erfolgreich. Bitte melden Sie sich an.", null );
+                    FacesContext.getCurrentInstance().addMessage( null, msg );
+                    return "login";
                 } else {
                     FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                             "Die eingegebenen Passwörte stimmen nicht überein.", null );

@@ -34,7 +34,7 @@
                 </p:selectOneRadio>
                 
                 <f:facet name="footer">
-                    <p:commandButton tabindex="7" value="Registrieren" actionListener="#{register.register}" update="messages"/>
+                    <p:commandButton tabindex="7" value="Registrieren" action="#{register.register}" ajax="false" />
                 </f:facet>
             </p:panelGrid>
         </h:form>

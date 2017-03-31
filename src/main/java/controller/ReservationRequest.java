@@ -76,7 +76,7 @@ public class ReservationRequest {
             FacesContext.getCurrentInstance().addMessage( "",
                     new FacesMessage( FacesMessage.SEVERITY_WARN, "Für die Veranstaltung '" + this.event.toString()
                             + "' wurde das Kontingent bereits vollständig ausgeschöpft.", "" ) );
-            return "start";
+            return "events";
         }
 
         return null;
