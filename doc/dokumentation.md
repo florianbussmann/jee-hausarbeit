@@ -2,13 +2,13 @@
 
 ## Kurzbeschreibung der Anwendung
 
-Die entwickelte Softwarelösung orientiert sich an der Model 2-Architektur. Die Komponenten der Anwendung lassen sich demnach unterschiedlichen Schichten zuordnen.
+Die entwickelte Softwarelösung orientiert sich an der `Model 2-Architektur`. Die Komponenten der Anwendung lassen sich demnach unterschiedlichen Schichten zuordnen.
 
-Die erste Schicht behandelt die Darstellung der Inhalte und wird daher im folgenden als Präsentationsschicht bezeichnet. Zu ihr zählen die Views welche im Verzeichnis src/main/webapp/ liegen.
+Die erste Schicht behandelt die Darstellung der Inhalte und wird daher im Folgenden als `Präsentationsschicht` bezeichnet. Zu ihr zählen die Views welche im Verzeichnis src/main/webapp/ liegen.
 
-Die Schicht der Geschäftslogik hingegen beschäftigt sich mit der konkreten Implementierung jeglicher Funktionalitäten zur Realisierung der User-Stories. Zu ihr zählen daher die Controller- und Request-Komponenten.
+Die Schicht der `Geschäftslogik` hingegen beschäftigt sich mit der konkreten Implementierung jeglicher Funktionalitäten zur Realisierung der User-Stories. Zu ihr zählen daher die Controller- und Request-Komponenten.
 
-Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird daher als Persistenzschicht bezeichnet. Zu ihr zählen die Datenmodelle und die Service-Komponenten, welche die Persistierung in H2 realisieren.
+Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird daher als `Persistenzschicht` bezeichnet. Zu ihr zählen die Datenmodelle und die jeweiligen Service-Komponenten, welche die Persistierung in `H2` realisieren.
 
 ### Tabelle 1: Architektur der Anwendung
 
@@ -20,13 +20,13 @@ Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird dahe
 
 ## Manager-Status
 
-Manager nehmen eine gesonderte Position ein. Sie sind die einzigen Nutzer die Veranstaltungen anlegen, veröffentlichen und bearbeiten können. Zusätzlich können Sie auch die Reservierungen zu ihren jeweiligen Veranstaltungen ansehen. Allerdings sei zu erwähnen, das eine Registierung als Manager durch den Anwender selber nicht möglich ist. Über die Seite register.jsf kann sich ein Anwender lediglich als ein normaler Benutzer registrieren, nicht jedoch als Manager. Diese Designentscheidung wurde aufgrund der Annahme getroffen, das sich ein Manager im Normalfall verifizieren muss. Dies kann allerdings nicht über ein einfaches Anhaken eines Kontrollkästchens erfolgen, sondern müsste über einen Mitarbeiter des Webseitenbetreibers geschehen, welche nach erfolgreicher Verifizierung diesen dann bei der aktuellen Implementation noch manuell in der Datenbank anlegen müsste.
+Manager nehmen eine gesonderte Position ein. Sie sind die einzigen Nutzer die Veranstaltungen anlegen, veröffentlichen und bearbeiten können. Zusätzlich können Sie auch die Reservierungen zu ihren jeweiligen Veranstaltungen ansehen. Allerdings sei zu erwähnen, das eine Registierung als Manager durch den Anwender selber nicht möglich ist. Über die Seite `register.jsf` kann sich ein Anwender lediglich als ein normaler Benutzer registrieren, nicht jedoch als Manager. Diese Designentscheidung wurde aufgrund der Annahme getroffen, das sich ein Manager im Normalfall verifizieren muss. Dies kann allerdings nicht über ein einfaches Anhaken eines Kontrollkästchens erfolgen, sondern müsste über einen Mitarbeiter des Webseitenbetreibers geschehen, welche nach erfolgreicher Verifizierung diesen dann bei der aktuellen Implementation noch manuell in der Datenbank anlegen müsste.
 
 ## Testdaten
 
-Über die Seite /initDatabase.jsf können Testdaten in der Datenbank erstellt werden. Beim Aufruf der Seite werden dabei zwei Buttons angezeigt. Der Button "Datenbank zurücksetzen" löscht zunächst alle bisherigen Daten in der Datenbank, sofern welche vorhanden sind. Danach befüllt er die Datenbank mit Testdaten. Der Button "Datenbank leeren" löscht dagegen alle Daten. Beim erstmaligen Deployen der Anwendung sowie nach dem Betätigen von "Datenbank leeren" sei zu beachten, das wie unter dem Kapitel Manager-Status beschrieben, keine Registierung als Manager möglich ist und somit auch keine Veranstaltungen erstellt werden können. Falls trotzdem darauf verzichtet werden soll, die Testdaten zu verwenden, so muss manuell per Insert auf der Datenbank ein Nutzer mit Manager-Rechten erstellt werden.
+Über die Seite `/initDatabase.jsf` können Testdaten in der Datenbank erstellt werden. Beim Aufruf der Seite werden dabei zwei Buttons angezeigt. Der Button "Datenbank zurücksetzen" löscht zunächst alle bisherigen Daten in der Datenbank, sofern welche vorhanden sind. Danach befüllt er die Datenbank mit Testdaten. Der Button "Datenbank leeren" löscht dagegen alle Daten. Beim erstmaligen Deployen der Anwendung sowie nach dem Betätigen von "Datenbank leeren" sei zu beachten, das wie unter dem Kapitel Manager-Status beschrieben, keine Registierung als Manager möglich ist und somit auch keine Veranstaltungen erstellt werden können. Falls trotzdem darauf verzichtet werden soll, die Testdaten zu verwenden, so muss manuell per Insert auf der Datenbank ein Nutzer mit Manager-Rechten erstellt werden.
 
-Zusätzlich sei zu erwähnen, das die Seite initDatabase.jsf neben login.jsf und register.jsf die einzige Seite ist, die ein Anwender auch ohne Anmeldung erreichen kann. Ebenfalls wird nirgendwo in der Anwendung auf initDatabase.jsf verlinkt. Dies ist der Tatsache geschuldet, das diese Seite lediglich den Testprozess erleichtern soll und keinen eigentlichen Teil der Anwendung darstellt.
+Zusätzlich sei zu erwähnen, das die Seite `initDatabase.jsf` neben `login.jsf` und `register.jsf` die einzige Seite ist, die ein Anwender auch ohne Anmeldung erreichen kann. Ebenfalls wird nirgendwo in der Anwendung auf `initDatabase.jsf` verlinkt. Dies ist der Tatsache geschuldet, das diese Seite lediglich den Testprozess erleichtern soll und keinen eigentlichen Teil der Anwendung darstellt.
 
 Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erzeugten Nutzer mit ihren E-Mail-Adressen, Passwörten und Statusen:
 
@@ -48,14 +48,14 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 
 ### 1. Veranstaltung anlegen
 
-| Komponente               | Aufgabe                                              | Anwendungsschicht |
-| ------------------------ | ---------------------------------------------------- | ----------------: |
-| createEvent.xhtml        | Darstellung des Formulars                            |      Präsentation |
-| CreateEventRequest.java  | Steuerung des Formulars                              |    Geschäftslogik |
-| SessionContext.java      | Authentifizierung                                    |    Geschäftslogik |
-| ManagementOperation.java | Autorisierung: Ist der angemeldete User ein Manager? |    Geschäftslogik |
-| EventService.java        | Persistierung                                        |        Persistenz |
-| Event.java               | Datenmodell                                          |        Persistenz |
+| Komponente               | Aufgabe                                        | Anwendungsschicht |
+| ------------------------ | ---------------------------------------------- | ----------------: |
+| createEvent.xhtml        | Darstellung des Formulars                      |      Präsentation |
+| CreateEventRequest.java  | Steuerung des Formulars                        |    Geschäftslogik |
+| SessionContext.java      | Authentifizierung                              |    Geschäftslogik |
+| ManagementOperation.java | Autorisierung: Ist der Aufrufende ein Manager? |    Geschäftslogik |
+| EventService.java        | Persistierung                                  |        Persistenz |
+| Event.java               | Datenmodell                                    |        Persistenz |
 
 > Der Manager wählt nach dem Login zunächst im linken Navigationsbereich den Eintrag `Veranstaltung anlegen` aus. Danach erscheint ein Formular in dem die nötigen Angaben zum Erstellen einer Veranstaltung abgefragt werden. Ist der Manager fertig mit der Eingabe der benötigten Daten, kann die Veranstaltung über den gleichnamigen Button erstellt werden.
 
@@ -65,7 +65,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | ------------------------ | ------------------------------------------------------------- | ----------------: |
 | publishEvents.xhtml      | Auflistung seiner noch nicht veröffentlichten Veranstaltungen |      Präsentation |
 | SessionContext.java      | Authentifizierung                                             |    Geschäftslogik |
-| ManagementOperation.java | Autorisierung: Ist der angemeldete User ein Manager?          |    Geschäftslogik |
+| ManagementOperation.java | Autorisierung: Ist der Aufrufende ein Manager?                |    Geschäftslogik |
 | EventService.java        | Durchführen der Veröffentlichung inklusive Persistierung      |        Persistenz |
 | Event.java               | Datenmodell                                                   |        Persistenz |
 
@@ -73,14 +73,14 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 
 ### 3. Veranstaltung bearbeiten
 
-| Komponente           | Aufgabe                                                                  | Anwendungsschicht |
-| -------------------- | ------------------------------------------------------------------------ | ----------------: |
-| changeEvent.xhtml    | Darstellung des Formulars                                                |      Präsentation |
-| ProcessEvent.java    | Steuerung des Formulars                                                  |    Geschäftslogik |
-| SessionContext.java  | Authentifizierung                                                        |    Geschäftslogik |
-| SecurityContext.java | Autorisierung: Ist der angemeldete User der Ersteller der Veranstaltung? |    Geschäftslogik |
-| EventService.java    | Persistierung                                                            |        Persistenz |
-| Event.java           | Datenmodell                                                              |        Persistenz |
+| Komponente           | Aufgabe                                                                         | Anwendungsschicht |
+| -------------------- | ------------------------------------------------------------------------------- | ----------------: |
+| changeEvent.xhtml    | Darstellung des Formulars                                                       |      Präsentation |
+| ProcessEvent.java    | Steuerung des Formulars                                                         |    Geschäftslogik |
+| SessionContext.java  | Authentifizierung                                                               |    Geschäftslogik |
+| SecurityContext.java | Autorisierung: Ist der angemeldete Nutzer auch der Ersteller der Veranstaltung? |    Geschäftslogik |
+| EventService.java    | Persistierung                                                                   |        Persistenz |
+| Event.java           | Datenmodell                                                                     |        Persistenz |
 
 > Der Manager wählt nach dem Login zunächst im linken Navigationsbereich den Eintrag `Meine Veranstaltungen` aus. Aus der Liste der Veranstaltungen wählt (`Details`) er dann eine aus, die er gerne bearbeiten möchte. Hier bekommt der Manager zunächst eine Übersicht über die aktuellen Eigenschaften der Veranstaltung und hat die Option, die `Veranstaltung zu bearbeiten`. Die Anpassungen bestätigt der Manager mit einem Klick auf den Button `Änderungen speichern`, dadurch wird er zurück auf die Übersicht seiner Veranstaltungen geleitet.
 
@@ -135,7 +135,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 
 > Bei dem Bestätigen einer Reservierung wird noch einmal geprüft, ob die vom Anwender gewünschte Anzahl an Tickets nach wie vor zur Verfügung steht. Danach erhält der Nutzer eine dementsprechende Meldung. Stehen nicht mehr genügend Tickets zur Verfügung kann der Anwender seine Eingabe anpassen.
 >
-> Sobald eine Reservierung erfolgreich durchgeführt wurde, wird dem Anwender ein Reservierungscode mitgeteilt. Hierzu gelangt er zu einer Übersicht seiner aktuellen Reservierungen, bei der oben die Nummer der neuen Reservierung angegeben ist.
+> Sobald eine Reservierung erfolgreich durchgeführt wurde, wird dem Anwender ein `Reservierungscode` mitgeteilt. Hierzu gelangt er zu einer Übersicht seiner aktuellen Reservierungen, bei der oben die Nummer der neuen Reservierung angegeben ist.
 
 ### 8. Reservierungsübersicht
 
@@ -158,7 +158,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | SessionContext.java | Authentifizierung              |    Geschäftslogik |
 | Event.java          | Datenmodell                    |        Persistenz |
 
-> Der Anwender wird an allen Stellen bei denen das freie Kontingent für ihn wichtig ist, über den aktuellen Stand informiert. Sowohl auf der Übersichtsseite der Veranstaltungen, als auch bei den Details einer Veranstaltung und der letzlichen Reservierung wird ihm daher die Anzahl noch reservierbarer Tickets angezeigt.
+> Der Anwender wird an allen Stellen bei denen das freie Kontingent für ihn wichtig ist, über den aktuellen Stand informiert. Sowohl auf der Übersichtsseite der Veranstaltungen, als auch bei den Details einer Veranstaltung und der letzlichen Reservierung wird ihm daher die `Anzahl noch reservierbarer Tickets` angezeigt.
 
 ## Tabelle 3: Sprint-Backlog
 
@@ -186,7 +186,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 
 ### Beschreibung der Datenbankstruktur
 
-Die Datenbankstruktur wird beim Deployment der Webanwendung automatisch erstellt. Die einzelnen Datenbanktabellen werden von der Java Persistence API anhand der Klassen, die als Entity gekennzeichnet sind abgeleitet und automatisch generiert. Diese Persistence API übernimmt zusätzlich zum ableiten der Datenbankstruktur noch einige weitere Aufgaben. So sorgt sie auch für das Erstellen einer eindeutigen ID für die jeweiligen Instanzen der Klassen, kümmert sich um die Integrität der Datenbank und das Verwalten der Beziehungen zwischen den einzelnen Entitäten.
+Die Datenbankstruktur wird beim Deployment der Webanwendung automatisch erstellt. Die einzelnen Datenbanktabellen werden von der `Java Persistence API` anhand der Klassen, die als Entity gekennzeichnet sind abgeleitet und automatisch generiert. Diese Persistence API übernimmt zusätzlich zum ableiten der Datenbankstruktur noch einige weitere Aufgaben. So sorgt sie auch für das Erstellen einer eindeutigen ID für die jeweiligen Instanzen der Klassen, kümmert sich um die Integrität der Datenbank und das Verwalten der Beziehungen zwischen den einzelnen Entitäten.
 Insgesamt sind drei Entitäten für die Webanwendung entscheidend:
 
 - Zunächst wäre hier der User zu nennen. Er repräsentiert einen realen Nutzer der Webanwendung und wird mit der Kombination aus E-Mail-Adresse und einem Passwort gekennzeichnet. Ein User kann zusätzlich als Manager markiert werden. Dies gibt im die Möglichkeit Veranstaltungen zu erstellen, diese frei zu geben, zu bearbeiten und zugehörige Reservierungen einzusehen.
