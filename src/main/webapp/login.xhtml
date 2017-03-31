@@ -13,13 +13,13 @@
             <p:messages closeable="true" id="messages"/>
             <p:panelGrid columns="2">
                 <h:outputLabel for="email" value="Email: *"/>
-                <p:inputText id="email" required="true" requiredMessage="Bitte geben Sie eine gültige E-Mail-Adresse ein." tabindex="1" value="#{login.email}"/>
+                <p:inputText id="email" required="true" requiredMessage="Bitte geben Sie eine gültige E-Mail-Adresse ein." tabindex="1" value="#{loginRequest.email}"/>
                 
                 <h:outputLabel for="password" value="Passwort: *"/>
-                <p:password id="password" required="true" requiredMessage="Bitte geben Sie ein gültiges Passwort ein." tabindex="2" value="#{login.password}" />
+                <p:password id="password" required="true" requiredMessage="Bitte geben Sie ein gültiges Passwort ein." tabindex="2" value="#{loginRequest.password}" />
                 
                 <f:facet name="footer">
-                    <p:commandButton tabindex="3" value="Anmelden" action="#{login.doLogin}" ajax="false"/>
+                    <p:commandButton tabindex="3" value="Anmelden" action="#{loginRequest.doLogin}" ajax="false"/>
                 </f:facet>
             </p:panelGrid>
         </h:form>

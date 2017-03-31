@@ -26,7 +26,7 @@ import de.hsw.jee.service.UserService;
  */
 @Named
 @RequestScoped
-public class Login {
+public class LoginRequest {
     private String         email;
     private String         password;
 

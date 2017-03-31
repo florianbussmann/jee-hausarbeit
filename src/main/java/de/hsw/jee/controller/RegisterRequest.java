@@ -28,7 +28,7 @@ import de.hsw.jee.service.UserService;
  */
 @Named
 @ViewScoped
-public class Register implements Serializable {
+public class RegisterRequest implements Serializable {
     private static final long serialVersionUID = -2030156315717245369L;
 
     private String            email;
