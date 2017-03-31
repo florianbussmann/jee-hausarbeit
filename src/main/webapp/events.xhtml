@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <f:metadata>
+        <!-- in Template auslagern über Parameter -->
+        <f:viewAction action="#{sessionContext.checkAuthentication()}" />
+    </f:metadata>
+</f:view>
+<ui:composition template="templates/base.xhtml">
+    <ui:param name="authRequired" value="true" />
+    <ui:param name="activePageIndex" value="1" />
+    <ui:define name="title">Veranstaltungen</ui:define>
+    <ui:define name="content">
+        <p:messages closeable="true" id="messages"/>
+        
+        <h:form>
+            <p:dataTable var="event" value="#{eventFilterView.events}" widgetVar="eventsTable" emptyMessage="Keine Events mit den angegebenen Kriterien gefunden." filteredValue="#{eventFilterView.filteredEvents}">
+                <f:facet name="header">
+                    Liste aller veröffentlichten Veranstaltungen
+                </f:facet>
+             
+                <p:column headerText="Veranstaltung" filterBy="#{event.name}" filterMatchMode="contains">
+                    <!-- 
+                    <p:commandLink title="Details anzeigen" value="" styleClass="ui-icon ui-icon-search">
+                        <h:outputText value="#{event.name}" />
+                    </p:commandLink>
+                    -->
+                    <h:outputText value="#{event.name}" />
+                </p:column>
+                <!-- gruppieren nach Typ? -->
+                <p:column headerText="Veranstaltungsart" filterBy="#{event.type}" filterMatchMode="exact" >
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('eventsTable').filter()" >
+                            <f:selectItem itemLabel="Auswählen" noSelectionOption="true" />
+                            <f:selectItems value="#{eventService.possibleTypes}" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <h:outputText value="#{event.type}" />
+                </p:column>
+                <p:column headerText="Ort" filterBy="#{event.place}" filterMatchMode="contains">
+                    <h:outputText value="#{event.place}" />
+                </p:column>
+                <p:column headerText="Datum">
+                    <h:outputText value="#{event.date}">
+                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Kontingent">
+                    <h:outputText value="#{event.contingent}" styleClass="center" />
+                </p:column>
+                <p:column headerText="Details">
+                    <p:link value="Details" outcome="event">
+                        <f:param name="id" value="#{event.id}"/>
+                    </p:link>
+                </p:column>
+                
+                <f:facet name="footer">
+                    Es gibt insgesamt #{fn:length(eventFilterView.events)} veröffentlichte Veranstaltungen.
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

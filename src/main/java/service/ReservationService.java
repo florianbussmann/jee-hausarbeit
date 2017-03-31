@@ -23,6 +23,7 @@ import javax.transaction.Transactional;
 import controller.SessionContext;
 import exception.EventContingentException;
 import exception.ReservationCancelException;
+import intercept.ManagementOperation;
 import model.Event;
 import model.Reservation;
 import model.User;
@@ -43,6 +44,7 @@ public class ReservationService {
     @Inject
     private SessionContext session;
 
+    @ManagementOperation
     public List<Reservation> getReservations() {
         TypedQuery<Reservation> query = this.entityManager
                 .createQuery(

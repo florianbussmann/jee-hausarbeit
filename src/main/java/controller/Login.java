@@ -48,7 +48,7 @@ public class Login {
                 if ( this.userService.checkAuthentication( user, this.password ) ) {
                     this.sessionContext.setCurrentUser( user );
                     System.out.println( this.sessionContext.isLoggedIn() );
-                    return "start";
+                    return this.sessionContext.redirectEntryPoint();
                 } else {
                     FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
                             "Diese Kombination aus E-Mail-Adresse und Passwort existiert nicht", null );

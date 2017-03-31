@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <f:metadata>
+        <!-- in Template auslagern über Parameter -->
+        <f:viewAction action="#{sessionContext.checkAuthentication()}" />
+    </f:metadata>
+</f:view>
+<ui:composition template="templates/base.xhtml">
+    <ui:param name="activePageIndex" value="1" />
+    <ui:define name="title">Startseite</ui:define>
+    <ui:define name="content">
+        <p:messages closeable="true" id="messages"/>
+        
+        <p:link value="Achtung: Es warten noch #{eventService.getDraftedEvents().size()} Veranstaltungen darauf veröffentlicht zu werden. Jetzt zur Übersicht wechseln um diese zu veröffentlichen." outcome="publishEvents" rendered="#{sessionContext.getCurrentUser().isManager()}"/>
+        
+        <h:form>
+            <p:dataTable var="reservation" value="#{reservationService.getReservations()}" rendered="#{sessionContext.getCurrentUser().isManager()}">
+                <f:facet name="header">
+                    Liste aller Reservierungen
+                </f:facet>
+             
+                <p:column headerText="Reservierung" styleClass="right">
+                    <h:outputText value="#{reservation.ticketAmount}" />
+                </p:column>
+                <p:column headerText="Veranstaltung">
+                    <h:outputText value="#{reservation.event.name}" />
+                </p:column>
+                <p:column headerText="Reserviert für">
+                    <h:outputText value="#{reservation.user.email}">
+                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Datum">
+                    <h:outputText value="#{reservation.issueDate}">
+                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                    </h:outputText>
+                </p:column>
+                
+                <f:facet name="footer">
+                    Es gibt insgesamt #{fn:length(reservationService.getReservations())} Reservierungen.
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

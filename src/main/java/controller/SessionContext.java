@@ -50,6 +50,18 @@ public class SessionContext implements Serializable {
         return "login";
     }
 
+    public String redirectEntryPoint() {
+        if ( !isLoggedIn() ) {
+            return "login";
+        }
+
+        if ( this.currentUser.isManager() ) {
+            return "reservations";
+        }
+
+        return "events";
+    }
+
     // TODO: store request uri and redirect to it after successful auth
     public String checkAuthentication() {
         if ( !isLoggedIn() ) {
