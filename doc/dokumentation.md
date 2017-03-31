@@ -150,6 +150,15 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 
 ### 9. Noch reservierbare Tickets
 
+| Komponente          | Aufgabe                        | Anwendungsschicht |
+| ------------------- | ------------------------------ | ----------------: |
+| events.xhtml        | Auflistung der Veranstaltungen |      Präsentation |
+| event.xhtml         | Darstellung der Details        |      Präsentation |
+| SessionContext.java | Authentifizierung              |    Geschäftslogik |
+| Event.java          | Datenmodell                    |        Persistenz |
+
+> Der Anwender wird an allen Stellen bei denen das freie Kontingent für ihn wichtig ist, über den aktuellen Stand informiert. Sowohl auf der Übersichtsseite der Veranstaltungen, als auch bei den Details einer Veranstaltung und der letzlichen Reservierung wird ihm daher die Anzahl noch reservierbarer Tickets angezeigt.
+
 ## Tabelle 2: Sprint-Backlog
 
 | Task                          | Beschreibung                                                                                     | Story |  Entwickler |
