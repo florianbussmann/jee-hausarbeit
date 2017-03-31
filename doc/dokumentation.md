@@ -42,7 +42,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 
 ## Umsetzung der User-Stories
 
-> Liste aller beteiligten Komponenten und Klassen, sowie deren Aufgaben und Zugehörigkeit der Anwendungsschicht.
+> Liste aller beteiligten Komponenten und Klassen, sowie deren Aufgaben und Zugehörigkeit zu den Anwendungsschichten.
 > Kurze Beschreibung der Schritte, die ein Nutzer für die Anwendung der Story ausführen muss.
 
 ### 1. Veranstaltung anlegen
@@ -68,7 +68,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | EventService.java        | Durchführen der Veröffentlichung inklusive Historisierung     |        Persistenz |
 | Event.java               | Datenmodell                                                   |        Persistenz |
 
-> Der Manager wählt nach dem Login zunächst im linken Navigationsbereich den Eintrag `Veranstaltung veröffentlichen` aus. Danach erscheint eine Liste der noch nicht veröffentlichten Veranstaltungen. Hier hat der Manager die Option eine Veranstaltung aus der Liste direkt zu veröffentlichen. Alternativ hierzu kann er sich auch zunächst die Details anzeigen lassen um vorher noch noch einmal die eingegebenen Daten näher zu kontrollieren und ggf. zu bearbeiten.
+> Der Manager wählt nach dem Login zunächst im linken Navigationsbereich den Eintrag `Veranstaltung veröffentlichen` aus. Danach erscheint eine Liste der noch nicht veröffentlichten Veranstaltungen. Hier hat der Manager die Option eine Veranstaltung aus der Liste direkt zu veröffentlichen. Alternativ hierzu kann er sich auch zunächst die Details anzeigen lassen um vorher noch einmal die eingegebenen Daten näher zu kontrollieren und ggf. zu bearbeiten.
 
 ### 3. Veranstaltung bearbeiten
 
@@ -121,20 +121,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 
 > Der Anwender hat nach dem Login eine Veranstaltung aus der Übersicht ausgewählt, die er gerne besuchen würde. In der Detail-Ansicht erhält er die Option `Ticket reservieren`. Hierbei wird ihm eingeblendet wieviele Karten aktuell noch zur Verfügung stehen. Nach einer Eingabe der gewünschten Anzahl an Tickets, kann der Anwender die `Reservierung bestätigen` oder den Vorgang `abbrechen`. Bestätigt er seinen Reservierungswunsch, so wird - wenn noch genügend Tickets zur Verfügung stehen - die Reservierung bestätigt.
 
-### 7. Reservierungsbestätätigung
-
-| Komponente              | Aufgabe                                  | Anwendungsschicht |
-| ----------------------- | ---------------------------------------- | ----------------: |
-| bookEvent.xhtml         | Darstellung des Formulars aus 6.         |      Präsentation |
-| myReservations.xhtml    | Darstellung der Reservierungsbestätigung |      Präsentation |
-| BookEventRequest.java   | Steuerung des Formulars aus 6.           |    Geschäftslogik |
-| SessionContext.java     | Authentifizierung                        |    Geschäftslogik |
-| ReservationService.java | Historisierung                           |        Persistenz |
-| Reservation.java        | Datenmodell                              |        Persistenz |
-
-> Bei dem Bestätigen einer Reservierung wird noch einmal geprüft, ob die vom Anwender gewünschte Anzahl an Tickets nach wie vor zur Verfügung steht. Danach erhält der Nutzer eine dementsprechende Meldung. Stehen nicht mehr genügend Tickets zur Verfügung kann der Anwender seine Eingabe anpassen.
->
-> Sobald eine Reservierung erfolgreich durchgeführt wurde, wird dem Anwender ein Reservierungscode mitgeteilt. Hierzu gelangt er zu einer Übersicht seiner aktuellen Reservierungen, bei der oben die Nummer der neuen Reservierung angegeben ist.
+### 7. Reservierungsbestätigung
 
 ### 8. Reservierungsübersicht
 
@@ -167,6 +154,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | Datenmodell                   | Konzipierung der benötigten Entitäten                                                            |     - | *Gemeinsam* |
 | Authentifizierung             | Registrierung & Anmeldung an der Anwendung                                                       |     - |      Arthur |
 | Autorisierung                 | Zugriffsschutz für Seiten- und Methodenaufrufe, die Managern vorbehalten sein sollen             |     - |     Florian |
+| Erstellung Testdaten| Erstellung der Testdaten und Einbindung in die Anwendung                                                |     - |      Arthur |
 | Veranstaltung anlegen         |                                                                                                  |     1 |      Arthur |
 | Veranstaltung veröffentlichen | Veranstaltungen werden erst nach der Freigabe durch ihren jeweiligen Manager für andere sichtbar |     2 |     Florian |
 | Veranstaltung bearbeiten      |                                                                                                  |     3 |      Arthur |
@@ -186,8 +174,8 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 
 [![Entity-Relationship-Model](assets/ER-Diagramm.bmp "ER-Diagramm der Datenbank")](assets/ER-Diagramm.bmp)
 
-Die Datenbankstruktur wird bei deployment der Webanwendung automatisch erstellt. Die einzelnen Datenbanktabellen werden von der Java Persistence API anhand der Klassen die als Entity gekennzeichnet sind abgeleitet und automatisch generiert. Diese Persistence API übernimmt zusätzlich zum ableiten der Datenbankstruktur noch einige weitere Aufgaben. So sorgt sie auch für das Erstellen einer eindeutigen ID für die jeweiligen Instanzen der Klassen, kümmert sich um die Integrität der Datenbank und das Verwalten der Beziehungen zwischen den einzelnen Entitäten.
+Die Datenbankstruktur wird bei deployment der Webanwendung automatisch erstellt. Die einzelnen Datenbanktabellen werden von der Java Persistence API anhand der Klassen, die als Entity gekennzeichnet sind abgeleitet und automatisch generiert. Diese Persistence API übernimmt zusätzlich zum ableiten der Datenbankstruktur noch einige weitere Aufgaben. So sorgt sie auch für das Erstellen einer eindeutigen ID für die jeweiligen Instanzen der Klassen, kümmert sich um die Integrität der Datenbank und das Verwalten der Beziehungen zwischen den einzelnen Entitäten.
 Insgesamt sind drei Entity für die Webanwendung entscheidend:
 - Zunächst wäre hier der User zu nennen. Er repräsentiert einen realen Nutzer der Webanwendung und wird mit der Kombination aus E-Mail-Adresse und einem Passwort gekennzeichnet. Ein User kann zusätzlich als Manager markiert werden. Dies gibt im die Möglichkeit Veranstaltunge zu erstellen, diese frei zu geben, zu bearbeiten und zugehörige Reservierungen einzusehen.
-- Eine weitere Entität wäre das Event. Sie stellt eine Veranstaltung da, bestehend aus einem Namen, einer Beschreibung, einen Veranstaltungsort, einer Datum mit Uhrzeit und einer Anzahl verfügbarer Karten. Zusätzlich kann jede Veranstaltung noch eine Kategorie zugeordnet werden. Eine Veranstaltung kann dabei entweder unveröffentlicht oder veröffentlicht sein. Eine unveröffentlichte Veranstaltung ist nur vom jeweiligen User der sie erstellt hat einsehbar und auch nur dieser kann sie veröffenlichen. Der Ersteller der Veranstaltung ist über die creator_ID gespeicehrt.
-- Als letztes gibt es noch die Reservation. Sie bildet eine Reservierung für eine Veranstaltung von einem User ab. Als solche speichert Sie diese auch mit Hilfe der Attribute Event_ID und User_ID ab. Zusätzlich besitzt sie noch das Attribut ticketamount, welches die Anzahl an reservierten Tickets abspeichert und issuedate,  welches das Datum mit Uhrzeit speichert, an welchen die Reservierung erfolgte.
+- Eine weitere Entität wäre Event. Sie stellt eine Veranstaltung da, bestehend aus einem Namen, einer Beschreibung, einen Veranstaltungsort, einer Datum mit Uhrzeit und einer Anzahl verfügbarer Karten. Zusätzlich kann jede Veranstaltung noch eine Kategorie zugeordnet werden. Eine Veranstaltung kann dabei entweder unveröffentlicht oder veröffentlicht sein. Eine unveröffentlichte Veranstaltung ist nur vom jeweiligen User der sie erstellt hat einsehbar und auch nur dieser kann sie veröffenlichen. Der Ersteller der Veranstaltung ist über die creator_ID gespeichert.
+- Als letztes gibt es noch die Reservation. Sie bildet eine Reservierung für eine Veranstaltung von einem User ab. Als solche speichert sie diese Veranstaltung und den Nutzer auch mit Hilfe der Attribute Event_ID und User_ID ab. Zusätzlich besitzt sie noch das Attribut ticketamount, welches die Anzahl an reservierten Tickets abspeichert und issuedate,  welches das Datum mit Uhrzeit speichert, an welchen die Reservierung erfolgte.
