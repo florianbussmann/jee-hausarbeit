@@ -22,7 +22,7 @@
                         <h:outputLabel for="name" value="Name: *"/>
                     </p:column>
                     <p:column>
-                        <p:inputText id="name" required="true" requiredMessage="Bitte geben Sie einen Namen für die Veranstaltung ein." tabindex="1" value="#{eventBean.name}"/>
+                        <p:inputText id="name" required="true" requiredMessage="Bitte geben Sie einen Namen für die Veranstaltung ein." tabindex="1" value="#{createEventRequest.event.name}"/>
                     </p:column>
                 </p:row>
                 
@@ -34,7 +34,7 @@
                 
                 <p:row>
                     <p:column colspan="2">
-                        <p:inputTextarea id="description" required="true" requiredMessage="Bitte geben Sie einen Beschreibung für die Veranstaltung ein." tabindex="2" value="#{eventBean.description}" cols="45" rows="7"/>
+                        <p:inputTextarea id="description" required="true" requiredMessage="Bitte geben Sie einen Beschreibung für die Veranstaltung ein." tabindex="2" value="#{createEventRequest.event.description}" cols="45" rows="7"/>
                     </p:column>
                 </p:row>
                 
@@ -43,7 +43,7 @@
                         <h:outputLabel for="contingent" value="Kartenkontingent: *"/>
                     </p:column>
                     <p:column>
-                        <p:spinner id="contingent" required="true" requiredMessage="Bitte geben Sie ein Kartenkontingent: ein." tabindex="3" value="#{eventBean.contingent}" min="1">
+                        <p:spinner id="contingent" required="true" requiredMessage="Bitte geben Sie ein Kartenkontingent: ein." tabindex="3" value="#{createEventRequest.event.contingent}" min="1">
                             <f:validator validatorId="contingentValidator"/>
                         </p:spinner>
                     </p:column>
@@ -54,7 +54,7 @@
                         <h:outputLabel for="place" value="Veranstaltungsstandort: *"/>
                     </p:column>
                     <p:column>
-                        <p:inputText id="place" required="true" requiredMessage="Bitte geben Sie einen Veranstaltungsstandort ein." tabindex="4" value="#{eventBean.place}"/>
+                        <p:inputText id="place" required="true" requiredMessage="Bitte geben Sie einen Veranstaltungsstandort ein." tabindex="4" value="#{createEventRequest.event.place}"/>
                     </p:column>
                 </p:row>
                 
@@ -63,7 +63,7 @@
                         <h:outputLabel for="date" value="Veranstaltungsdatum: *"/>
                     </p:column>
                     <p:column>
-                        <p:inputText id="date" required="true" requiredMessage="Bitte geben Sie ein Veranstaltungsdatum ein." tabindex="5" value="#{eventBean.date}" label="dd.MM.yy hh:mm" validatorMessage="Bitte geben Sie ein Datum in der Zukunft an." converterMessage="Bitte geben Sie ein Datum im Format DD.MM.YYYY HH:MM ein">
+                        <p:inputText id="date" required="true" requiredMessage="Bitte geben Sie ein Veranstaltungsdatum ein." tabindex="5" value="#{createEventRequest.event.date}" label="dd.MM.yy hh:mm" validatorMessage="Bitte geben Sie ein Datum in der Zukunft an." converterMessage="Bitte geben Sie ein Datum im Format DD.MM.YYYY HH:MM ein">
                             <f:convertDateTime pattern="dd.MM.yyyy HH:mm"/>
                             <f:validator validatorId="dateValidator"/>
                             <p:watermark for="date" value="DD.MM.YYYY HH:MM"/>
@@ -76,7 +76,8 @@
                         <h:outputLabel for="type" value="Veranstaltungsart: *"/>
                     </p:column>
                     <p:column>
-                        <p:selectOneMenu id= "type" value="#{eventBean.type}" required="true" requiredMessage="Bitte suchen Sie eine Veranstaltungsart aus." tabindex="6">
+                        <p:selectOneMenu id= "type" value="#{createEventRequest.event.type}" required="true" requiredMessage="Bitte suchen Sie eine Veranstaltungsart aus." tabindex="6">
+                            <f:selectItem itemLabel="Auswählen" noSelectionOption="true" />
                             <f:selectItems value="#{eventService.getPossibleTypes()}" />
                         </p:selectOneMenu>
                     </p:column>
@@ -85,7 +86,7 @@
                 <f:facet name="footer">
                     <p:row>
                         <p:column colspan="2">
-                            <p:commandButton tabindex="7" value="Veranstaltung erstellen" action="#{eventBean.createEvent}" ajax="false" />
+                            <p:commandButton tabindex="7" value="Veranstaltung erstellen" action="#{createEventRequest.createEvent}" ajax="false" />
                         </p:column>
                     </p:row>
                 </f:facet>

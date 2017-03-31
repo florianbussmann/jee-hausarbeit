@@ -65,7 +65,7 @@
                 <p:column headerText="Veranstaltungsart" filterBy="#{event.type}" filterMatchMode="exact" >
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('eventsTable').filter()" >
-                            <f:selectItem itemLabel="Select One" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Auswählen" noSelectionOption="true" />
                             <f:selectItems value="#{eventService.possibleTypes}" />
                         </p:selectOneMenu>
                     </f:facet>

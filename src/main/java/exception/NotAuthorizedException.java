@@ -9,18 +9,10 @@
  */
 package exception;
 
-
-import javax.faces.context.FacesContext;
-
-
 /**
  * @author fbussmann
  *
  */
 public class NotAuthorizedException extends Exception {
-
-    public NotAuthorizedException() {
-        FacesContext.getCurrentInstance().getExternalContext().setResponseStatus( 403 );
-    }
 
 }

@@ -101,6 +101,10 @@ public class Event {
         return this.creator;
     }
 
+    public void setCreator( final User creator ) {
+        this.creator = creator;
+    }
+
     public void setDescription( final String description ) {
         this.description = description;
     }
@@ -155,6 +159,10 @@ public class Event {
 
     public void setPublished( final boolean published ) {
         this.published = published;
+    }
+
+    public boolean isBookable() {
+        return this.isPublished() && ( this.getContingent() > 0 );
     }
 
     /** {@inheritDoc} */

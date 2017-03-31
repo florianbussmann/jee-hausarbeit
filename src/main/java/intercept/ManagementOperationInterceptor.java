@@ -11,7 +11,6 @@ package intercept;
 
 
 import javax.enterprise.context.Dependent;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
@@ -40,7 +39,6 @@ public class ManagementOperationInterceptor {
         User user = this.sessionContext.getCurrentUser();
         if ( ( user == null ) || !user.isManager() ) {
             System.out.println( "not a manager" );
-            FacesContext.getCurrentInstance().getExternalContext().setResponseStatus( 403 );
             throw new NotAuthorizedException();
         }
 

@@ -21,8 +21,10 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import controller.SessionContext;
+import intercept.ManagementOperation;
 import model.Event;
 import model.Type;
+import model.User;
 
 
 /**
@@ -44,7 +46,8 @@ public class EventService {
     }
 
     @Transactional
-    public void addEvent( final Event event ) {
+    public void addEvent( final Event event, final User creator ) {
+        event.setCreator( creator );
         this.entityManager.persist( event );
     }
 
@@ -56,6 +59,7 @@ public class EventService {
         return query.getResultList();
     }
 
+    @ManagementOperation
     public List<Event> getDraftedEvents() {
         TypedQuery<Event> query = this.entityManager.createQuery(
                 "SELECT event FROM Event event WHERE event.published = false AND event.creator = :creator",

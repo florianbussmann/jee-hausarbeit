@@ -78,14 +78,14 @@
                 </p:row>
                 
                 <f:facet name="footer">
-                    <p:row rendered="#{processEvent.eventBookable()}">
+                    <p:row rendered="#{processEvent.event.isBookable()}">
                         <p:column colspan="2">
                             <p:button value="Ticket reservieren" outcome="bookEvent">
                                 <f:param name="id" value="#{processEvent.event.id}"/>
                             </p:button>
                         </p:column>
                     </p:row>
-                    <p:row rendered="#{!processEvent.eventBookable()}">
+                    <p:row rendered="#{processEvent.event.isPublished() and !processEvent.event.isBookable()}">
                         <p:column colspan="2">
                             Diese Veranstaltung ist leider schon ausverkauft.
                         </p:column>
