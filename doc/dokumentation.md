@@ -59,7 +59,7 @@ Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird dahe
 | EventService.java    | Historisierung                                                           |        Persistenz |
 | Event.java           | Datenmodell                                                              |        Persistenz |
 
-> Der Manager wählt nach dem Login zunächst im oberen Navigationsbereich den Eintrag `Veranstaltungen` aus. Aus der Liste der Veranstaltungen wählt (`Details`) er dann eine aus, die er gerne bearbeiten möchte. Hier bekommt der Manager zunächst eine Übersicht über die aktuellen Eigenschaften der Veranstaltung und hat die Option, die Veranstaltung zu bearbeiten. Die Anpassungen bestätigt der Manager mit einem Klick auf den Button `Änderungen speichern`.
+> Der Manager wählt nach dem Login zunächst im linken Navigationsbereich den Eintrag `Meine Veranstaltungen` aus. Aus der Liste der Veranstaltungen wählt (`Details`) er dann eine aus, die er gerne bearbeiten möchte. Hier bekommt der Manager zunächst eine Übersicht über die aktuellen Eigenschaften der Veranstaltung und hat die Option, die `Veranstaltung zu bearbeiten`. Die Anpassungen bestätigt der Manager mit einem Klick auf den Button `Änderungen speichern`, dadurch wird er zurück auf die Übersicht seiner Veranstaltungen geleitet.
 
 ### 4. Veranstaltung suchen
 

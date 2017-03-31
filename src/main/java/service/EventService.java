@@ -39,7 +39,7 @@ public class EventService {
     private EntityManager  entityManager;
 
     @Inject
-    private SessionContext session;
+    private SessionContext sessionContext;
 
     public Type[] getPossibleTypes() {
         return Type.values();
@@ -63,7 +63,7 @@ public class EventService {
     public List<Event> getDraftedEvents() {
         TypedQuery<Event> query = this.entityManager.createQuery(
                 "SELECT event FROM Event event WHERE event.published = false AND event.creator = :creator",
-                Event.class ).setParameter( "creator", this.session.getCurrentUser() );
+                Event.class ).setParameter( "creator", this.sessionContext.getCurrentUser() );
         return query.getResultList();
     }
 
@@ -72,9 +72,17 @@ public class EventService {
                 .createQuery(
                         "SELECT event FROM Event event WHERE (event.published='true' OR event.creator= :creator) AND event.date > :sysdate",
                         Event.class )
-                .setParameter( "creator", this.session.getCurrentUser() )
+                .setParameter( "creator", this.sessionContext.getCurrentUser() )
                 .setParameter( "sysdate", new Date( System.currentTimeMillis() ) );
         ;
+        return query.getResultList();
+    }
+
+    @ManagementOperation
+    public List<Event> getEventsForUser() {
+        TypedQuery<Event> query = this.entityManager
+                .createQuery( "SELECT event FROM Event event WHERE event.creator = :creator", Event.class )
+                .setParameter( "creator", this.sessionContext.getCurrentUser() );
         return query.getResultList();
     }
 
@@ -99,7 +107,7 @@ public class EventService {
                 .createQuery(
                         "SELECT event FROM Event event WHERE (event.published='true' OR event.creator = :creator) AND (event.name REGEXP :query OR event.description REGEXP :query ) AND event.date > :sysdate ",
                         Event.class )
-                .setParameter( "query", RegExQuery ).setParameter( "creator", this.session.getCurrentUser() )
+                .setParameter( "query", RegExQuery ).setParameter( "creator", this.sessionContext.getCurrentUser() )
                 .setParameter( "sysdate", new Date( System.currentTimeMillis() ) );
         return result.getResultList();
     }

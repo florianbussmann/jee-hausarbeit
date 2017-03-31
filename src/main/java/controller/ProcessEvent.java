@@ -48,9 +48,9 @@ public class ProcessEvent implements Serializable {
     public String changeEvent() {
         this.eventService.changeEvent( this.event );
         FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
-                "Die Veranstaltung wurde erfolgreich geändert.", null );
+                "Die Veranstaltung '" + this.event + "' wurde erfolgreich geändert.", null );
         FacesContext.getCurrentInstance().addMessage( null, msg );
-        return "events";
+        return "myEvents";
     }
 
     @PreDestroy

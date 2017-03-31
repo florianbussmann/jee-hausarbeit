@@ -35,6 +35,8 @@
                     <p:submenu label="Mein Bereich">
                         <p:menuitem value="Meine Reservierungen" outcome="/myReservations" icon="ui-icon-tag"
                                     styleClass="#{view.viewId == '/myReservations.xhtml' ? 'ui-state-active' : ''}"/>
+                        <p:menuitem value="Meine Veranstaltungen" outcome="/myEvents" icon="ui-icon-folder-collapsed"
+                                    styleClass="#{view.viewId == '/myEvents.xhtml' ? 'ui-state-active' : ''}"/>
                     </p:submenu>
                     <p:submenu label="Management" rendered="#{sessionContext.getCurrentUser().isManager()}">
                         <p:menuitem value="Veranstaltung anlegen" outcome="/createEvent" icon="ui-icon-document"

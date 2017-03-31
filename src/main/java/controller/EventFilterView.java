@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -41,7 +42,17 @@ public class EventFilterView implements Serializable {
 
     @PostConstruct
     public void init() {
-        this.events = this.eventService.getPublishedEvents();
+        switch ( FacesContext.getCurrentInstance().getViewRoot().getViewId() ) {
+            case "/events.xhtml":
+                this.events = this.eventService.getPublishedEvents();
+                break;
+            case "/myEvents.xhtml":
+                this.events = this.eventService.getEventsForUser();
+                break;
+            default:
+                this.events = this.eventService.getVisibleEvents();
+        }
+
     }
 
     public List<Event> getEvents() {
