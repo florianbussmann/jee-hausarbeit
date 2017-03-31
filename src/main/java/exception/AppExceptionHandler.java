@@ -44,27 +44,25 @@ public class AppExceptionHandler extends ExceptionHandlerWrapper {
             ExceptionQueuedEvent event = i.next();
             ExceptionQueuedEventContext context = (ExceptionQueuedEventContext) event.getSource();
             Throwable t = context.getException();
-            if ( t instanceof FacesException ) {
-                Throwable cause = t.getCause();
-                while ( cause != null ) {
-                    if ( cause instanceof NotAuthorizedException ) {
-                        NotAuthorizedException nae = (NotAuthorizedException) cause;
-                        FacesContext fc = FacesContext.getCurrentInstance();
-                        NavigationHandler nav = fc.getApplication().getNavigationHandler();
-                        try {
-                            nav.handleNavigation( fc, null, "/ERROR/notAuthorized.xhtml" );
-                            fc.renderResponse();
-                            /*
-                             * fc.getExternalContext().responseSendError( 403, nae.getMessage() );
-                             * fc.responseComplete();
-                             */
-                        } finally {
-                            i.remove();
-                            cause = null;
-                        }
-                    } else {
-                        cause = cause.getCause();
+
+            Throwable cause = t.getCause();
+            while ( cause != null ) {
+                if ( cause instanceof NotAuthorizedException ) {
+                    NotAuthorizedException nae = (NotAuthorizedException) cause;
+                    FacesContext fc = FacesContext.getCurrentInstance();
+                    NavigationHandler nav = fc.getApplication().getNavigationHandler();
+                    try {
+                        nav.handleNavigation( fc, null, "/ERROR/notAuthorized.xhtml" );
+                        fc.renderResponse();
+                        /*
+                         * fc.getExternalContext().responseSendError( 403, nae.getMessage() ); fc.responseComplete();
+                         */
+                    } finally {
+                        i.remove();
+                        cause = null;
                     }
+                } else {
+                    cause = cause.getCause();
                 }
             }
         }

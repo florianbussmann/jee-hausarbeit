@@ -77,6 +77,16 @@ Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird dahe
 
 ### 5. Veranstaltung ansehen
 
+| Komponente          | Aufgabe                        | Anwendungsschicht |
+| ------------------- | ------------------------------ | ----------------: |
+| events.xhtml        | Auflistung der Veranstaltungen |      Präsentation |
+| event.xhtml         | Darstellung der Details        |      Präsentation |
+| SessionContext.java | Authentifizierung              |    Geschäftslogik |
+| EventService.java   | Durchführen der Abfrage        |        Persistenz |
+| Event.java          | Datenmodell                    |        Persistenz |
+
+> Der Anwender erhält nach dem Login eine Übersicht der veröffentlichten Veranstaltungen, die in Zukunft stattfinden werden. Hierbei wird ihm *Name*, *Art*, *Ort*, *Datum* und das noch zur Verfügung stehende *Kontingent an Tickets* der Veranstaltung angezeigt. Nach einem Klick auf `Details` neben der Veranstaltung wird ihm zusätzlich eine weiterführende *Beschreibung* der Veranstaltung angezeigt.
+
 ### 6. Ticketreservierung
 
 ### 7. Reservierungsbestätätigung
