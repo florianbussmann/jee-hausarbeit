@@ -148,9 +148,12 @@ Damit diese Testdaten auch genutzt werden können, hier eine Übersicht aller er
 
 ### Klassendiagramm
 
+[![Klassendiagramm](assets/class-diagram.png "Klassendiagramm der Entitäten")](assets/class-diagram.png)
+
 ### Beschreibung der Datenbankstruktur
 
-![Entity-Relationship-Model](ER-Diagramm.bmp "ER-Diagramm der Datenbank")
+[![Entity-Relationship-Model](assets/ER-Diagramm.bmp "ER-Diagramm der Datenbank")](assets/ER-Diagramm.bmp)
+
 Die Datenbankstruktur wird bei deployment der Webanwendung automatisch erstellt. Die einzelnen Datenbanktabellen werden von der Java Persistence API anhand der Klassen die als Entity gekennzeichnet sind abgeleitet und automatisch generiert. Diese Persistence API übernimmt zusätzlich zum ableiten der Datenbankstruktur noch einige weitere Aufgaben. So sorgt sie auch für das Erstellen einer eindeutigen ID für die jeweiligen Instanzen der Klassen, kümmert sich um die Integrität der Datenbank und das Verwalten der Beziehungen zwischen den einzelnen Entitäten.
 Insgesamt sind drei Entity für die Webanwendung entscheidend:
 - Zunächst wäre hier der User zu nennen. Er repräsentiert einen realen Nutzer der Webanwendung und wird mit der Kombination aus E-Mail-Adresse und einem Passwort gekennzeichnet. Ein User kann zusätzlich als Manager markiert werden. Dies gibt im die Möglichkeit Veranstaltunge zu erstellen, diese frei zu geben, zu bearbeiten und zugehörige Reservierungen einzusehen.
