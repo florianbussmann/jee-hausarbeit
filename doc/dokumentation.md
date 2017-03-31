@@ -169,11 +169,11 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | Authentifizierung             | Registrierung & Anmeldung an der Anwendung                                                       |     - |      Arthur |
 | Autorisierung                 | Zugriffsschutz für Seiten- und Methodenaufrufe, die Managern vorbehalten sein sollen             |     - |     Florian |
 | Erstellung Testdaten          | Erstellung der Testdaten und Einbindung in die Anwendung                                         |     - |      Arthur |
-| Veranstaltung anlegen         |                                                                                                  |     1 |      Arthur |
+| Veranstaltung anlegen         | Erstellen von unterschiedlichen Veranstaltungen                                                  |     1 |      Arthur |
 | Veranstaltung veröffentlichen | Veranstaltungen werden erst nach der Freigabe durch ihren jeweiligen Manager für andere sichtbar |     2 |     Florian |
-| Veranstaltung bearbeiten      |                                                                                                  |     3 |      Arthur |
+| Veranstaltung bearbeiten      | Ändern von Eigenschaften einer erstellten Veranstaltung durch den jeweiligen Manager             |     3 |      Arthur |
 | Veranstaltung suchen          | Kontextbasiertes Durchsuchen zzgl. konkreter Filter in den Auflistungen                          |     4 | *Gemeinsam* |
-| Veranstaltung ansehen         |                                                                                                  | 5 & 9 |      Arthur |
+| Veranstaltung ansehen         | Einblenden von Detailinformationen zu einer Veranstaltung                                        | 5 & 9 |      Arthur |
 | Ticketreservierung            | Reservieren von Tickets und Möglichkeit zur Stornierung                                          | 6 & 9 |     Florian |
 | Reservierungsbestätigung      | Vergabe und Mitteilen einer eindeutigen ID für jede Reservierung                                 |     7 |     Florian |
 | Auflistung von Reservierungen | Auflistung aller Reservierungen zu den Veranstaltungen des angemeldeten Managers                 |     8 |     Florian |
