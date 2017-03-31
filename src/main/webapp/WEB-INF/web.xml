@@ -15,14 +15,18 @@
       <error-code>404</error-code>
       <location>/ERROR/404.html</location>
     </error-page>
+    <!-- moved to AppExceptionHandler
     <error-page>
-      <error-code>500</error-code>
+      <error-code>403</error-code>
       <location>/ERROR/notAuthorized.xhtml</location>
     </error-page>
+    -->
+    <!-- moved to faces-config.xml
     <error-page>
       <exception-type>exception.NotAuthorizedException</exception-type>
       <location>/ERROR/notAuthorized.xhtml</location>
     </error-page>
+    -->
     <welcome-file-list>
         <welcome-file>start.jsf</welcome-file>
     </welcome-file-list>

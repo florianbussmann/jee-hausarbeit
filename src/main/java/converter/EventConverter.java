@@ -10,6 +10,8 @@
 package converter;
 
 
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -43,9 +45,14 @@ public class EventConverter implements Converter {
             if ( event != null ) {
                 return event;
             } else {
-                FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,
+                FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_WARN,
                         "Es existiert kein Event mit der übergebenen ID.", null );
-                throw new ConverterException( msg );
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect( "events.jsf" );
+                } catch ( IOException ex ) {
+                    ex.printStackTrace();
+                }
+                return null;
             }
         } catch ( NumberFormatException nfx ) {
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR,
@@ -59,7 +66,7 @@ public class EventConverter implements Converter {
     public String getAsString( final FacesContext context, final UIComponent component, final Object value ) {
         try {
             Event event = (Event) value;
-            return Long.toString( event.getId() );
+            return event != null ? Long.toString( event.getId() ) : null;
         } catch ( ClassCastException ccex ) {
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR,
                     "Das übergebene Objekt ist keine Instanz der Klasse Event.", null );
