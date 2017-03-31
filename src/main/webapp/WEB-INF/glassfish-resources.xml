@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource Definitions//EN" "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
 <resources>
-  
   <jdbc-connection-pool datasource-classname="org.h2.jdbcx.JdbcDataSource" name="h2-pool" res-type="javax.sql.DataSource">
     <property name="URL" value="jdbc:h2:tcp://localhost/~/jee-hausarbeit;AUTO_SERVER=TRUE;MVCC=TRUE"/>
     <property name="User" value="sa"/>
