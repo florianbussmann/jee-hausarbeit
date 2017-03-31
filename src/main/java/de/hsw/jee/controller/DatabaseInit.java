@@ -85,18 +85,18 @@ public class DatabaseInit {
     private void add() throws ParseException, EventContingentException {
         // Add users
         User user1 = new User( "admin@admin.de", "admin", "admin", 'm', true );
-        User user2 = new User( "foo@bar.de", "admin", "bar", 'm', true );
-        User user3 = new User( "test@test.de", "admin", "test", 'w', true );
+        User user2 = new User( "foo@bar.de", "foo", "bar", 'm', true );
+        User user3 = new User( "test@test.de", "test", "test", 'w', true );
         User user4 = new User( "user@user.de", "user", "user", 'm', false );
-        User user5 = new User( "sonst@was.com", "user", "was", 'w', false );
-        User user6 = new User( "keine@idee.de", "user", "idee", 'm', false );
+        User user5 = new User( "sonst@was.com", "sonst", "was", 'w', false );
+        User user6 = new User( "keine@idee.de", "keine", "idee", 'm', false );
 
         this.userService.addUser( user1, "admin" );
-        this.userService.addUser( user2, "foo" );
-        this.userService.addUser( user3, "test" );
+        this.userService.addUser( user2, "admin" );
+        this.userService.addUser( user3, "admin" );
         this.userService.addUser( user4, "user" );
-        this.userService.addUser( user5, "sonst" );
-        this.userService.addUser( user6, "keine" );
+        this.userService.addUser( user5, "user" );
+        this.userService.addUser( user6, "user" );
 
         // Add events
         SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm" );

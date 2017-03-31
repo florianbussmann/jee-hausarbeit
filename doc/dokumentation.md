@@ -20,12 +20,13 @@ Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird dahe
 
 ## Manager-Status
 
-Manager nehmen eine gesonderte Position ein. Sie sind die einzigen Nutzer die Veranstaltungen anlegen, veröffentlichen und bearbeiten können. Zusätzlich können Sie auch die Reservierungen zu ihren jeweiligen Veranstaltungen ansehen. Allerdings sei zu erwähnen, das eine Registierung als Manager als solche durch den Anwender selber nicht möglich ist. Über die Seite register.jsf kann sich ein Anwender lediglich als ein normaler Benutzer registrieren, aber nicht als Manager. Diese Designentscheidung wurde aufgrund der Annahme getroffen, das sich ein Manager als solcher im Normalfall verifizieren muss. Dies kann allerdings nicht über ein einfaches anhaken eines Kontrollkästchens erfolgen, sondern müsste über einen Mitarbeiter der Webseitenbetreibers geschehen, welche nach erfolgreicher Verifizierung diesen dann manuell in der Datenbank anlegen müsste.
+Manager nehmen eine gesonderte Position ein. Sie sind die einzigen Nutzer die Veranstaltungen anlegen, veröffentlichen und bearbeiten können. Zusätzlich können Sie auch die Reservierungen zu ihren jeweiligen Veranstaltungen ansehen. Allerdings sei zu erwähnen, das eine Registierung als Manager durch den Anwender selber nicht möglich ist. Über die Seite register.jsf kann sich ein Anwender lediglich als ein normaler Benutzer registrieren, nicht jedoch als Manager. Diese Designentscheidung wurde aufgrund der Annahme getroffen, das sich ein Manager im Normalfall verifizieren muss. Dies kann allerdings nicht über ein einfaches Anhaken eines Kontrollkästchens erfolgen, sondern müsste über einen Mitarbeiter des Webseitenbetreibers geschehen, welche nach erfolgreicher Verifizierung diesen dann bei der aktuellen Implementation noch manuell in der Datenbank anlegen müsste.
 
 ## Testdaten
-Über die Seite /initDatabase.jsf können Testdaten in der Datenbank erstellt werden. Beim Aufruf der Seite werden dabei zwei Buttons angezeigt. Der Button "Datenbank zurücksetzen" löscht zunächst alle bisherigen Daten in der Datenbank, falls welche vorhanden sind. Danach befüllt er die Datenbank mit Testdaten. Der Button "Datenbank leeren" löscht dagegen lediglich nur alle Daten. Beim erstmaligen deployen der Anwendung sowie nach dem betätigen von "Datenbank leeren" sei zu beachten, das wie unter dem Kapitel Manager-Status beschrieben, keine Registierung als Manager möglich ist und somit auch keine Veranstaltungen erstellt werden können. Falls trotzdem darauf verzichtet werden soll, die Testdaten zu verwenden, so muss manuell per Insert auf der Datenbank ein Nutzer mit Manager-Rechten erstellt werden.
 
-Zusätzlich sei zu erwähnen, das die Seite initDatabase.jsf neben login.jsf und register.jsf die einzige Seite ist, die ein Anwender auch ohne Anmeldung erreichen kann. Ebenfalls wird nirgendwo in der Anwendung auf initDatabase.jsf verlinkt. Dies ist der Tatsache geschuldet, das diese Seite lediglich den Testprozess erleichtern soll und keinen eigentlichen Teil der Anwendung darstellt. 
+Über die Seite /initDatabase.jsf können Testdaten in der Datenbank erstellt werden. Beim Aufruf der Seite werden dabei zwei Buttons angezeigt. Der Button "Datenbank zurücksetzen" löscht zunächst alle bisherigen Daten in der Datenbank, sofern welche vorhanden sind. Danach befüllt er die Datenbank mit Testdaten. Der Button "Datenbank leeren" löscht dagegen alle Daten. Beim erstmaligen Deployen der Anwendung sowie nach dem Betätigen von "Datenbank leeren" sei zu beachten, das wie unter dem Kapitel Manager-Status beschrieben, keine Registierung als Manager möglich ist und somit auch keine Veranstaltungen erstellt werden können. Falls trotzdem darauf verzichtet werden soll, die Testdaten zu verwenden, so muss manuell per Insert auf der Datenbank ein Nutzer mit Manager-Rechten erstellt werden.
+
+Zusätzlich sei zu erwähnen, das die Seite initDatabase.jsf neben login.jsf und register.jsf die einzige Seite ist, die ein Anwender auch ohne Anmeldung erreichen kann. Ebenfalls wird nirgendwo in der Anwendung auf initDatabase.jsf verlinkt. Dies ist der Tatsache geschuldet, das diese Seite lediglich den Testprozess erleichtern soll und keinen eigentlichen Teil der Anwendung darstellt.
 
 Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erzeugten Nutzer mit ihren E-Mail-Adressen, Passwörten und Statusen:
 
@@ -123,6 +124,19 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 
 ### 7. Reservierungsbestätigung
 
+| Komponente              | Aufgabe                                  | Anwendungsschicht |
+| ----------------------- | ---------------------------------------- | ----------------: |
+| bookEvent.xhtml         | Darstellung des Formulars aus 6.         |      Präsentation |
+| myReservations.xhtml    | Darstellung der Reservierungsbestätigung |      Präsentation |
+| BookEventRequest.java   | Steuerung des Formulars aus 6.           |    Geschäftslogik |
+| SessionContext.java     | Authentifizierung                        |    Geschäftslogik |
+| ReservationService.java | Historisierung                           |        Persistenz |
+| Reservation.java        | Datenmodell                              |        Persistenz |
+
+> Bei dem Bestätigen einer Reservierung wird noch einmal geprüft, ob die vom Anwender gewünschte Anzahl an Tickets nach wie vor zur Verfügung steht. Danach erhält der Nutzer eine dementsprechende Meldung. Stehen nicht mehr genügend Tickets zur Verfügung kann der Anwender seine Eingabe anpassen.
+>
+> Sobald eine Reservierung erfolgreich durchgeführt wurde, wird dem Anwender ein Reservierungscode mitgeteilt. Hierzu gelangt er zu einer Übersicht seiner aktuellen Reservierungen, bei der oben die Nummer der neuen Reservierung angegeben ist.
+
 ### 8. Reservierungsübersicht
 
 | Komponente              | Aufgabe                                    | Anwendungsschicht |
@@ -146,7 +160,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 
 > Der Anwender wird an allen Stellen bei denen das freie Kontingent für ihn wichtig ist, über den aktuellen Stand informiert. Sowohl auf der Übersichtsseite der Veranstaltungen, als auch bei den Details einer Veranstaltung und der letzlichen Reservierung wird ihm daher die Anzahl noch reservierbarer Tickets angezeigt.
 
-## Tabelle 2: Sprint-Backlog
+## Tabelle 3: Sprint-Backlog
 
 | Task                          | Beschreibung                                                                                     | Story |  Entwickler |
 | ----------------------------- | ------------------------------------------------------------------------------------------------ | ----: | ----------: |
@@ -154,7 +168,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | Datenmodell                   | Konzipierung der benötigten Entitäten                                                            |     - | *Gemeinsam* |
 | Authentifizierung             | Registrierung & Anmeldung an der Anwendung                                                       |     - |      Arthur |
 | Autorisierung                 | Zugriffsschutz für Seiten- und Methodenaufrufe, die Managern vorbehalten sein sollen             |     - |     Florian |
-| Erstellung Testdaten| Erstellung der Testdaten und Einbindung in die Anwendung                                                |     - |      Arthur |
+| Erstellung Testdaten          | Erstellung der Testdaten und Einbindung in die Anwendung                                         |     - |      Arthur |
 | Veranstaltung anlegen         |                                                                                                  |     1 |      Arthur |
 | Veranstaltung veröffentlichen | Veranstaltungen werden erst nach der Freigabe durch ihren jeweiligen Manager für andere sichtbar |     2 |     Florian |
 | Veranstaltung bearbeiten      |                                                                                                  |     3 |      Arthur |
@@ -172,10 +186,11 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 
 ### Beschreibung der Datenbankstruktur
 
-[![Entity-Relationship-Model](assets/ER-Diagramm.bmp "ER-Diagramm der Datenbank")](assets/ER-Diagramm.bmp)
+Die Datenbankstruktur wird beim Deployment der Webanwendung automatisch erstellt. Die einzelnen Datenbanktabellen werden von der Java Persistence API anhand der Klassen, die als Entity gekennzeichnet sind abgeleitet und automatisch generiert. Diese Persistence API übernimmt zusätzlich zum ableiten der Datenbankstruktur noch einige weitere Aufgaben. So sorgt sie auch für das Erstellen einer eindeutigen ID für die jeweiligen Instanzen der Klassen, kümmert sich um die Integrität der Datenbank und das Verwalten der Beziehungen zwischen den einzelnen Entitäten.
+Insgesamt sind drei Entitäten für die Webanwendung entscheidend:
 
-Die Datenbankstruktur wird bei deployment der Webanwendung automatisch erstellt. Die einzelnen Datenbanktabellen werden von der Java Persistence API anhand der Klassen, die als Entity gekennzeichnet sind abgeleitet und automatisch generiert. Diese Persistence API übernimmt zusätzlich zum ableiten der Datenbankstruktur noch einige weitere Aufgaben. So sorgt sie auch für das Erstellen einer eindeutigen ID für die jeweiligen Instanzen der Klassen, kümmert sich um die Integrität der Datenbank und das Verwalten der Beziehungen zwischen den einzelnen Entitäten.
-Insgesamt sind drei Entity für die Webanwendung entscheidend:
-- Zunächst wäre hier der User zu nennen. Er repräsentiert einen realen Nutzer der Webanwendung und wird mit der Kombination aus E-Mail-Adresse und einem Passwort gekennzeichnet. Ein User kann zusätzlich als Manager markiert werden. Dies gibt im die Möglichkeit Veranstaltunge zu erstellen, diese frei zu geben, zu bearbeiten und zugehörige Reservierungen einzusehen.
-- Eine weitere Entität wäre Event. Sie stellt eine Veranstaltung da, bestehend aus einem Namen, einer Beschreibung, einen Veranstaltungsort, einer Datum mit Uhrzeit und einer Anzahl verfügbarer Karten. Zusätzlich kann jede Veranstaltung noch eine Kategorie zugeordnet werden. Eine Veranstaltung kann dabei entweder unveröffentlicht oder veröffentlicht sein. Eine unveröffentlichte Veranstaltung ist nur vom jeweiligen User der sie erstellt hat einsehbar und auch nur dieser kann sie veröffenlichen. Der Ersteller der Veranstaltung ist über die creator_ID gespeichert.
-- Als letztes gibt es noch die Reservation. Sie bildet eine Reservierung für eine Veranstaltung von einem User ab. Als solche speichert sie diese Veranstaltung und den Nutzer auch mit Hilfe der Attribute Event_ID und User_ID ab. Zusätzlich besitzt sie noch das Attribut ticketamount, welches die Anzahl an reservierten Tickets abspeichert und issuedate,  welches das Datum mit Uhrzeit speichert, an welchen die Reservierung erfolgte.
+- Zunächst wäre hier der User zu nennen. Er repräsentiert einen realen Nutzer der Webanwendung und wird mit der Kombination aus E-Mail-Adresse und einem Passwort gekennzeichnet. Ein User kann zusätzlich als Manager markiert werden. Dies gibt im die Möglichkeit Veranstaltungen zu erstellen, diese frei zu geben, zu bearbeiten und zugehörige Reservierungen einzusehen.
+- Eine weitere Entität ist das Event. Sie stellt eine Veranstaltung dar, bestehend aus einem Namen, einer Beschreibung, einem Veranstaltungsort, einer Datum mit Uhrzeit und einer Anzahl verfügbarer Karten. Zusätzlich kann jede Veranstaltung noch einer Kategorie zugeordnet werden. Eine Veranstaltung kann dabei entweder unveröffentlicht oder veröffentlicht sein. Eine noch nicht veröffentlichte Veranstaltung ist nur vom jeweiligen User der sie erstellt hat einsehbar und auch nur dieser kann sie veröffenlichen. Der Ersteller der Veranstaltung ist in dem Feld Creator_ID gespeichert.
+- Als Letztes gibt es noch die Reservation. Sie bildet eine Reservierung für eine Veranstaltung von einem User ab. Als solche speichert sie diese Veranstaltung und den Nutzer in den entsprechenden Feldern Event_ID und User_ID ab. Zusätzlich besitzt sie noch das Attribut ticketamount, welches die Anzahl an reservierten Tickets abspeichert, und das issuedate, welches das Datum mit Uhrzeit speichert, an welchen die Reservierung erfolgte.
+
+[![Entity-Relationship-Model](assets/ER-Diagramm.bmp "ER-Diagramm der Datenbank")](assets/ER-Diagramm.bmp)
