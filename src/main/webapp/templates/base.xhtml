@@ -39,12 +39,16 @@
             <h:form>
                 <p:menu>
                     <p:submenu label="Mein Bereich">
-                        <p:menuitem value="Meine Reservierungen" outcome="/myReservations" icon="ui-icon-tag" />
+                        <p:menuitem value="Meine Reservierungen" outcome="/myReservations" icon="ui-icon-tag"
+                                    styleClass="#{view.viewId == '/myReservations.xhtml' ? 'ui-state-active' : ''}"/>
                     </p:submenu>
                     <p:submenu label="Management" rendered="#{sessionContext.getCurrentUser().isManager()}">
-                        <p:menuitem value="Veranstaltung anlegen" outcome="/createEvent" icon="ui-icon-document" />
-                        <p:menuitem value="Veranstaltung veröffentlichen" outcome="/publishEvents" icon="ui-icon-signal-diag" />
-                        <p:menuitem value="Reservierungen" outcome="/start" icon="ui-icon-tag" />
+                        <p:menuitem value="Veranstaltung anlegen" outcome="/createEvent" icon="ui-icon-document"
+                                    styleClass="#{view.viewId == '/createEvent.xhtml' ? 'ui-state-active' : ''}"/>
+                        <p:menuitem value="Veranstaltung veröffentlichen" outcome="/publishEvents" icon="ui-icon-signal-diag"
+                                    styleClass="#{view.viewId == '/publishEvents.xhtml' ? 'ui-state-active' : ''}"/>
+                        <p:menuitem value="Reservierungen" outcome="/start" icon="ui-icon-tag"
+                                    styleClass="#{view.viewId == '/start.xhtml' ? 'ui-state-active' : ''}"/>
                     </p:submenu>
                 </p:menu>
             </h:form>
