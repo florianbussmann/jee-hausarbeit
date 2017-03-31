@@ -25,24 +25,41 @@ Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird dahe
 
 ### 1. Veranstaltung anlegen
 
-| Komponente        | Aufgabe                   | Anwendungsschicht |
-| ----------------- | ------------------------- | ----------------: |
-| createEvent.jsf   | Darstellung des Formulars |      Präsentation |
-| EventBean.java    | Steuerung des Formulars   |    Geschäftslogik |
-| EventService.java | Historisierung            |        Persistenz |
+| Komponente               | Aufgabe                                              | Anwendungsschicht |
+| ------------------------ | ---------------------------------------------------- | ----------------: |
+| createEvent.xhtml        | Darstellung des Formulars                            |      Präsentation |
+| CreateEventRequest.java  | Steuerung des Formulars                              |    Geschäftslogik |
+| SessionContext.java      | Authentifizierung                                    |    Geschäftslogik |
+| ManagementOperation.java | Autorisierung: Ist der angemeldete User ein Manager? |    Geschäftslogik |
+| EventService.java        | Historisierung                                       |        Persistenz |
+| Event.java               | Datenmodell                                          |        Persistenz |
 
 > Der Manager wählt nach dem Login zunächst im linken Navigationsbereich den Eintrag `Veranstaltung anlegen` aus. Danach erscheint ein Formular in dem die nötigen Angaben zum Erstellen einer Veranstaltung abgefragt werden. Ist der Manager fertig mit der Eingabe der benötigten Daten, kann die Veranstaltung über den gleichnamigen Button erstellt werden.
 
 ### 2. Veranstaltung veröffentlichen
 
-| Komponente        | Aufgabe                                                    | Anwendungsschicht |
-| ----------------- | ---------------------------------------------------------- | ----------------: |
-| publishEvents.jsf | Auflistung der noch nicht veröffentlichten Veranstaltungen |      Präsentation |
-| EventService.java | Durchführen der Veröffentlichung inklusive Historisierung  |        Persistenz |
+| Komponente               | Aufgabe                                                       | Anwendungsschicht |
+| ------------------------ | ------------------------------------------------------------- | ----------------: |
+| publishEvents.xhtml      | Auflistung seiner noch nicht veröffentlichten Veranstaltungen |      Präsentation |
+| SessionContext.java      | Authentifizierung                                             |    Geschäftslogik |
+| ManagementOperation.java | Autorisierung: Ist der angemeldete User ein Manager?          |    Geschäftslogik |
+| EventService.java        | Durchführen der Veröffentlichung inklusive Historisierung     |        Persistenz |
+| Event.java               | Datenmodell                                                   |        Persistenz |
 
 > Der Manager wählt nach dem Login zunächst im linken Navigationsbereich den Eintrag `Veranstaltung veröffentlichen` aus. Danach erscheint eine Liste der noch nicht veröffentlichten Veranstaltungen. Hier hat der Manager die Option eine Veranstaltung aus der Liste direkt zu veröffentlichen. Alternativ hierzu kann er sich auch zunächst die Details anzeigen lassen um vorher noch noch einmal die eingegebenen Daten näher zu kontrollieren und ggf. zu bearbeiten.
 
 ### 3. Veranstaltung bearbeiten
+
+| Komponente           | Aufgabe                                                                  | Anwendungsschicht |
+| -------------------- | ------------------------------------------------------------------------ | ----------------: |
+| changeEvent.xhtml    | Darstellung des Formulars                                                |      Präsentation |
+| ProcessEvent.java    | Steuerung des Formulars                                                  |    Geschäftslogik |
+| SessionContext.java  | Authentifizierung                                                        |    Geschäftslogik |
+| SecurityContext.java | Autorisierung: Ist der angemeldete User der Ersteller der Veranstaltung? |    Geschäftslogik |
+| EventService.java    | Historisierung                                                           |        Persistenz |
+| Event.java           | Datenmodell                                                              |        Persistenz |
+
+> Der Manager wählt nach dem Login zunächst im oberen Navigationsbereich den Eintrag `Veranstaltungen` aus. Aus der Liste der Veranstaltungen wählt (`Details`) er dann eine aus, die er gerne bearbeiten möchte. Hier bekommt der Manager zunächst eine Übersicht über die aktuellen Eigenschaften der Veranstaltung und hat die Option, die Veranstaltung zu bearbeiten. Die Anpassungen bestätigt der Manager mit einem Klick auf den Button `Änderungen speichern`.
 
 ### 4. Veranstaltung suchen
 
