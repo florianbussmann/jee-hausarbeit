@@ -21,6 +21,8 @@ import de.hsw.jee.model.Event;
 /**
  * @author fbussmann
  *
+ *         Diese Komponente ist für weiterführende Autorisierungsprüfungen verantwortlich. Beispielsweise kann eine
+ *         Veranstaltung nur von dem Manager bearbeitet werden, der sie auch erstellt hat.
  */
 @Named
 @ApplicationScoped
@@ -30,7 +32,6 @@ public class SecurityContext {
     private SessionContext sessionContext;
 
     public String checkOwnership( final Event event ) throws NotAuthorizedException {
-        System.out.println( event.getCreator() + " vs " + this.sessionContext.getCurrentUser() );
         if ( !event.getCreator().equals( this.sessionContext.getCurrentUser() ) ) {
             throw new NotAuthorizedException();
         }

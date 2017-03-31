@@ -59,7 +59,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean checkAuthentication( final User user, final String password ) {
         try {
@@ -76,6 +75,14 @@ public class UserServiceImpl implements UserService {
 
     public void setEntityManager( final EntityManager entityManager ) {
         this.entityManager = entityManager;
+    }
+
+    public SecurePassword getSecurePassword() {
+        return this.securePassword;
+    }
+
+    public void setSecurePassword( final SecurePassword securePassword ) {
+        this.securePassword = securePassword;
     }
 
 }

@@ -19,6 +19,7 @@ import javax.persistence.PersistenceContext;
 /**
  * @author agraf
  *
+ *         Stellt den EntityManager für die Persistierung bereit.
  */
 @ApplicationScoped
 public class EntityManagerProducer {

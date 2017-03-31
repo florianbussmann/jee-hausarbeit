@@ -20,6 +20,7 @@ import javax.inject.Named;
 /**
  * @author fbussmann
  *
+ *         Eine vereinfachte Implementierung zum Hashen und Prüfen der übertragenen Passwörter.
  *         http://howtodoinjava.com/security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
  */
 @Named

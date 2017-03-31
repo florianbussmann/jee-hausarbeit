@@ -15,6 +15,14 @@ import de.hsw.jee.model.Event;
 import de.hsw.jee.service.EventService;
 
 
+/**
+ * @author agraf
+ *
+ *         Diese Komponente ist für die Kommunikation bei dem Bearbeiten der Details oder dem Veröffentlichen einer
+ *         Veranstaltung aus den Details heraus verantwortlich.
+ *
+ */
+
 @Named
 @ConversationScoped
 public class ProcessEvent implements Serializable {

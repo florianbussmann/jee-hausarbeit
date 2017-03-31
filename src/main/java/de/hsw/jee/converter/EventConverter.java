@@ -29,7 +29,6 @@ import de.hsw.jee.service.EventService;
  *
  */
 
-// Workaround, da in FacesConverter nicht Injected werden kann
 @Named
 public class EventConverter implements Converter {
 

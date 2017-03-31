@@ -55,6 +55,7 @@ public class ReservationService {
         return query.getResultList();
     }
 
+    @ManagementOperation
     public List<Reservation> getReservationsForEvent( final Event event ) {
         TypedQuery<Reservation> query = this.entityManager
                 .createQuery( "SELECT reservation FROM Reservation reservation WHERE reservation.event = :event",

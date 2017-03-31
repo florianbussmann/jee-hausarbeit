@@ -32,6 +32,7 @@ import de.hsw.jee.service.UserService;
 /**
  * @author agraf
  *
+ *         Diese Komponente ist für eine Initialisierung einer Datenbasis zu Testzwecken gedacht.
  */
 
 @Named

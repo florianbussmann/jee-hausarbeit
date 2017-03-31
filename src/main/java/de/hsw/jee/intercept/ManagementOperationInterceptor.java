@@ -25,6 +25,12 @@ import de.hsw.jee.model.User;
 /**
  * @author fbussmann
  *
+ *         Bei der Verwendung der Annotation @ManagementOperation wird durch diesen Interceptor geprüft, ob der
+ *         Aufrufende einer Methode ein Manager ist. Bei der aktuellen Implementierung ist dies weitestgehend nicht
+ *         möglich, da der Nutzer bei fehlenden Berechtigungen in den Views automatisch beim Betreten der Seite
+ *         umgeleitet wird. Der Interceptor wurde als zusätzliche Sicherheißtsnahme entworfen, der auch automatisch
+ *         greifen würde wenn die Präsentationsschicht ausgetauscht werden sollte. Dadurch wird sichergestellt, das zu
+ *         keinem Zeitpunkt die Integrität des Datenbestandes verletzt werden kann.
  */
 @ManagementOperation
 @Interceptor
@@ -36,14 +42,10 @@ public class ManagementOperationInterceptor {
 
     @AroundInvoke
     public Object checkAuthorization( final InvocationContext context ) throws Exception {
-        System.out.println( "interception started" );
         User user = this.sessionContext.getCurrentUser();
         if ( ( user == null ) || !user.isManager() ) {
-            System.out.println( "not a manager" );
             throw new NotAuthorizedException();
         }
-
-        System.out.println( "continue" );
 
         return context.proceed();
     }

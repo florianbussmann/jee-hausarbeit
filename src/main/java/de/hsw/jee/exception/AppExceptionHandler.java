@@ -24,6 +24,8 @@ import javax.faces.event.ExceptionQueuedEventContext;
 /**
  * @author fbussmann
  *
+ *         Ein zusätzliches Error-Handling für die eigenen Exceptions.
+ *
  */
 public class AppExceptionHandler extends ExceptionHandlerWrapper {
 

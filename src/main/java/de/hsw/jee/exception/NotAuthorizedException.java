@@ -9,8 +9,11 @@
  */
 package de.hsw.jee.exception;
 
+
 /**
  * @author fbussmann
+ *
+ *         Der Nutzer wollte eine Operation durchführen, zu der er nicht berechtigt war.
  *
  */
 public class NotAuthorizedException extends Exception {
