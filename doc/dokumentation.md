@@ -18,9 +18,11 @@ Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird dahe
 | Geschäftslogik    | Steuerung der Präsentation und Abbildung von Funktionalitäten |
 | Persistenz        | Datenmodell und Persistierung in H2                           |
 
+Für ein vereinfachtes Deployment wurde die für GlassFish 4 optimierte Version unter `/jee-hausarbeit.war` abgelegt. Die Anwendung ist danach standardmäßig unter dem Kontext `/jee-hausarbeit` erreichbar.
+
 ## Manager-Status
 
-Manager nehmen eine gesonderte Position ein. Sie sind die einzigen Nutzer die Veranstaltungen anlegen, veröffentlichen und bearbeiten können. Zusätzlich können Sie auch die Reservierungen zu ihren jeweiligen Veranstaltungen ansehen. Allerdings sei zu erwähnen, das eine Registierung als Manager durch den Anwender selber nicht möglich ist. Über die Seite `register.jsf` kann sich ein Anwender lediglich als ein normaler Benutzer registrieren, nicht jedoch als Manager. Diese Designentscheidung wurde aufgrund der Annahme getroffen, das sich ein Manager im Normalfall verifizieren muss. Dies kann allerdings nicht über ein einfaches Anhaken eines Kontrollkästchens erfolgen, sondern müsste über einen Mitarbeiter des Webseitenbetreibers geschehen, welche nach erfolgreicher Verifizierung diesen dann bei der aktuellen Implementation noch manuell in der Datenbank anlegen müsste.
+Manager nehmen eine gesonderte Position in der Anwendung ein. Sie sind die einzigen Nutzer die Veranstaltungen anlegen, veröffentlichen und bearbeiten können. Zusätzlich können Sie auch die Reservierungen zu ihren jeweiligen Veranstaltungen ansehen. Allerdings sei zu erwähnen, das eine Registierung als Manager durch den Anwender selber nicht möglich ist. Über die Seite `register.jsf` kann sich ein Anwender lediglich als ein normaler Benutzer registrieren, nicht jedoch als Manager. Diese Designentscheidung wurde aufgrund der Annahme getroffen, das sich ein Manager im Normalfall verifizieren muss. Dies kann allerdings nicht über ein einfaches Anhaken eines Kontrollkästchens erfolgen, sondern müsste über einen Mitarbeiter des Webseitenbetreibers geschehen, welche nach erfolgreicher Verifizierung diesen dann bei der aktuellen Implementation noch manuell in der Datenbank anlegen müsste.
 
 ## Testdaten
 
@@ -178,7 +180,7 @@ Damit die Testdaten auch genutzt werden können, hier eine Übersicht aller erze
 | Reservierungsbestätigung      | Vergabe und Mitteilen einer eindeutigen ID für jede Reservierung                                 |     7 |     Florian |
 | Auflistung von Reservierungen | Auflistung aller Reservierungen zu den Veranstaltungen des angemeldeten Managers                 |     8 |     Florian |
 
-## Datenmodell
+## Beschreibung des Datenmodells
 
 ### Klassendiagramm
 
