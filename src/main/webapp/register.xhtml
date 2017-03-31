@@ -6,7 +6,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <ui:composition template="templates/base.xhtml">
-    <ui:define name="title">Registrierung</ui:define>
+    <ui:param name="activePageIndex" value="2" />
+    <ui:define name="title">Registrieren</ui:define>
     <ui:define name="content">
         <h:form>
             <p:messages closeable="true" id="messages"/>
@@ -20,20 +21,20 @@
                 <h:outputLabel for="confirmPassword" value="Passwort bestätigen: *"/>
                 <p:password id="confirmPassword" required="true" requiredMessage="Bitte bestätigen Sie das Passwort." tabindex="3" value="#{register.confirmPassword}" />
                 
-                <h:outputLabel for="firstName" value="Vorname *"/>
+                <h:outputLabel for="firstName" value="Vorname: *"/>
                 <p:inputText id="firstName" required="true" requiredMessage="Bitte geben Sie einen gültigen Vornamen ein." tabindex="4" value="#{register.firstName}" />
                 
                 <h:outputLabel for="surname" value="Name: *"/>
                 <p:inputText id="surname" required="true" requiredMessage="Bitte geben Sie einen gültigen Nachnamen ein." tabindex="5" value="#{register.surname}" />
                 
                 <h:outputLabel for="gender" value="Geschlecht: *"/>
-                <p:selectOneRadio id="gender" value="#{register.gender}" required="true" requiredMessage="Bitte geben Sie ein Geschlecht ein.">  
-                    <f:selectItem itemValue="m" itemLabel="Männlich" tabindex="6" />  
-                    <f:selectItem itemValue="w" itemLabel="Weiblich" tabindex="7"/>
+                <p:selectOneRadio id="gender" value="#{register.gender}" required="true" requiredMessage="Bitte geben Sie ein Geschlecht ein." tabindex="6">  
+                    <f:selectItem itemValue="m" itemLabel="Männlich" />  
+                    <f:selectItem itemValue="w" itemLabel="Weiblich" />
                 </p:selectOneRadio>
                 
                 <f:facet name="footer">
-                    <p:commandButton tabindex="8" value="Registrieren" actionListener="#{register.register}" update="messages"/>
+                    <p:commandButton tabindex="7" value="Registrieren" actionListener="#{register.register}" update="messages"/>
                 </f:facet>
             </p:panelGrid>
         </h:form>
@@ -41,4 +42,4 @@
 </ui:composition>
 </html>
 
-<!-- Tabreihenfolge bei selectOneRadio will nicht, Validator einfügen für email, das @ enthalten -->
+<!-- Validator einfügen für email, das @ enthalten -->

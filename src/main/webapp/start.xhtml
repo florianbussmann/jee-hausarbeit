@@ -9,11 +9,12 @@
 <f:view>
     <f:metadata>
         <!-- in Template auslagern über Parameter -->
-       <f:viewAction action="#{sessionContext.checkAuthentication()}" />
+        <f:viewAction action="#{sessionContext.checkAuthentication()}" />
     </f:metadata>
 </f:view>
 <ui:composition template="templates/base.xhtml">
     <ui:param name="authRequired" value="true" />
+    <ui:param name="activePageIndex" value="1" />
     <ui:define name="title">Startseite</ui:define>
     <ui:define name="content">
         <p:messages closeable="true" id="messages"/>

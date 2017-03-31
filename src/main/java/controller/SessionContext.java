@@ -46,7 +46,7 @@ public class SessionContext implements Serializable {
     public String logout() {
         this.currentUser = null;
         FacesContext.getCurrentInstance().addMessage( "",
-                new FacesMessage( FacesMessage.SEVERITY_INFO, "Logout successful", "" ) );
+                new FacesMessage( FacesMessage.SEVERITY_INFO, "Sie wurden abgemeldet.", "" ) );
         return "login";
     }
 
