@@ -63,7 +63,7 @@ public class ReservationRequest {
                             + reservation.getId() + ".",
                     null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
-            return "myReservations";
+            return "myReservations" + "?faces-redirect=true";
         } catch ( EventContingentException ex ) {
             FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_ERROR, ex.getMessage(), null );
             FacesContext.getCurrentInstance().addMessage( null, msg );
