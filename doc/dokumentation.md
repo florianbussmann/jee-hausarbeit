@@ -18,6 +18,28 @@ Die letzte Schicht beschäftigt sich mit der Speicherung der Daten und wird dahe
 | Geschäftslogik    | Steuerung der Präsentation und Abbildung von Funktionalitäten |
 | Persistenz        | Datenmodell und Historisierung in H2                          |
 
+## Manager-Status
+
+Manager nehmen eine gesonderte Position ein. Sie sind die einzigen Nutzer die Veranstaltungen anlegen, veröffentlichen und bearbeiten können. Zusätzlich könne Sie auch die Reservierungen zu ihren jeweiligen Veranstaltungen ansehen. Allerdings sei zu erwähnen, das eine Registierung als Manager als solche durch den Anwender selber nicht möglich ist. Über die Seite register.jsf kann sich ein Anwender lediglich als ein normaler Benutzer anmelden, aber nicht als Manager. Diese Designentscheidung wurde aufgrund der Annahme getroffen, das sich ein Manager als solcher im Normalfall verifizieren muss. Dies kann allerdings nicht über ein einfaches anhaken eines Kontrollkästchens erfolgen, sondern müsste über einen Mitarbeiter der Webseitenbetreibers erfolgen, welche nach erfolgreicher Verifizierung diesen dann manuell in der Datenbank anlegen müsste.
+
+## Testdaten
+Über die Seite /initDatabase.jsf können Testdaten in der Datenbank erstellt werden. Beim Aufruf der Seite werden dabei zwei Buttons angezeigt. Der Button "Datenbank zurücksetzen" löscht zunächst alle bisherigen Daten in der Datenbank, falls welche vorhanden sind. Danach befüllt er die Datenbank mit Testdaten. Der Button "Datenbank leeren" löscht einfach nur alle Daten in der Datenbank. Beim erstmaligen deployen der Anwendung sowie nach dem betätigen von "Datenbank leeren" sei zu beachten, das wie unter dem Kapitel Manager-Status beschrieben keine Registierung als Manager möglich ist und somit auch keine Veranstaltungen erstellt werden können. Falls trotzdem darauf verzichtet werden soll die Testdaten zu verwenden, so muss manuell per Insert auf der Datenbank ein Nutzer mit Manager-Rechten erstellt werden.
+
+Zusätzlich sie zu erwähnen, das die Seite initDatabase.jsf neben login.jsf und register.jsf die einzige Seite ist die ein Anwender auch ohne Anmeldung erreichen kann. Zusätzlich wird auch nirgendwo in der Anwendung auf initDatabase.jsf verlinkt. Dies liegt daran, das diese Seite lediglich den Testprozess erleichtern soll und kein eigentlicher Teil der Anwendung ist. 
+
+Damit diese Testdaten auch genutzt werden können, hier eine Übersicht aller erzeugten Nutzer mit ihren E-Mail-Adressen, Passwörten und Status:
+
+### Tabelle 2: Übersicht der Testnutzer
+
+| E-Mail         | Passwort | Manager |
+| -------------- | -------- | ------- |
+| admin@admin.de | admin    | x       |
+| foo@bar.de     | admin    | x       |
+| test@test.de   | admin    | x       |
+| user@user.de   | user     |         |
+| sonst@was.com  | user     |         |
+| keine@idee.de  | user     |         |
+
 ## Umsetzung der User-Stories
 
 > Liste aller beteiligten Komponenten und Klassen, sowie deren Aufgaben und Zugehörigkeit der Anwendungsschicht.
